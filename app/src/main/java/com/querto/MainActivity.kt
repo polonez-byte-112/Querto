@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() ,LifecycleOwner, NavigationView.OnNavig
         setContentView(R.layout.activity_main)
 
 
-      var  view =  ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
+      var  viewModel =  ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
 
 
 
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() ,LifecycleOwner, NavigationView.OnNavig
         //Kod powyzej od 21 do 34 jest po to by było menu (hamburger) w rogu
 
         if(savedInstanceState==null){
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, view.homeFragment ).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, viewModel.homeFragment ).commit()
             navigationView.setCheckedItem(R.id.home)
         }
 
