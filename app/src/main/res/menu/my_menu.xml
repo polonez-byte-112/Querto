@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/home" android:title="Home" android:icon="@drawable/ic_home"/>
+        <item android:id="@+id/login" android:title="Login" android:icon="@drawable/ic_login"/>
+        <item android:id="@+id/register" android:title="Register" android:icon="@drawable/ic_register"/>
+    </group>
+
+    <item android:title="Communication">
+        <menu>
+            <item android:id="@+id/email" android:title="Email Author" android:icon="@drawable/ic_email" android:tint="#6F001F"/>
+            <item android:id="@+id/share" android:title="Share App on Facebook" android:icon="@drawable/ic_share" android:tint="#6F001F"/>
+            <item android:id="@+id/rate" android:title="Rate app on Google Play" android:icon="@drawable/ic_store" android:tint="#6F001F"/>
+        </menu>
+    </item>
+</menu>
