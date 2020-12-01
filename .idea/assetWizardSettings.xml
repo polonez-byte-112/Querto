@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/share/baseline_share_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/person/baseline_person_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="6f001f" />
-                            <entry key="outputName" value="ic_share" />
+                            <entry key="color" value="c70039" />
+                            <entry key="outputName" value="ic_person_clicked" />
                             <entry key="sourceFile" value="C:\Users\pawel\AndroidStudioProjects\Querto" />
                           </map>
                         </option>
