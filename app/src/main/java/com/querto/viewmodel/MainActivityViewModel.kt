@@ -40,6 +40,14 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
+
+    fun  checkLogin(username: String, password: String){
+        viewModelScope.launch(Dispatchers.IO){
+
+            repository.loginUser(username, password)
+        }
+    }
+
     fun shareApp(context: Context){
         Toast.makeText(context, "App Shared", Toast.LENGTH_SHORT).show()
     }
@@ -53,6 +61,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     fun sendMail(context : Context){
         Toast.makeText(context, "Send Email", Toast.LENGTH_SHORT).show()
     }
+
+
 
 
 }

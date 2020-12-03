@@ -9,7 +9,9 @@ import com.querto.model.User
 @Dao
 interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun addUser(user: User)
 
+    @Query("SELECT * FROM user_table WHERE username= :username AND password=:password")
+    fun  loginUser(username: String, password: String): User
 }
