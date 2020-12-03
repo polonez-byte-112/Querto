@@ -5,11 +5,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import org.jetbrains.annotations.NotNull
 
-@Parcelize
+
 @Entity(tableName = "user_table")
 data class User(
     @PrimaryKey(autoGenerate = true)
+    @NotNull
+    @ColumnInfo(name="id")
     val id: Int,
 
     @ColumnInfo(name="name")
@@ -26,4 +29,4 @@ data class User(
 
     @ColumnInfo(name="age")
     val age: Int
-): Parcelable
+)

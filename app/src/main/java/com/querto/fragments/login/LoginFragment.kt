@@ -1,4 +1,4 @@
- package com.querto.fragments.login
+package com.querto.fragments.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,11 +20,11 @@ class LoginFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-     val view = inflater.inflate(R.layout.fragment_login, container, false)
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
 
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
@@ -39,13 +39,13 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Fill all columns", Toast.LENGTH_SHORT).show()
             }else{
                 //Perform Query
-                    // naprawic to !!!
-                  val userEntity  = mMainActivityViewModel.checkLogin(takenUsername,takenPassword)
-                    if(userEntity.equals(null)){
-                        Toast.makeText(context!!, "Bad login or password", Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(context!!, "Login successfull", Toast.LENGTH_SHORT).show()
-                    }
+                // naprawic to !!!
+                val userEntity  = mMainActivityViewModel.checkLogin(takenUsername,takenPassword)
+                if(userEntity.equals(null)){
+                    Toast.makeText(context!!, "Bad login or password", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context!!, "Login successfull", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         return view
