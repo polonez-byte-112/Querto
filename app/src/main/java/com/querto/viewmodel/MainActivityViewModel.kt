@@ -6,7 +6,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.querto.data.UserDatabase
 import com.querto.fragments.home.HomeFragment
@@ -20,49 +20,47 @@ import kotlinx.coroutines.launch
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 
-    val homeFragment= HomeFragment()
+    val homeFragment = HomeFragment()
     val loginFragment = LoginFragment()
     val registerFragment = RegisterFragment()
 
     private val repository: UserRepository
 
+    private val mutableLoginStatus = MutableLiveData<Boolean>()
+    val loginStatus: LiveData<Boolean>
+        get() = mutableLoginStatus
 
-    init{
+    init {
         val userDao = UserDatabase.getDataBase(application).userDao()
-        repository= UserRepository(userDao)
-
+        repository = UserRepository(userDao)
     }
 
-    fun addUser(user: User){
-
-        viewModelScope.launch(Dispatchers.IO){
+    fun addUser(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.addUser(user)
         }
     }
 
-
-    fun  checkLogin(username: String, password: String){
-        viewModelScope.launch(Dispatchers.IO){
-
-            repository.loginUser(username, password)
+    /**
+     * Function is to validate provided user on login page
+     */
+    fun checkLogin(username: String, password: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.loginUser(username, password)?.let {
+                mutableLoginStatus.postValue(true)
+            } ?: mutableLoginStatus.postValue(false)
         }
     }
 
-    fun shareApp(context: Context){
+    fun shareApp(context: Context) {
         Toast.makeText(context, "App Shared", Toast.LENGTH_SHORT).show()
     }
 
-
-    fun openStore(context: Context){
+    fun openStore(context: Context) {
         Toast.makeText(context, "Store opened", Toast.LENGTH_SHORT).show()
     }
 
-
-    fun sendMail(context : Context){
+    fun sendMail(context: Context) {
         Toast.makeText(context, "Send Email", Toast.LENGTH_SHORT).show()
     }
-
-
-
-
 }
