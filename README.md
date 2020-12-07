@@ -31,10 +31,11 @@ App have slide menu on the left side  and will have menu in HomeFragment which a
 ## 📷 Screenshots
 
 <p align="center">
-   <img src="p1.jpg" width="250" alt="photo2">
-    <img src="p2.jpg" width="250" alt="photo1">
-   <img src="p3.jpg" width="250" alt="photo3">
-      <img src="p4.jpg" width="250" alt="photo4">
+ <img src="photo1.jpg" width="250" alt="photo2">
+ <img src="photo2.jpg" width="250" alt="photo1">
+ <img src="photo3.jpg" width="250" alt="photo3">
+ <img src="photo4.jpg" width="250" alt="photo4">
+ <img src="photo5.jpg" width="250" alt="photo5">
 </p>
 
 
