@@ -26,6 +26,7 @@ App have slide menu on the left side  and will have menu in HomeFragment which a
 * Menu with kind of food to order
 * Floating shopping button with animations and extra options
 * Connection with database online (by Firebase)
+* Login or Create an User by Google Account
 
 <br /><br/>
 ## 📷 Screenshots
