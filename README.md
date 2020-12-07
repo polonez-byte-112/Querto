@@ -3,7 +3,7 @@ App that allow fast ordering pizza
 
 
 
-This project is a build using MVVM architecture.
+This project is a build using MVVM architecture connected to Room Database
 
 
 <br /><br/>
