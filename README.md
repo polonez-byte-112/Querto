@@ -1,4 +1,4 @@
-# 🍕 Querto
+# Querto
 <img src="image.png" width="128" height="128"/>
 
 App that allow fast ordering pizza 
