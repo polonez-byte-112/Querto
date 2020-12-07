@@ -1,7 +1,7 @@
 # 🍕 Querto
-App that allow fast ordering pizza
+<img src="image.png" width="128" height="128"/>
 
-
+App that allow fast ordering pizza 
 
 This project is a build using MVVM architecture connected to Room Database
 
