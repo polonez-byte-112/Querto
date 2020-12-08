@@ -169,8 +169,8 @@
 
     <!-- Focaccia -->
     <string-array name="foaccia_titles">
-        <item>Base</item>
-        <item>Nutella</item>
+        <item>Base\u0020</item>
+        <item>Nutella\u0020</item>
     </string-array>
     <string-array name="foaccia_desc">
         <item>ciasto, oregano, oliwa extra vergin</item>
@@ -183,7 +183,7 @@
 
     <!-- Calzone -->
     <string-array name="calzone_titles">
-        <item>Calzone</item>
+        <item>Calzone\u0020</item>
     </string-array>
     <string-array name="calzone_desc">
         <item>ciasto, ser mozzarella, wybrane dodatki wg cennika</item>
@@ -197,7 +197,7 @@
 
     <!-- Panuozzo -->
     <string-array name="panuozzo_titles">
-        <item>Panuozzo</item>
+        <item>Panuozzo\u0020</item>
     </string-array>
     <string-array name="panuozzo_desc">
         <item>ciasto, ser mozzarella, wybrane dodatki według cennika</item>
@@ -212,10 +212,10 @@
 
     <!-- Sosy -->
     <string-array name="sosy_titles">
-        <item>Oliwa: czosnkowa, oregano, pepperoncino</item>
-        <item>Ketchup</item>
-        <item>Słodko-kwaśny</item>
-        <item>Czosnkowo-koperkowy</item>
+        <item>Oliwa: czosnkowa, oregano, pepperoncino\u0020</item>
+        <item>Ketchup\u0020</item>
+        <item>Słodko-kwaśny\u0020</item>
+        <item>Czosnkowo-koperkowy\u0020</item>
     </string-array>
     <integer-array name="sosy_price">
         <item>3</item>
@@ -226,8 +226,8 @@
 
     <!-- Napoje -->
     <string-array name="napoje_titles">
-        <item>Pepsi</item>
-        <item>Woda</item>
+        <item>Pepsi\u0020</item>
+        <item>Woda\u0020</item>
     </string-array>
     <string-array name="napoje_kinds_one">
         <item>pepsi</item>
@@ -244,11 +244,11 @@
 
     <!-- Dodatki -->
     <string-array name="dodatki_titles">
-        <item>ser gorgonzola, ser mozzarella, pomidorki koktajlowe, szynka parmeńska, ser grana padano, tuńczyk</item>
-        <item>anchois, bakłażan, boczek, cukinia, ricotta, kurczak w marynacie gyros, nutella, orzechy laskowe, pancetta, papryka, pieczarki, salami łagodne, salami pikantne, szynka, ser wędzony, pomidory suszone, szpinak</item>
-        <item>berlinki, kapary, kukurydza, majonez, oliwki, papryka jalapeno</item>
-        <item>cebula, czosnek, sos pomidorowy</item>
-        <item>bazylia, oregano, oliwa extra vergin, peperoncino, sól morska</item>
+        <item>ser gorgonzola, ser mozzarella, pomidorki koktajlowe, szynka parmeńska, ser grana padano, tuńczyk\u0020</item>
+        <item>anchois, bakłażan, boczek, cukinia, ricotta, kurczak w marynacie gyros, nutella, orzechy laskowe, pancetta, papryka, pieczarki, salami łagodne, salami pikantne, szynka, ser wędzony, pomidory suszone, szpinak\u0020</item>
+        <item>berlinki, kapary, kukurydza, majonez, oliwki, papryka jalapeno\u0020</item>
+        <item>cebula, czosnek, sos pomidorowy\u0020</item>
+        <item>bazylia, oregano, oliwa extra vergin, peperoncino, sól morska\u0020</item>
     </string-array>
     <integer-array name="dodatki_small_price">
         <item>4</item>

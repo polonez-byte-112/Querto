@@ -36,7 +36,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val loginStatus: LiveData<Boolean>
         get() = mutableLoginStatus
 
-
+//Pizza
     var pizza_names: Array<String> = application.resources.getStringArray(R.array.pizza_titles)
     var pizza_desc: Array<String> = application.resources.getStringArray(R.array.pizza_desc)
     val pizza_small_price : IntArray = application.resources.getIntArray(R.array.pizza_small_price)
@@ -44,6 +44,13 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val pizza_big_price : IntArray = application.resources.getIntArray(R.array.pizza_big_price)
     //dodac te zdjecia potem
     var pizza_img: Array<Int> = arrayOf( R.drawable.napoletana,  R.drawable.margherita, R.drawable.estate, R.drawable.pepperone, R.drawable.pancetta, R.drawable.ortolana, R.drawable.marinara, R.drawable.diavola, R.drawable.messicana, R.drawable.quattro_formaggi, R.drawable.sugoza, R.drawable.semola, R.drawable.capriciossa, R.drawable.vulcano, R.drawable.romana, R.drawable.capodanno, R.drawable.primavera, R.drawable.regina, R.drawable.quattro_stagioni, R.drawable.cilento, R.drawable.tirolese, R.drawable.michele, R.drawable.pollo, R.drawable.havana, R.drawable.siciliana, R.drawable.sandra, R.drawable.bari, R.drawable.gringo, R.drawable.angelo, R.drawable.spinaci)
+
+
+    var focaccia_names: Array<String> = application.resources.getStringArray(R.array.foaccia_titles)
+    var focaccia_desc: Array<String> = application.resources.getStringArray(R.array.foaccia_desc)
+    val focaccia_price : IntArray = application.resources.getIntArray(R.array.foaccia_price)
+    var focaccia_img: Array<Int> = arrayOf(R.drawable.base, R.drawable.nutella)
+
 
     private val repository: UserRepository
 

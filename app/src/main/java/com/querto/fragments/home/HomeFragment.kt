@@ -23,14 +23,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
        val view =  inflater.inflate(R.layout.fragment_home, container, false)
-        setUpTabs()
-
         return view
 
 
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setUpTabs()
+        super.onViewCreated(view, savedInstanceState)
+    }
     private fun setUpTabs() {
         val viewPagerAdapter = ViewPagerAdapter((activity as AppCompatActivity).supportFragmentManager)
 

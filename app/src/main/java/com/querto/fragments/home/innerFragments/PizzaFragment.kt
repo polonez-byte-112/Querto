@@ -23,9 +23,7 @@ class PizzaFragment : Fragment() {
         view.recyclerViewPizza.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
-        //Dodac to jak bedą zdjecia
-        //     view.recyclerView.adapter = HomeAdapter(context, mMainActivityViewModel.pizza_names, mMainActivityViewModel.pizza_desc, mMainActivityViewModel.pizza_img )
-        view.recyclerViewPizza.adapter = PizzaAdapter(context!!,mMainActivityViewModel.pizza_img, mMainActivityViewModel.pizza_names, mMainActivityViewModel.pizza_desc, mMainActivityViewModel.pizza_small_price, mMainActivityViewModel.pizza_medium_price, mMainActivityViewModel.pizza_big_price )
+          view.recyclerViewPizza.adapter = PizzaAdapter(requireContext(),mMainActivityViewModel.pizza_img, mMainActivityViewModel.pizza_names, mMainActivityViewModel.pizza_desc, mMainActivityViewModel.pizza_small_price, mMainActivityViewModel.pizza_medium_price, mMainActivityViewModel.pizza_big_price )
 
 
         return view
