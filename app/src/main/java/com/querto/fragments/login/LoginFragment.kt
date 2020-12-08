@@ -9,8 +9,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
@@ -19,9 +22,8 @@ class LoginFragment : Fragment() {
     lateinit var password: EditText
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
@@ -37,13 +39,14 @@ class LoginFragment : Fragment() {
             val takenUsername = username.text.toString()
             val takenPassword = password.text.toString()
 
-            if (takenUsername.isEmpty() || takenPassword.isEmpty()) {
+            if(takenUsername.isEmpty() || takenPassword.isEmpty()){
                 Toast.makeText(context, "Fill all columns", Toast.LENGTH_SHORT).show()
             } else {
                 //Check user is valid or not in db and you will get the callback on line #
                 mMainActivityViewModel.checkLogin(takenUsername, takenPassword)
             }
         }
+
         return view
     }
 
@@ -61,4 +64,5 @@ class LoginFragment : Fragment() {
             }
         })
     }
+
 }

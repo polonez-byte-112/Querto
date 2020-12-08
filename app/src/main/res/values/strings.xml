@@ -4,4 +4,172 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="pizza_titles">
+        <item>Napoletana\u0020</item>
+        <item>Margherita\u0020</item>
+        <item>Estate\u0020</item>
+        <item>Pepperone\u0020</item>
+        <item>Pancetta\u0020</item>
+        <item>Ortolana\u0020</item>
+        <item>Marinara\u0020</item>
+        <item>Diavola\u0020</item>
+        <item>Messicana\u0020</item>
+        <item>Quattro Formaggi\u0020</item>
+        <item>Sugoza\u0020</item>
+        <item>Semola\u0020</item>
+        <item>Capriciossa\u0020</item>
+        <item>Vulcano\u0020</item>
+        <item>Romana\u0020</item>
+        <item>Capodanno\u0020</item>
+        <item>Primavera\u0020</item>
+        <item>Regina\u0020</item>
+        <item>Quattro Stagioni\u0020</item>
+        <item>Cilento\u0020</item>
+        <item>Tirolese\u0020</item>
+        <item>Michele\u0020</item>
+        <item>Pollo\u0020</item>
+        <item>Havana\u0020</item>
+        <item>Siciliana\u0020</item>
+        <item>Sandra\u0020</item>
+        <item>Bari\u0020</item>
+        <item>Gringo\u0020</item>
+        <item>Angelo\u0020</item>
+        <item>Spinaci\u0020</item>
+    </string-array>
+
+
+    <string-array name="pizza_desc">
+        <item>sos pomidorowy, czosnek, oregano</item>
+        <item>sos pomidorowy, ser mozzarella, bazylia</item>
+        <item>ser grana padano, ser mozzarella, pomidorki koktajlowe, rukola</item>
+        <item>sos pomidorowy, ser mozzarella, salami pikantne , czosnek, oliwki, papryka z grilla</item>
+        <item>sos pomidorowy, ser mozzarella, pancetta, cebula, kukurydza</item>
+        <item>ser mozzarella, bakłażan grillowany, cukinia, oregano, papryka z grilla, pieczarki</item>
+        <item>sos pomidorowy, filety anchovies,kapary, oregano</item>
+        <item>sos pomidorowy, ser mozzarella, salami pikantne</item>
+        <item>sos pomidorowy, ser mozzarella, salami pikantne, cebula, oliwki, peperoncino</item>
+        <item>ser gorgonzola, ser mozzarella, serricotto, ser wędzony</item>
+        <item>sos pomidorowy, ser mozzarella, szynka, pieczarki</item>
+        <item>ser mozzarella, szynka, kukurydza, pieczarki</item>
+        <item>sos pomidorowy, ser mozzarella, szynka, oliwki, papryka z grilla, pieczarki</item>
+        <item>sos pomidorowy, ser mozzarella, szynka parmeńska, oliwki</item>
+        <item>sos pomidorowy, ser mozzarella, salami łagodne, oliwki</item>
+        <item>sos pomidorowy, ser mozzarella, tuńczyk, cebula, kukurydza</item>
+        <item>sos pomidorowy, ser mozzarella, salami pikantne, pieczarki, pomidorki koktajlowe</item>
+        <item>ser mozzarella, ser wędzony, rukola, suszone pomidory</item>
+        <item>sos pomidorowy, ser mozzarella, salami łagodne, szynka, pieczarki</item>
+        <item>ser grana padano, ser mozzarella, szynka parmeńska, pomidorki koktajlowe, rukola</item>
+        <item>sos pomidorowy, ser mozzarella, salami łagodne, szynka, czosnek, pomidorki koktajlowe</item>
+        <item>sos pomidorowy, ser gorgonzola, ser mozzarella, salami pikantne, cebula</item>
+        <item>sos pomidorowy, ser mozzarella, kurczak w marynacie gyros, kukurydza, pieczarki</item>
+        <item>ser mozzarella, szynka, ananas</item>
+        <item>ser mozzarella, bakłażan grillowany, cebula, oliwki, oregano</item>
+        <item>majonez, ser mozzarella, szynka, rukola, suszone pomidory</item>
+        <item>sos pomidorowy, ser mozzarella, kurczak w marynacie gyros, salami łagodne, szynka</item>
+        <item>sos pomidorowy, ser mozzarella, berlinki, salami pikantne, papryka z grilla</item>
+        <item>sos pomidorowy, ser mozzarella, boczek, salami pikantne, papryka jalapeno, rukola</item>
+        <item>ser gorgonzola, ser mozzarella, czosnek, szpinak</item>
+    </string-array>
+
+    <integer-array name="pizza_small_price">
+        <item>14</item>
+        <item>16</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>24</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>25</item>
+        <item>23</item>
+        <item>23</item>
+        <item>25</item>
+        <item>23</item>
+        <item>24</item>
+        <item>30</item>
+        <item>24</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>24</item>
+        <item>24</item>
+        <item>24</item>
+        <item>26</item>
+        <item>23</item>
+    </integer-array>
+
+
+    <integer-array name="pizza_medium_price">
+        <item>16</item>
+        <item>21</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>29</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>30</item>
+        <item>28</item>
+        <item>28</item>
+        <item>30</item>
+        <item>28</item>
+        <item>29</item>
+        <item>34</item>
+        <item>29</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>28</item>
+        <item>29</item>
+        <item>29</item>
+        <item>29</item>
+        <item>31</item>
+        <item>28</item>
+    </integer-array>
+
+    <integer-array name="pizza_big_price">
+        <item>20</item>
+        <item>25</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>36</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>37</item>
+        <item>35</item>
+        <item>35</item>
+        <item>37</item>
+        <item>35</item>
+        <item>36</item>
+        <item>41</item>
+        <item>36</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>36</item>
+        <item>36</item>
+        <item>36</item>
+        <item>38</item>
+        <item>35</item>
+    </integer-array>
+
 </resources>

@@ -11,9 +11,9 @@
 
     <item android:title="Communication">
         <menu>
-            <item android:id="@+id/email" android:title="Email Author" android:icon="@drawable/ic_email" android:tint="#6F001F"/>
-            <item android:id="@+id/share" android:title="Share App on Facebook" android:icon="@drawable/ic_share" android:tint="#6F001F"/>
-            <item android:id="@+id/rate" android:title="Rate app on Google Play" android:icon="@drawable/ic_store" android:tint="#6F001F"/>
+            <item android:id="@+id/email" android:title="Email \'Cliento\'" android:icon="@drawable/ic_email" android:tint="#6F001F"/>
+            <item android:id="@+id/share" android:title="Like \'Cliento\' on Facebook" android:icon="@drawable/ic_share" android:tint="#6F001F"/>
+            <item android:id="@+id/rate" android:title="Contact \'Cliento\' Details" android:icon="@drawable/ic_store" android:tint="#6F001F"/>
         </menu>
     </item>
 </menu>
