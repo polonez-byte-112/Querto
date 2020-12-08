@@ -4,12 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.Design.Light.NoActionBar"
     tools:context=".fragments.home.HomeFragment">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
@@ -17,19 +14,18 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabBackground="@color/design_default_color_primary_dark"
+                app:tabBackground="@color/customYellow"
                 app:tabGravity="fill"
                 app:tabInlineLabel="true"
                 app:tabMode="fixed"
                 app:tabTextAppearance="@style/CustomTabStyle"
-                app:tabTextColor="@color/white" />
+                app:tabTextColor="#C70039" />
 
             <!-- false daje label pod ikona a true obok -->
         </com.google.android.material.appbar.AppBarLayout>
@@ -40,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/appBarLayout"
-            tools:ignore="MissingClass" />
+            />
 
     </RelativeLayout>
 </FrameLayout>
