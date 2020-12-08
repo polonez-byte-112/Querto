@@ -56,7 +56,11 @@ class MainActivity : AppCompatActivity() ,LifecycleOwner, NavigationView.OnNavig
             R.id.register-> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, view.registerFragment).commit()
 
             R.id.email-> view.sendMail(this)
-            R.id.rate -> view.openStore(this)
+            R.id.rate -> {
+                val navigationView :NavigationView
+                navigationView = findViewById(R.id.nav_view)
+                navigationView.setCheckedItem(R.id.rate)
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, view.detailsFragment).commit()}
             R.id.share -> view.shareApp(this)
         }
 

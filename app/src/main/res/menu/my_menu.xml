@@ -9,11 +9,14 @@
         <item android:id="@+id/register" android:title="Register" android:icon="@drawable/ic_register"/>
     </group>
 
-    <item android:title="Communication">
+    <item android:title="Communication" >
         <menu>
             <item android:id="@+id/email" android:title="Email \'Cliento\'" android:icon="@drawable/ic_email" android:tint="#6F001F"/>
             <item android:id="@+id/share" android:title="Like \'Cliento\' on Facebook" android:icon="@drawable/ic_share" android:tint="#6F001F"/>
-            <item android:id="@+id/rate" android:title="Contact \'Cliento\' Details" android:icon="@drawable/ic_store" android:tint="#6F001F"/>
         </menu>
     </item>
+
+    <group android:checkableBehavior="single">
+    <item android:id="@+id/rate" android:title="Contact \'Cliento\' Details" android:icon="@drawable/ic_store" android:tint="#6F001F"/>
+    </group>
 </menu>

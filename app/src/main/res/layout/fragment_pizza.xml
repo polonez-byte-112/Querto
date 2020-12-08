@@ -7,7 +7,7 @@
     tools:context=".fragments.home.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/viewPager_pizza"
+        android:id="@+id/recyclerViewPizza"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

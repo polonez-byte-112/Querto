@@ -9,7 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.my_row.view.*
+import kotlinx.android.synthetic.main.my_pizza_row.view.*
+
 
 class PizzaAdapter(contextAdapter: Context, val pizza_images: Array<Int>, val pizza_names: Array<String>, val pizza_desc: Array<String>, val pizza_small_price: IntArray, val pizza_medium_price: IntArray, val pizza_big_price: IntArray): RecyclerView.Adapter<PizzaAdapter.MyViewHolder>() {
    private var mMainActivityViewModel : MainActivityViewModel
@@ -20,7 +21,7 @@ class PizzaAdapter(contextAdapter: Context, val pizza_images: Array<Int>, val pi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-       return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_row, parent,false))
+       return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_pizza_row, parent,false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -41,14 +42,14 @@ class PizzaAdapter(contextAdapter: Context, val pizza_images: Array<Int>, val pi
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val currentImage = itemView.row_img
-        val currentId = itemView.row_id
-        val currentName = itemView.row_title
-        val currentDesc = itemView.row_description
-        val currentPriceSmall = itemView.row_price_small
-        val currentPriceMedium = itemView.row_price_medium
-        val currentPriceBig = itemView.row_price_big
-        val box = itemView.box
+        val currentImage = itemView.pizza_row_img
+        val currentId = itemView.pizza_row_id
+        val currentName = itemView.pizza_row_title
+        val currentDesc = itemView.pizza_row_description
+        val currentPriceSmall = itemView.pizza_row_price_small
+        val currentPriceMedium = itemView.pizza_row_price_medium
+        val currentPriceBig = itemView.pizza_row_price_big
+        val box = itemView.pizza_box
 
 
     }

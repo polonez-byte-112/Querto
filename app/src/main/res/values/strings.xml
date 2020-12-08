@@ -5,6 +5,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Pizza -->
     <string-array name="pizza_titles">
         <item>Napoletana\u0020</item>
         <item>Margherita\u0020</item>
@@ -37,8 +38,6 @@
         <item>Angelo\u0020</item>
         <item>Spinaci\u0020</item>
     </string-array>
-
-
     <string-array name="pizza_desc">
         <item>sos pomidorowy, czosnek, oregano</item>
         <item>sos pomidorowy, ser mozzarella, bazylia</item>
@@ -71,7 +70,6 @@
         <item>sos pomidorowy, ser mozzarella, boczek, salami pikantne, papryka jalapeno, rukola</item>
         <item>ser gorgonzola, ser mozzarella, czosnek, szpinak</item>
     </string-array>
-
     <integer-array name="pizza_small_price">
         <item>14</item>
         <item>16</item>
@@ -104,8 +102,6 @@
         <item>26</item>
         <item>23</item>
     </integer-array>
-
-
     <integer-array name="pizza_medium_price">
         <item>16</item>
         <item>21</item>
@@ -138,7 +134,6 @@
         <item>31</item>
         <item>28</item>
     </integer-array>
-
     <integer-array name="pizza_big_price">
         <item>20</item>
         <item>25</item>
@@ -170,6 +165,111 @@
         <item>36</item>
         <item>38</item>
         <item>35</item>
+    </integer-array>
+
+    <!-- Focaccia -->
+    <string-array name="foaccia_titles">
+        <item>Base</item>
+        <item>Nutella</item>
+    </string-array>
+    <string-array name="foaccia_desc">
+        <item>ciasto, oregano, oliwa extra vergin</item>
+        <item>Nutella, orzechy laskowe</item>
+    </string-array>
+    <integer-array name="foaccia_price">
+        <item>10</item>
+        <item>20</item>
+    </integer-array>
+
+    <!-- Calzone -->
+    <string-array name="calzone_titles">
+        <item>Calzone</item>
+    </string-array>
+    <string-array name="calzone_desc">
+        <item>ciasto, ser mozzarella, wybrane dodatki wg cennika</item>
+    </string-array>
+    <integer-array name="calzone_normal_price">
+        <item>15</item>
+    </integer-array>
+    <integer-array name="calzone_big_price">
+        <item>20</item>
+    </integer-array>
+
+    <!-- Panuozzo -->
+    <string-array name="panuozzo_titles">
+        <item>Panuozzo</item>
+    </string-array>
+    <string-array name="panuozzo_desc">
+        <item>ciasto, ser mozzarella, wybrane dodatki według cennika</item>
+    </string-array>
+    <integer-array name="panuozzo_normal_price">
+        <item>15</item>
+
+    </integer-array>
+    <integer-array name="panuozzo_big_price">
+        <item>20</item>
+    </integer-array>
+
+    <!-- Sosy -->
+    <string-array name="sosy_titles">
+        <item>Oliwa: czosnkowa, oregano, pepperoncino</item>
+        <item>Ketchup</item>
+        <item>Słodko-kwaśny</item>
+        <item>Czosnkowo-koperkowy</item>
+    </string-array>
+    <integer-array name="sosy_price">
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+
+    <!-- Napoje -->
+    <string-array name="napoje_titles">
+        <item>Pepsi</item>
+        <item>Woda</item>
+    </string-array>
+    <string-array name="napoje_kinds_one">
+        <item>pepsi</item>
+        <item>gazowana</item>
+    </string-array>
+    <string-array name="napoje_kinds_two">
+        <item>pepsi light</item>
+        <item>niegazowana</item>
+    </string-array>
+    <integer-array name="napoje_price">
+        <item>7</item>
+        <item>4</item>
+    </integer-array>
+
+    <!-- Dodatki -->
+    <string-array name="dodatki_titles">
+        <item>ser gorgonzola, ser mozzarella, pomidorki koktajlowe, szynka parmeńska, ser grana padano, tuńczyk</item>
+        <item>anchois, bakłażan, boczek, cukinia, ricotta, kurczak w marynacie gyros, nutella, orzechy laskowe, pancetta, papryka, pieczarki, salami łagodne, salami pikantne, szynka, ser wędzony, pomidory suszone, szpinak</item>
+        <item>berlinki, kapary, kukurydza, majonez, oliwki, papryka jalapeno</item>
+        <item>cebula, czosnek, sos pomidorowy</item>
+        <item>bazylia, oregano, oliwa extra vergin, peperoncino, sól morska</item>
+    </string-array>
+    <integer-array name="dodatki_small_price">
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>1</item>
+    </integer-array>
+    <integer-array name="dodatki_medium_price">
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+    </integer-array>
+    <integer-array name="dodatki_big_price">
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>1</item>
     </integer-array>
 
 </resources>

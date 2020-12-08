@@ -3,13 +3,18 @@ package com.querto.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.provider.Browser
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.data.UserDatabase
+import com.querto.fragments.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
@@ -24,6 +29,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val homeFragment = HomeFragment()
     val loginFragment = LoginFragment()
     val registerFragment = RegisterFragment()
+    val detailsFragment= DetailsFragment()
 
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
@@ -67,16 +73,31 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun shareApp(context: Context) {
-        Toast.makeText(context, "App Shared", Toast.LENGTH_SHORT).show()
+
+        val openURL = Intent(android.content.Intent.ACTION_VIEW)
+
+        openURL.data =Uri.parse("https://www.facebook.com/1488596184507308/")
+            context.startActivity(openURL)
+
+
     }
 
 
     fun openStore(context: Context) {
-        Toast.makeText(context, "Store opened", Toast.LENGTH_SHORT).show()
-    }
+
+
+ }
 
 
     fun sendMail(context : Context) {
-        Toast.makeText(context, "Send Email", Toast.LENGTH_SHORT).show()
+        val sendEmail = Intent(Intent.ACTION_SEND)
+        val email: Array<String> = arrayOf("kontakt@cilento.pl")
+        sendEmail.setData(Uri.parse("mailto: kontakt@cilento.pl "))
+        sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Problem z Usługą")
+        sendEmail.putExtra(Intent.EXTRA_TEXT, "Pizza którą zamówiłem nie przyszła na czas.\n\n\nMoje Dane Kontaktowe: \n\nImie: \nNazwisko: \nAdres: ")
+        sendEmail.setType("message/rfc822")
+        sendEmail.putExtra(Intent.EXTRA_EMAIL, email)
+        val chooser = Intent.createChooser(sendEmail,"Send mail using")
+        context.startActivity(chooser)
     }
 }

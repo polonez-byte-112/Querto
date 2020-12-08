@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.querto">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="false"
         android:icon="@drawable/querto_icon"
@@ -9,16 +11,24 @@
         android:roundIcon="@drawable/querto_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Querto">
-        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.NoActionBar" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
             </intent-filter>
         </activity>
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+
 
 </manifest>

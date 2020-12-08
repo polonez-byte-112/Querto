@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".fragments.home.HomeFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -23,11 +21,10 @@
                 app:tabBackground="@color/customYellow"
                 app:tabGravity="fill"
                 app:tabInlineLabel="true"
-                app:tabMode="fixed"
+                app:tabMode="scrollable"
                 app:tabTextAppearance="@style/CustomTabStyle"
                 app:tabTextColor="#C70039" />
 
-            <!-- false daje label pod ikona a true obok -->
         </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -38,5 +35,5 @@
             android:layout_below="@id/appBarLayout"
             />
 
-    </RelativeLayout>
-</FrameLayout>
+
+</RelativeLayout>

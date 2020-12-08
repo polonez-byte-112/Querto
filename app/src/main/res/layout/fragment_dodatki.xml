@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.innerFragments.SosyFragment">
+    tools:context=".fragments.home.innerFragments.DodatkiFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewSosy"
+        android:id="@+id/recyclerViewDodatki"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </FrameLayout>
