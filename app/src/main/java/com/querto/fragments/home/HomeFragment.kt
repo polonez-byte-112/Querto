@@ -12,10 +12,11 @@ import com.querto.adapters.ViewPagerAdapter
 import com.querto.fragments.home.innerFragments.*
 
 import kotlinx.android.synthetic.main.fragment_home.*
-
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class HomeFragment : Fragment() {
+
 
 
     override fun onCreateView(
@@ -23,6 +24,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+
+
+
+
         return view
 
 
@@ -31,26 +36,36 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpTabs()
+
         super.onViewCreated(view, savedInstanceState)
+
     }
     private fun setUpTabs() {
         val viewPagerAdapter = ViewPagerAdapter((activity as AppCompatActivity).supportFragmentManager)
 
 
-        viewPagerAdapter.addFragment(PizzaFragment(), "Pizza")
-        viewPagerAdapter.addFragment(FoacciaFragment(), "Foaccia")
-        viewPagerAdapter.addFragment(CalzoneFragment(), "Calzone")
-        viewPagerAdapter.addFragment(PanuozzoFragment(), "Panuozzo")
-        viewPagerAdapter.addFragment(SosyFragment(), "Sosy")
-        viewPagerAdapter.addFragment(NapojeFragment(), "Napoje")
-        viewPagerAdapter.addFragment(DodatkiFragment(), "Dodatki")
+
+
         viewLifecycleOwnerLiveData.observe(viewLifecycleOwner, Observer {
+            viewPagerAdapter.addFragment(PizzaFragment(), "Pizza")
+            viewPagerAdapter.addFragment(FoacciaFragment(), "Foaccia")
+            viewPagerAdapter.addFragment(CalzoneFragment(), "Calzone")
+            viewPagerAdapter.addFragment(PanuozzoFragment(), "Panuozzo")
+            viewPagerAdapter.addFragment(SosyFragment(), "Sosy")
+            viewPagerAdapter.addFragment(NapojeFragment(), "Napoje")
+            viewPagerAdapter.addFragment(DodatkiFragment(), "Dodatki")
+
             viewPager_home?.adapter=viewPagerAdapter
             tabLayout?.setupWithViewPager(viewPager_home)
+            tabLayout?.getTabAt(0)?.select()
+            viewPagerAdapter.notifyDataSetChanged()
         })
 
 
+
+
     }
+
 
 
 }

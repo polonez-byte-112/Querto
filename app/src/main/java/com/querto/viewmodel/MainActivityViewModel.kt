@@ -32,17 +32,11 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val detailsFragment= DetailsFragment()
 
 
-    private val mutableLoginStatus = MutableLiveData<Boolean>()
-    val loginStatus: LiveData<Boolean>
-        get() = mutableLoginStatus
-
-//Pizza
     var pizza_names: Array<String> = application.resources.getStringArray(R.array.pizza_titles)
     var pizza_desc: Array<String> = application.resources.getStringArray(R.array.pizza_desc)
     val pizza_small_price : IntArray = application.resources.getIntArray(R.array.pizza_small_price)
     val pizza_medium_price : IntArray = application.resources.getIntArray(R.array.pizza_medium_price)
     val pizza_big_price : IntArray = application.resources.getIntArray(R.array.pizza_big_price)
-    //dodac te zdjecia potem
     var pizza_img: Array<Int> = arrayOf( R.drawable.napoletana,  R.drawable.margherita, R.drawable.estate, R.drawable.pepperone, R.drawable.pancetta, R.drawable.ortolana, R.drawable.marinara, R.drawable.diavola, R.drawable.messicana, R.drawable.quattro_formaggi, R.drawable.sugoza, R.drawable.semola, R.drawable.capriciossa, R.drawable.vulcano, R.drawable.romana, R.drawable.capodanno, R.drawable.primavera, R.drawable.regina, R.drawable.quattro_stagioni, R.drawable.cilento, R.drawable.tirolese, R.drawable.michele, R.drawable.pollo, R.drawable.havana, R.drawable.siciliana, R.drawable.sandra, R.drawable.bari, R.drawable.gringo, R.drawable.angelo, R.drawable.spinaci)
 
 
@@ -50,6 +44,38 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     var focaccia_desc: Array<String> = application.resources.getStringArray(R.array.foaccia_desc)
     val focaccia_price : IntArray = application.resources.getIntArray(R.array.foaccia_price)
     var focaccia_img: Array<Int> = arrayOf(R.drawable.base, R.drawable.nutella)
+
+
+    var calzone_names: Array<String> = application.resources.getStringArray(R.array.calzone_titles)
+    var calzone_desc: Array<String> = application.resources.getStringArray(R.array.calzone_desc)
+    val calzone_price_normal : IntArray = application.resources.getIntArray(R.array.calzone_normal_price)
+    val calzone_price_big : IntArray = application.resources.getIntArray(R.array.calzone_big_price)
+    var calzone_img: Array<Int> = arrayOf(R.drawable.calzone)
+
+
+    var panuozzo_names: Array<String> = application.resources.getStringArray(R.array.panuozzo_titles)
+    var panuozzo_desc: Array<String> = application.resources.getStringArray(R.array.panuozzo_desc)
+    val panuozzo_price_normal : IntArray = application.resources.getIntArray(R.array.panuozzo_normal_price)
+    val panuozzo_price_big : IntArray = application.resources.getIntArray(R.array.panuozzo_big_price)
+    var panuozzo_img: Array<Int> = arrayOf(R.drawable.panuozzo)
+
+    val sosy_names: Array<String> = application.resources.getStringArray(R.array.sosy_titles)
+    val sosy_price: IntArray = application.resources.getIntArray(R.array.sosy_price)
+
+    val napoje_names: Array<String> = application.resources.getStringArray(R.array.napoje_titles)
+    val napoje_price: IntArray = application.resources.getIntArray(R.array.napoje_price)
+    val napoje_first_kind: Array<String> = application.resources.getStringArray(R.array.napoje_kinds_one)
+    val napoje_second_kind:  Array<String> = application.resources.getStringArray(R.array.napoje_kinds_two)
+
+    val dodatki_names: Array<String> = application.resources.getStringArray(R.array.dodatki_titles)
+    val dodatki_small_price : IntArray = application.resources.getIntArray(R.array.dodatki_small_price)
+    val dodatki_medium_price : IntArray = application.resources.getIntArray(R.array.dodatki_medium_price)
+    val dodatki_big_price : IntArray = application.resources.getIntArray(R.array.dodatki_big_price)
+
+
+    private val mutableLoginStatus = MutableLiveData<Boolean>()
+    val loginStatus: LiveData<Boolean>
+        get() = mutableLoginStatus
 
 
     private val repository: UserRepository

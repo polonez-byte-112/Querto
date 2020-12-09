@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/pizza_row_id"
+        android:id="@+id/dodatki_row_id"
         android:layout_width="70dp"
         android:layout_height="450dp"
         android:background="@drawable/row_id_bg"
@@ -32,34 +32,22 @@
         android:layout_marginEnd="5dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pizza_row_id"
+        app:layout_constraintStart_toEndOf="@+id/dodatki_row_id"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/pizza_box"
+            android:id="@+id/dodatki_box"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:layout_marginStart="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/pizza_row_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:scaleType="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_background" />
-
             <TextView
-                android:id="@+id/pizza_row_title"
+                android:id="@+id/dodatki_row_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="@font/amatic_sc"
                 android:text="TRADIZIONALE"
@@ -67,69 +55,55 @@
                 android:textColor="#000"
                 android:textSize="30dp"
                 android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_row_img" />
-
-            <TextView
-                android:id="@+id/pizza_row_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingBottom="20dp"
-                android:text="sos, ser, szynka, salami,peperoni, cebula"
-                android:textAlignment="center"
-                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_row_title" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/pizza_txtSmall"
+                android:id="@+id/dodatki_txtSmall"
                 android:layout_width="53dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginBottom="50dp"
                 android:fontFamily="@font/poppins"
                 android:text="Mała"
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/pizza_txtMedium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dodatki_txtMedium"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_row_description" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/pizza_txtMedium"
+                android:id="@+id/dodatki_txtMedium"
                 android:layout_width="54dp"
                 android:layout_height="23dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginBottom="50dp"
                 android:fontFamily="@font/poppins"
                 android:text="Srednia"
                 android:textColor="#000"
-                app:layout_constraintEnd_toStartOf="@+id/pizza_txtBig"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dodatki_txtBig"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/pizza_txtSmall"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_row_description" />
+                app:layout_constraintStart_toEndOf="@+id/dodatki_txtSmall" />
 
             <TextView
-                android:id="@+id/pizza_txtBig"
+                android:id="@+id/dodatki_txtBig"
                 android:layout_width="44dp"
                 android:layout_height="23dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginBottom="50dp"
                 android:fontFamily="@font/poppins"
                 android:text="Duża"
                 android:textAlignment="center"
                 android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/pizza_txtMedium"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_row_description" />
+                app:layout_constraintStart_toEndOf="@+id/dodatki_txtMedium" />
 
             <TextView
-                android:id="@+id/pizza_row_price_small"
+                android:id="@+id/dodatki_row_price_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -140,11 +114,11 @@
                 android:paddingBottom="33dp"
                 android:text="20"
                 android:textColor="#000"
-                app:layout_constraintStart_toStartOf="@+id/pizza_txtSmall"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_txtSmall" />
+                app:layout_constraintStart_toStartOf="@+id/dodatki_txtSmall"
+                app:layout_constraintTop_toBottomOf="@+id/dodatki_txtSmall" />
 
             <TextView
-                android:id="@+id/pizza_textView9"
+                android:id="@+id/dodatki_textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -152,11 +126,11 @@
                 android:paddingTop="3dp"
                 android:text="zł"
                 android:textColor="#000"
-                app:layout_constraintStart_toEndOf="@+id/pizza_row_price_small"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_txtSmall" />
+                app:layout_constraintStart_toEndOf="@+id/dodatki_row_price_small"
+                app:layout_constraintTop_toBottomOf="@+id/dodatki_txtSmall" />
 
             <TextView
-                android:id="@+id/pizza_row_price_medium"
+                android:id="@+id/dodatki_row_price_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -166,11 +140,11 @@
                 android:paddingBottom="3dp"
                 android:text="25"
                 android:textColor="#000"
-                app:layout_constraintStart_toStartOf="@+id/pizza_txtMedium"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_txtMedium" />
+                app:layout_constraintStart_toStartOf="@+id/dodatki_txtMedium"
+                app:layout_constraintTop_toBottomOf="@+id/dodatki_txtMedium" />
 
             <TextView
-                android:id="@+id/pizza_textView12"
+                android:id="@+id/dodatki_textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -178,11 +152,11 @@
                 android:paddingTop="3dp"
                 android:text="zł"
                 android:textColor="#000"
-                app:layout_constraintStart_toEndOf="@+id/pizza_row_price_medium"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_txtMedium" />
+                app:layout_constraintStart_toEndOf="@+id/dodatki_row_price_medium"
+                app:layout_constraintTop_toBottomOf="@+id/dodatki_txtMedium" />
 
             <TextView
-                android:id="@+id/pizza_row_price_big"
+                android:id="@+id/dodatki_row_price_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -193,11 +167,11 @@
                 android:paddingBottom="3dp"
                 android:text="25"
                 android:textColor="#000"
-                app:layout_constraintStart_toStartOf="@+id/pizza_txtBig"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_txtBig" />
+                app:layout_constraintStart_toStartOf="@+id/dodatki_txtBig"
+                app:layout_constraintTop_toBottomOf="@+id/dodatki_txtBig" />
 
             <TextView
-                android:id="@+id/pizza_textView13"
+                android:id="@+id/dodatki_textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -205,8 +179,8 @@
                 android:paddingTop="3dp"
                 android:text="zł"
                 android:textColor="#000"
-                app:layout_constraintStart_toEndOf="@+id/pizza_row_price_big"
-                app:layout_constraintTop_toBottomOf="@+id/pizza_txtBig" />
+                app:layout_constraintStart_toEndOf="@+id/dodatki_row_price_big"
+                app:layout_constraintTop_toBottomOf="@+id/dodatki_txtBig" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>

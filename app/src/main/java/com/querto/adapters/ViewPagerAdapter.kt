@@ -24,6 +24,6 @@ class ViewPagerAdapter(supportFragmentManager: FragmentManager): FragmentPagerAd
     fun addFragment(fragment: Fragment, title: String){
         mFragmentList.add(fragment)
         mFragmentTitleList.add(title)
-        println("Added : $title")
     }
+
 }
