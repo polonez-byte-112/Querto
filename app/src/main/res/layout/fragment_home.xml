@@ -8,8 +8,54 @@
     tools:context=".fragments.home.HomeFragment">
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingCartBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:tint="#fff"
+        android:backgroundTint="#C70039"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_shopping_cart" />
 
-        <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingClearBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/floatingCartBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="10dp"
+        android:tint="#C70039"
+        android:backgroundTint="#F5D1DB"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_clear_cart" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingContinueBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_above="@+id/floatingClearBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="10dp"
+        android:tint="#C70039"
+        android:backgroundTint="#F5D1DB"
+        android:clickable="true"
+        android:focusable="true"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_continue" />
+
+    <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -28,12 +74,13 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/appBarLayout"
-            />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBarLayout" >
+
+    </androidx.viewpager.widget.ViewPager>
 
 
 </RelativeLayout>

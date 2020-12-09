@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC300"
+    android:background="#fff"
     tools:context=".fragments.login.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +27,7 @@
             android:paddingLeft="5dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+            android:textColorHint="@color/customYellow"
             android:textColor="#C70039"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
+            android:textColorHint="@color/customYellow"
             android:background="@drawable/custom_input"
             android:drawableStart="@drawable/custom_person_icon"
             android:drawablePadding="15dp"
