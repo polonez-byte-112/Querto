@@ -9,12 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.my_calzone_row.view.*
 import kotlinx.android.synthetic.main.my_sosy_row.view.*
 
-class SosyAdapter(contextAdapter: Context,  val sosy_names: Array<String>, val sosy_price: IntArray): RecyclerView.Adapter<SosyAdapter.MyViewHolder>() {
+class SosyAdapter(contextAdapter: Context, val sosy_names: Array<String>, val sosy_price: IntArray) : RecyclerView.Adapter<SosyAdapter.MyViewHolder>() {
 
-    private var mMainActivityViewModel : MainActivityViewModel
+    private var mMainActivityViewModel: MainActivityViewModel
     private val context: Context = contextAdapter
 
     init {
@@ -22,9 +21,9 @@ class SosyAdapter(contextAdapter: Context,  val sosy_names: Array<String>, val s
                 MainActivityViewModel::class.java)
     }
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val currentName = itemView.sosy_row_title
-        var currentPrice =itemView.sosy_row_price
+        var currentPrice = itemView.sosy_row_price
         val currentId = itemView.sosy_row_id
     }
 
@@ -34,9 +33,9 @@ class SosyAdapter(contextAdapter: Context,  val sosy_names: Array<String>, val s
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.currentId.text = (position+1).toString()
+        holder.currentId.text = (position + 1).toString()
         holder.currentName.text = sosy_names.get(position)
-        holder.currentPrice.text= sosy_price.get(position).toString()
+        holder.currentPrice.text = sosy_price.get(position).toString()
     }
 
     override fun getItemCount(): Int {

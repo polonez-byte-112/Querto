@@ -21,7 +21,7 @@
 
     <style name="CustomTabStyle" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">20dp</item>
-        <item name="fontFamily"> @font/amatic_sc</item>
+        <item name="fontFamily">@font/amatic_sc</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>

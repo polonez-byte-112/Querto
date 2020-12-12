@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_calzone_row.view.*
-import kotlinx.android.synthetic.main.my_foaccia_row.view.*
 
-class CalzoneAdapter(contextAdapter: Context, val calzone_images: Array<Int>, val calzone_names: Array<String>, val calzone_desc: Array<String>, val calzone_normal_price: IntArray, val calzone_big_price: IntArray): RecyclerView.Adapter<CalzoneAdapter.MyViewHolder>() {
+class CalzoneAdapter(contextAdapter: Context, val calzone_images: Array<Int>, val calzone_names: Array<String>, val calzone_desc: Array<String>, val calzone_normal_price: IntArray, val calzone_big_price: IntArray) : RecyclerView.Adapter<CalzoneAdapter.MyViewHolder>() {
 
-    private var mMainActivityViewModel : MainActivityViewModel
+    private var mMainActivityViewModel: MainActivityViewModel
     private val context: Context = contextAdapter
 
     init {
@@ -22,7 +21,7 @@ class CalzoneAdapter(contextAdapter: Context, val calzone_images: Array<Int>, va
                 MainActivityViewModel::class.java)
     }
 
-    class MyViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val currentImage = itemView.calzone_row_img
         val currentId = itemView.calzone_row_id
         val currentName = itemView.calzone_row_title
@@ -38,7 +37,7 @@ class CalzoneAdapter(contextAdapter: Context, val calzone_images: Array<Int>, va
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.currentImage.setImageResource(calzone_images[position])
-        holder.currentId.text = (position+1).toString()
+        holder.currentId.text = (position + 1).toString()
         holder.currentName.text = calzone_names.get(position)
         holder.currentDesc.text = calzone_desc.get(position)
         holder.currentPriceNormal.text = calzone_normal_price.get(position).toString()

@@ -13,24 +13,34 @@
         android:layout_margin="50dp">
 
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:elevation="10sp"
+            android:src="@drawable/pizza_transparent_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/loginUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="168dp"
+            android:layout_marginTop="268dp"
             android:background="@drawable/custom_input"
             android:drawableStart="@drawable/custom_person_icon"
             android:drawablePadding="15dp"
+            android:elevation="10sp"
             android:ems="10"
             android:hint="Username"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:textColorHint="@color/customYellow"
             android:textColor="#C70039"
+            android:textColorHint="@color/customYellow"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,10 +49,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
-            android:textColorHint="@color/customYellow"
             android:background="@drawable/custom_input"
             android:drawableStart="@drawable/custom_person_icon"
             android:drawablePadding="15dp"
+            android:elevation="10sp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
@@ -50,6 +60,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textColor="#C70039"
+            android:textColorHint="@color/customYellow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +70,8 @@
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/cardview_dark_background"
+            android:elevation="10sp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:text="Login"
@@ -66,5 +79,36 @@
             app:layout_constraintTop_toBottomOf="@+id/loginPassword"
             app:layout_constraintVertical_bias="0.519"
             tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="33dp"
+            android:elevation="10sp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Login"
+            android:textColor="#000000"
+            android:textSize="46sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/redirectLoginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="10sp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Nie masz jeszcze konta? Zarejestruj"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

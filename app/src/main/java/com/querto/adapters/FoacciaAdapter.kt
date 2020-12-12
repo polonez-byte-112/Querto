@@ -10,20 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_foaccia_row.view.*
-import kotlinx.android.synthetic.main.my_pizza_row.view.*
 
 
-class FoacciaAdapter(contextAdapter: Context, val foaccia_images: Array<Int>, val foaccia_names: Array<String>, val foaccia_desc: Array<String>, val foaccia_price: IntArray): RecyclerView.Adapter<FoacciaAdapter.MyViewHolder>() {
+class FoacciaAdapter(contextAdapter: Context, val foaccia_images: Array<Int>, val foaccia_names: Array<String>, val foaccia_desc: Array<String>, val foaccia_price: IntArray) : RecyclerView.Adapter<FoacciaAdapter.MyViewHolder>() {
 
-    private var mMainActivityViewModel : MainActivityViewModel
+    private var mMainActivityViewModel: MainActivityViewModel
     private val context: Context = contextAdapter
 
     init {
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(contextAdapter.applicationContext as Application).create(
-            MainActivityViewModel::class.java)
+                MainActivityViewModel::class.java)
     }
-
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoacciaAdapter.MyViewHolder {
@@ -32,7 +29,7 @@ class FoacciaAdapter(contextAdapter: Context, val foaccia_images: Array<Int>, va
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.currentImage.setImageResource(foaccia_images[position])
-        holder.currentId.text = (position+1).toString()
+        holder.currentId.text = (position + 1).toString()
         holder.currentName.text = foaccia_names.get(position)
         holder.currentDesc.text = foaccia_desc.get(position)
         holder.currentPriceMedium.text = foaccia_price.get(position).toString()

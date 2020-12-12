@@ -12,27 +12,26 @@ import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_pizza_row.view.*
 
 
-class PizzaAdapter(contextAdapter: Context, val pizza_images: Array<Int>, val pizza_names: Array<String>, val pizza_desc: Array<String>, val pizza_small_price: IntArray, val pizza_medium_price: IntArray, val pizza_big_price: IntArray): RecyclerView.Adapter<PizzaAdapter.MyViewHolder>() {
-   private var mMainActivityViewModel : MainActivityViewModel
+class PizzaAdapter(contextAdapter: Context, val pizza_images: Array<Int>, val pizza_names: Array<String>, val pizza_desc: Array<String>, val pizza_small_price: IntArray, val pizza_medium_price: IntArray, val pizza_big_price: IntArray) : RecyclerView.Adapter<PizzaAdapter.MyViewHolder>() {
+    private var mMainActivityViewModel: MainActivityViewModel
     private val context: Context = contextAdapter
 
     init {
-       mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(contextAdapter.applicationContext as Application).create(MainActivityViewModel::class.java)
+        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(contextAdapter.applicationContext as Application).create(MainActivityViewModel::class.java)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-       return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_pizza_row, parent,false))
+        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_pizza_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.currentImage.setImageResource(pizza_images[position])
-        holder.currentId.text = (position+1).toString()
+        holder.currentId.text = (position + 1).toString()
         holder.currentName.text = pizza_names.get(position)
         holder.currentDesc.text = pizza_desc.get(position)
         holder.currentPriceSmall.text = pizza_small_price.get(position).toString()
         holder.currentPriceMedium.text = pizza_medium_price.get(position).toString()
         holder.currentPriceBig.text = pizza_big_price.get(position).toString()
-
 
 
     }

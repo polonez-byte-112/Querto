@@ -11,7 +11,10 @@
         android:roundIcon="@drawable/querto_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Querto">
-        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.NoActionBar" android:screenOrientation="portrait">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +28,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 
 
 </manifest>

@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:showIn="navigation_view">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/home" android:title="Home" android:icon="@drawable/ic_home"/>
-        <item android:id="@+id/login" android:title="Login" android:icon="@drawable/ic_login"/>
-        <item android:id="@+id/register" android:title="Register" android:icon="@drawable/ic_register"/>
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/login"
+            android:icon="@drawable/ic_login"
+            android:title="Login" />
+        <item
+            android:id="@+id/register"
+            android:icon="@drawable/ic_register"
+            android:title="Register" />
     </group>
 
-    <item android:title="Communication" >
+    <item android:title="Communication">
         <menu>
-            <item android:id="@+id/email" android:title="Email \'Cliento\'" android:icon="@drawable/ic_email" android:tint="#6F001F"/>
-            <item android:id="@+id/share" android:title="Like \'Cliento\' on Facebook" android:icon="@drawable/ic_share" android:tint="#6F001F"/>
+            <item
+                android:id="@+id/email"
+                android:icon="@drawable/ic_email"
+                android:tint="#6F001F"
+                android:title="Email \'Cliento\'" />
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/ic_share"
+                android:tint="#6F001F"
+                android:title="Like \'Cliento\' on Facebook" />
         </menu>
     </item>
 
     <group android:checkableBehavior="single">
-    <item android:id="@+id/rate" android:title="Contact \'Cliento\' Details" android:icon="@drawable/ic_store" android:tint="#6F001F"/>
+        <item
+            android:id="@+id/rate"
+            android:icon="@drawable/ic_store"
+            android:tint="#6F001F"
+            android:title="Contact \'Cliento\' Details" />
     </group>
 </menu>

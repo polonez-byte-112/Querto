@@ -1,9 +1,9 @@
 package com.querto
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LifecycleOwner
@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import com.querto.viewmodel.MainActivityViewModel
 
-class MainActivity : AppCompatActivity() ,LifecycleOwner, NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var drawer : DrawerLayout
+    private lateinit var drawer: DrawerLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,46 +21,50 @@ class MainActivity : AppCompatActivity() ,LifecycleOwner, NavigationView.OnNavig
         setContentView(R.layout.activity_main)
 
 
-      var  viewModel =  ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
+        var viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
 
 
 
         drawer = findViewById(R.id.drawer_layout)
 
-        val navigationView :NavigationView
+        val navigationView: NavigationView
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
 
-        val toogle : ActionBarDrawerToggle
-        toogle = ActionBarDrawerToggle(this, drawer, findViewById(R.id.toolbar),R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toogle: ActionBarDrawerToggle
+        toogle = ActionBarDrawerToggle(this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toogle)
 
         toogle.syncState()
 
         //Kod powyzej od 21 do 34 jest po to by było menu (hamburger) w rogu
 
-        if(savedInstanceState==null){
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, viewModel.homeFragment ).commit()
-            navigationView.setCheckedItem(R.id.home)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
+            navigationView.setCheckedItem(R.id.login)
         }
 
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var  view =  ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
+        var view = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
 
-        when(item.itemId){
-            R.id.home -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, view.homeFragment).commit()
-            R.id.login-> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, view.loginFragment).commit()
-            R.id.register-> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, view.registerFragment).commit()
-
-            R.id.email-> view.sendMail(this)
+        when (item.itemId) {
+            R.id.home -> {
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.homeFragment).commit()
+            }
+            R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.loginFragment).commit()
+            R.id.register -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.registerFragment).commit()
+            R.id.email -> view.sendMail(this)
             R.id.rate -> {
-                val navigationView :NavigationView
+                val navigationView: NavigationView
                 navigationView = findViewById(R.id.nav_view)
                 navigationView.setCheckedItem(R.id.rate)
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, view.detailsFragment).commit()}
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.detailsFragment).commit()
+
+
+            }
             R.id.share -> view.shareApp(this)
         }
 
@@ -70,10 +74,12 @@ class MainActivity : AppCompatActivity() ,LifecycleOwner, NavigationView.OnNavig
     }
 
     override fun onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
-        }else{
+        } else {
             super.onBackPressed()
         }
     }
+
+
 }
