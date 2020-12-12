@@ -24,9 +24,13 @@ App have slide menu on the left side  and will have menu in HomeFragment which a
 ## 🧭 What's next
 
 * Menu with kind of food to order (done)
-* Floating shopping button with animations and extra options
+* Floating shopping button with animations and extra options 
 * Connection with database online (by Firebase)
 * Login or Create an User by Google Account
+* Ordering fragments etc
+* User profile etc 
+* Better UI
+
 
 <br /><br/>
 ## 📷 Screenshots
