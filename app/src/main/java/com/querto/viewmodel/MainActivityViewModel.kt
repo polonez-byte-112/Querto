@@ -5,24 +5,29 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.querto.R
-import com.querto.data.UserDatabase
 import com.querto.fragments.details.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
 import com.querto.model.User
-import com.querto.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
-
+    private lateinit var database: DatabaseReference
+    private lateinit var mAuth: FirebaseAuth
     val homeFragment = HomeFragment()
     val loginFragment = LoginFragment()
     val registerFragment = RegisterFragment()
@@ -74,34 +79,23 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val loginStatus: LiveData<Boolean>
         get() = mutableLoginStatus
 
-
-    private val repository: UserRepository
-
-
-    init {
-        val userDao = UserDatabase.getDataBase(application).userDao()
-        repository = UserRepository(userDao)
-
-
-    }
-
-    fun addUser(user: User) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addUser(user)
-        }
-    }
-
-    /**
-     * Function is to validate provided user on login page
-     */
     fun checkLogin(username: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.loginUser(username, password)?.let {
-                mutableLoginStatus.postValue(true)
 
-            } ?: mutableLoginStatus.postValue(false)
+            database = FirebaseDatabase.getInstance().reference
+            mAuth = FirebaseAuth.getInstance()
+
+                mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        mutableLoginStatus.postValue(true)
+                    }else{
+                        mutableLoginStatus.postValue(false)
+                    }
+                }
         }
     }
+
+
 
     fun shareApp(context: Context) {
 
@@ -114,10 +108,6 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     }
 
 
-    fun openStore(context: Context) {
-
-
-    }
 
 
     fun sendMail(context: Context) {
@@ -132,29 +122,4 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         context.startActivity(chooser)
     }
 
-    /*
-       fun createNotification(context: Context){
-           if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
-               val channel: NotificationChannel = NotificationChannel(1.toString(), "Title", NotificationManager.IMPORTANCE_DEFAULT).apply {
-                   description = "Notifaction here : D "
-               }
-
-               val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.createNotificationChannel(channel)
-           }
-       }
-
-
-       fun sendNotification(context: Context){
-           var builder = NotificationCompat.Builder(context, 1.toString())
-               .setSmallIcon(R.drawable.ic_person_clicked)
-               .setContentTitle("Cilento").setContentText("Example desc")
-               .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-
-           with(NotificationManagerCompat.from(context)){
-               notify(notifcat)
-           }
-       }
-     */
 }

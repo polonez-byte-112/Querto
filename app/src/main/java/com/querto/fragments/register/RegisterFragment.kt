@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.querto.R
 import com.querto.model.User
 import com.querto.viewmodel.MainActivityViewModel
@@ -19,7 +22,8 @@ import kotlinx.android.synthetic.main.fragment_register.view.*
 class RegisterFragment : Fragment() {
 
     private lateinit var mMainActivityViewModel: MainActivityViewModel
-
+    private lateinit var database: DatabaseReference
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +36,12 @@ class RegisterFragment : Fragment() {
         view.register_btn.setOnClickListener {
             inputUser()
         }
+        mAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
 
+        if(mAuth.currentUser!=null){
+            mAuth.signOut()
+        }
 
         return view
 
@@ -42,21 +51,29 @@ class RegisterFragment : Fragment() {
     private fun inputUser() {
         val name = registerName.text.toString()
         val surname = registerSurname.text.toString()
-        val age = registerAge.text
+        val age = registerAge.text.toString()
         val username = registerUsername.text.toString()
         val password = registerPassword.text.toString()
-        username.toLowerCase()
         name.toLowerCase()
         surname.toLowerCase()
 
         surname.capitalize()
         name.capitalize()
-        username.capitalize()
 
-        if (inputCheck(name, surname, username, password, age)) {
-            val user = User(0, name, surname, username, password, Integer.parseInt(age.toString()))
-            mMainActivityViewModel.addUser(user)
-            Toast.makeText(requireContext(), "Added a user", Toast.LENGTH_SHORT).show()
+        if (inputCheck(name, surname, username, password,age)) {
+
+            mAuth = FirebaseAuth.getInstance()
+            database = FirebaseDatabase.getInstance().reference
+
+            mAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener {
+                if (it.isSuccessful){
+                    Toast.makeText(requireContext(), "Created a user", Toast.LENGTH_SHORT).show()
+                   writeNewUser(database.push().key.toString(), name, surname, username, password, age)
+                }else{
+                    Toast.makeText(requireContext(), "Fail at creating a user", Toast.LENGTH_SHORT).show()
+                    it.exception?.printStackTrace()
+                }
+            }
 
         } else {
             Toast.makeText(requireContext(), "Fill all columns", Toast.LENGTH_SHORT).show()
@@ -65,8 +82,13 @@ class RegisterFragment : Fragment() {
     }
 
 
-    private fun inputCheck(firstName: String, secondName: String, username: String, password: String, age: Editable): Boolean {
-        return !((TextUtils.isEmpty(firstName) || firstName.length > 17) || (TextUtils.isEmpty(secondName) || secondName.length > 17) || (TextUtils.isEmpty(username) || username.length > 22) || (TextUtils.isEmpty(password) || password.length > 22) || age.isEmpty())
+    private fun inputCheck(firstName: String, secondName: String, username: String, password: String,age: String)=
+        firstName.isNotEmpty() && secondName.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() && age.isNotEmpty()
+
+    private fun writeNewUser(userId: String, name: String, surname: String, username: String, password: String, age: String) {
+        val user = User(name, surname,username, password,age)
+        database.child("users").child(database.push().key.toString()).setValue(user)
+
     }
 
 }

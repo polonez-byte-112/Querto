@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,6 +18,8 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
     private lateinit var mMainActivityViewModel: MainActivityViewModel
+    private lateinit var database: DatabaseReference
+    private lateinit var mAuth: FirebaseAuth
     lateinit var username: EditText
     lateinit var password: EditText
 
@@ -24,6 +28,10 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+        database = FirebaseDatabase.getInstance().reference
+        mAuth = FirebaseAuth.getInstance()
+
+
 
         mMainActivityViewModel =
                 ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
@@ -32,15 +40,15 @@ class LoginFragment : Fragment() {
         username = view.loginUsername
         password = view.loginPassword
 
+
         view.login_btn.setOnClickListener {
-            val takenUsername = username.text.toString()
-            val takenPassword = password.text.toString()
+          var  takenUsername = username.text.toString()
+          var  takenPassword = password.text.toString()
 
             if (takenUsername.isEmpty() || takenPassword.isEmpty()) {
                 Toast.makeText(context, "Fill all columns", Toast.LENGTH_SHORT).show()
             } else {
-                //Check user is valid or not in db and you will get the callback on line #
-                mMainActivityViewModel.checkLogin(takenUsername, takenPassword)
+                mMainActivityViewModel.checkLogin(takenUsername,takenPassword)
             }
         }
 
@@ -50,8 +58,15 @@ class LoginFragment : Fragment() {
             activity?.nav_view?.setCheckedItem(R.id.register)
         }
 
+        if(mAuth.currentUser!=null){
+            activity?.nav_view?.setCheckedItem(R.id.home)
+            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
+        }
         return view
     }
+
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,11 +76,17 @@ class LoginFragment : Fragment() {
     private fun setupLoginObserver() {
         mMainActivityViewModel.loginStatus.observe(this, Observer { isValidUser ->
             if (isValidUser) {
+                activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Bad login or password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Bad email or password", Toast.LENGTH_SHORT).show()
             }
         })
     }
+
+
+
+
+
 
 }
