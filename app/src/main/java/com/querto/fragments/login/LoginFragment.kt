@@ -76,6 +76,7 @@ class LoginFragment : Fragment() {
     private fun setupLoginObserver() {
         mMainActivityViewModel.loginStatus.observe(this, Observer { isValidUser ->
             if (isValidUser) {
+                activity?.nav_view?.setCheckedItem(R.id.home)
                 activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
             } else {

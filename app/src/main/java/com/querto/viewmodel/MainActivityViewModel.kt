@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.querto.R
+import com.querto.fragments.address.AddAddressFragment
+import com.querto.fragments.address.AddressFragment
 import com.querto.fragments.details.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
@@ -32,6 +34,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val loginFragment = LoginFragment()
     val registerFragment = RegisterFragment()
     val detailsFragment = DetailsFragment()
+    val addressFragment = AddressFragment()
+    val addAddressFragment = AddAddressFragment()
 
 
     var pizza_names: Array<String> = application.resources.getStringArray(R.array.pizza_titles)
@@ -73,6 +77,12 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val dodatki_small_price: IntArray = application.resources.getIntArray(R.array.dodatki_small_price)
     val dodatki_medium_price: IntArray = application.resources.getIntArray(R.array.dodatki_medium_price)
     val dodatki_big_price: IntArray = application.resources.getIntArray(R.array.dodatki_big_price)
+
+    val address_title = ArrayList<String>()
+    val address_street= ArrayList<String>()
+    val address_post_code= ArrayList<String> ()
+    val address_house_number= ArrayList<String> ()
+    val address_city_name= ArrayList<String> ()
 
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()

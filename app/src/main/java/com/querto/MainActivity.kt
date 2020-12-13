@@ -9,12 +9,17 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.querto.fragments.address.AddressFragment
 import com.querto.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawer: DrawerLayout
-
+    private lateinit var database: DatabaseReference
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +27,8 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
 
 
         var viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
-
+        database = FirebaseDatabase.getInstance().reference
+        mAuth = FirebaseAuth.getInstance()
 
 
         drawer = findViewById(R.id.drawer_layout)
@@ -56,6 +62,13 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
             }
             R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.loginFragment).commit()
             R.id.register -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.registerFragment).commit()
+            R.id.address -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.addressFragment).commit()
+            R.id.logout->{
+                if(mAuth.currentUser!=null){
+                    mAuth.signOut()
+                }
+            }
+
             R.id.email -> view.sendMail(this)
             R.id.rate -> {
                 val navigationView: NavigationView

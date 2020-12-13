@@ -86,8 +86,8 @@ class RegisterFragment : Fragment() {
         firstName.isNotEmpty() && secondName.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() && age.isNotEmpty()
 
     private fun writeNewUser(userId: String, name: String, surname: String, username: String, password: String, age: String) {
-        val user = User(name, surname,username, password,age)
-        database.child("users").child(database.push().key.toString()).setValue(user)
+        val user = User(userId, name, surname,username, password,age)
+        database.child("users").child(userId).setValue(user)
 
     }
 

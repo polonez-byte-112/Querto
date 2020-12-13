@@ -16,6 +16,16 @@
             android:id="@+id/register"
             android:icon="@drawable/ic_register"
             android:title="Register" />
+
+        <item
+            android:id="@+id/address"
+            android:icon="@drawable/ic_location"
+            android:title="Address" />
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Log out" />
     </group>
 
     <item android:title="Communication">

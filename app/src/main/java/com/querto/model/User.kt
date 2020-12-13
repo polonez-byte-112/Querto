@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull
 
 @Entity(tableName = "user_table")
 data class User(
+        val userId :String?,
         val name: String,
         val surname: String,
         val username: String,
