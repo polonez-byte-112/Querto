@@ -79,7 +79,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val dodatki_medium_price: IntArray = application.resources.getIntArray(R.array.dodatki_medium_price)
     val dodatki_big_price: IntArray = application.resources.getIntArray(R.array.dodatki_big_price)
 
-    var list_of_addresses = ArrayList<Address>()
+
 
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
@@ -101,9 +101,6 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 }
         }
     }
-
-
-
     fun shareApp(context: Context) {
 
         val openURL = Intent(Intent.ACTION_VIEW)
@@ -113,10 +110,6 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
 
     }
-
-
-
-
     fun sendMail(context: Context) {
         val sendEmail = Intent(Intent.ACTION_SEND)
         val email: Array<String> = arrayOf("kontakt@cilento.pl")

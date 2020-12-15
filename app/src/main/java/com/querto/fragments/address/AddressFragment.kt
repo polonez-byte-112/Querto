@@ -23,6 +23,7 @@ class AddressFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
     private lateinit var addressAdapter: AddressAdapter
+    var list_of_addresses = ArrayList<Address>()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -36,7 +37,7 @@ class AddressFragment : Fragment() {
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
                 MainActivityViewModel::class.java)
 
-        addressAdapter = AddressAdapter(requireContext(), mMainActivityViewModel.list_of_addresses)
+        addressAdapter = AddressAdapter(requireContext(),list_of_addresses)
         getAddresses()
 
         if(mAuth.currentUser==null){
@@ -47,7 +48,7 @@ class AddressFragment : Fragment() {
         }
 
         view.recyclerViewAddress.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        view.recyclerViewAddress.adapter = AddressAdapter(requireContext(), mMainActivityViewModel.list_of_addresses)
+        view.recyclerViewAddress.adapter = AddressAdapter(requireContext(), list_of_addresses)
 
 
 
@@ -58,7 +59,6 @@ class AddressFragment : Fragment() {
 
         return view
     }
-
 
 
     fun getAddresses(){
@@ -73,8 +73,10 @@ class AddressFragment : Fragment() {
                     val house_number = dataSnapshot.child("house_number").value.toString()
                     val city_name = dataSnapshot.child("city_name").value.toString()
                     val address = Address(userId,name,street,postcode,house_number,city_name)
-                    mMainActivityViewModel.list_of_addresses.add(address)
+                    list_of_addresses.add(address)
                     addressAdapter.notifyDataSetChanged()
+                    print(list_of_addresses)
+
                 }
             }
 

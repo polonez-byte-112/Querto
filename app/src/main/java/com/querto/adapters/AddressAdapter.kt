@@ -62,8 +62,4 @@ class AddressAdapter(contextAdapter: Context, addresses: ArrayList<Address>):
     }
 
 
-    fun addAddress(address: Address) {
-        mMainActivityViewModel.list_of_addresses.add(address)
-        notifyDataSetChanged()
-    }
 }
