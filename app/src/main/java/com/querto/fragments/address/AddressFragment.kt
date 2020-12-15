@@ -22,7 +22,7 @@ class AddressFragment : Fragment() {
     private lateinit var mMainActivityViewModel: MainActivityViewModel
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
-   private lateinit var addressAdapter: AddressAdapter
+    private lateinit var addressAdapter: AddressAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -33,8 +33,8 @@ class AddressFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
 
 
-       mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
-            MainActivityViewModel::class.java)
+        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
+                MainActivityViewModel::class.java)
 
         addressAdapter = AddressAdapter(requireContext(), mMainActivityViewModel.list_of_addresses)
         getAddresses()
@@ -66,7 +66,13 @@ class AddressFragment : Fragment() {
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val address = dataSnapshot.getValue<Address>()
+                    val userId = dataSnapshot.child("userId").value.toString()
+                    val name =  dataSnapshot.child("name").value.toString()
+                    val street = dataSnapshot.child("street").value.toString()
+                    val postcode = dataSnapshot.child("street").value.toString()
+                    val house_number = dataSnapshot.child("house_number").value.toString()
+                    val city_name = dataSnapshot.child("city_name").value.toString()
+                    val address = Address(userId,name,street,postcode,house_number,city_name)
                     mMainActivityViewModel.list_of_addresses.add(address)
                     addressAdapter.notifyDataSetChanged()
                 }
@@ -78,7 +84,7 @@ class AddressFragment : Fragment() {
         })
 
     }
-
-
-
 }
+
+
+
