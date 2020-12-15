@@ -10,6 +10,7 @@
         android:id="@+id/recyclerViewAddress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/white_wall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

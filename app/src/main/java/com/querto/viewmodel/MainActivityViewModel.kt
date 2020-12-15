@@ -22,6 +22,7 @@ import com.querto.fragments.details.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
+import com.querto.model.Address
 import com.querto.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -78,11 +79,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val dodatki_medium_price: IntArray = application.resources.getIntArray(R.array.dodatki_medium_price)
     val dodatki_big_price: IntArray = application.resources.getIntArray(R.array.dodatki_big_price)
 
-    val address_title = ArrayList<String>()
-    val address_street= ArrayList<String>()
-    val address_post_code= ArrayList<String> ()
-    val address_house_number= ArrayList<String> ()
-    val address_city_name= ArrayList<String> ()
+    var list_of_addresses = ArrayList<Address>()
 
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
@@ -109,7 +106,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     fun shareApp(context: Context) {
 
-        val openURL = Intent(android.content.Intent.ACTION_VIEW)
+        val openURL = Intent(Intent.ACTION_VIEW)
 
         openURL.data = Uri.parse("https://www.facebook.com/1488596184507308/")
         context.startActivity(openURL)

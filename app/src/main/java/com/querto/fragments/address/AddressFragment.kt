@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.querto.R
 import com.querto.adapters.AddressAdapter
+import com.querto.model.Address
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_address.view.*
@@ -22,18 +22,22 @@ class AddressFragment : Fragment() {
     private lateinit var mMainActivityViewModel: MainActivityViewModel
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
+   private lateinit var addressAdapter: AddressAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+
+
         var view =  inflater.inflate(R.layout.fragment_address, container, false)
+
         database = FirebaseDatabase.getInstance().reference
         mAuth = FirebaseAuth.getInstance()
 
 
-        view.recyclerViewAddress.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
+       mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
             MainActivityViewModel::class.java)
-        view.recyclerViewAddress.adapter = AddressAdapter(requireContext(),  mMainActivityViewModel.address_title, mMainActivityViewModel.address_street,mMainActivityViewModel.address_post_code, mMainActivityViewModel.address_house_number, mMainActivityViewModel.address_city_name)
+
+        addressAdapter = AddressAdapter(requireContext(), mMainActivityViewModel.list_of_addresses)
+        getAddresses()
 
         if(mAuth.currentUser==null){
             Toast.makeText(requireContext(), "To add address please login",Toast.LENGTH_SHORT).show()
@@ -42,11 +46,39 @@ class AddressFragment : Fragment() {
 
         }
 
+        view.recyclerViewAddress.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        view.recyclerViewAddress.adapter = AddressAdapter(requireContext(), mMainActivityViewModel.list_of_addresses)
+
+
+
         view.add_address_btn.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.addAddressFragment)?.commit()
         }
+
+
         return view
     }
+
+
+
+    fun getAddresses(){
+        val ref = FirebaseDatabase.getInstance().reference.child("addresses")
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val address = dataSnapshot.getValue<Address>()
+                    mMainActivityViewModel.list_of_addresses.add(address)
+                    addressAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
+
+    }
+
 
 
 }
