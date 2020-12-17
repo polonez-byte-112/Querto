@@ -10,12 +10,14 @@
 
 
     <ImageView
+        android:id="@+id/header_img"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:scaleType="fitStart"
-        android:src="@drawable/pizza_long" />
+        android:src="@drawable/profile" />
 
     <TextView
+        android:id="@+id/nav_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
@@ -25,6 +27,7 @@
 
 
     <TextView
+        android:id="@+id/nav_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"

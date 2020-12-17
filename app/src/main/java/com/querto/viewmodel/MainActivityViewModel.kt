@@ -1,19 +1,23 @@
 package com.querto.viewmodel
 
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.FirebaseError
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.querto.R
 import com.querto.fragments.address.AddAddressFragment
@@ -24,6 +28,8 @@ import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
 import com.querto.model.Address
 import com.querto.model.User
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -78,13 +84,24 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val dodatki_small_price: IntArray = application.resources.getIntArray(R.array.dodatki_small_price)
     val dodatki_medium_price: IntArray = application.resources.getIntArray(R.array.dodatki_medium_price)
     val dodatki_big_price: IntArray = application.resources.getIntArray(R.array.dodatki_big_price)
+    private val mutable_name = MutableLiveData<String>()
+    val name : LiveData<String>
+        get()= mutable_name
 
+    private val mutable_surname = MutableLiveData<String>()
+    val surname: LiveData<String>
+     get()=mutable_surname
 
 
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean>
         get() = mutableLoginStatus
+
+    init {
+
+    }
+
 
     fun checkLogin(username: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -120,6 +137,35 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         sendEmail.putExtra(Intent.EXTRA_EMAIL, email)
         val chooser = Intent.createChooser(sendEmail, "Send mail using")
         context.startActivity(chooser)
+    }
+
+   fun updateUI(){
+        database = FirebaseDatabase.getInstance().reference
+        mAuth = FirebaseAuth.getInstance()
+       println("Aktualizowanie UI")
+
+        if(mAuth.currentUser!=null){
+
+            database.child("users").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        mutable_name.postValue(snapshot.child("name").value.toString())
+                       mutable_surname.postValue(snapshot.child("surname").value.toString())
+                    } else {
+                        println("\nUser doesnt exist")
+                        mutable_name.postValue("Test")
+                        mutable_surname.postValue("Test")
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
+        }
+
+       println("Koniec aktualizacji danych")
     }
 
 }

@@ -2,17 +2,19 @@ package com.querto
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.querto.fragments.address.AddressFragment
+import com.google.firebase.database.*
 import com.querto.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavigationItemSelectedListener {
@@ -20,6 +22,9 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     private lateinit var drawer: DrawerLayout
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
+    lateinit var user_name : TextView
+    lateinit var user_surname: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,48 +42,72 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
+        val headerView: View
+        headerView= navigationView.getHeaderView(0)
+
+        viewModel.updateUI()
+
+        val img = headerView.findViewById<ImageView>(R.id.header_img)
+        user_name = headerView.findViewById(R.id.nav_name)
+        user_surname = headerView.findViewById(R.id.nav_surname)
+
+
+
+
+
+
+        img.setOnClickListener {
+            println("Otwiera profil uzytkownika")
+        }
+
+    viewModel.name
+
 
         val toogle: ActionBarDrawerToggle
         toogle = ActionBarDrawerToggle(this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toogle)
+        drawer.setOnClickListener {
+            println("\n\n\n\nDziala")
+        }
 
         toogle.syncState()
-
-        //Kod powyzej od 21 do 34 jest po to by było menu (hamburger) w rogu
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
             navigationView.setCheckedItem(R.id.login)
+
+
         }
 
+
+
+        /*
+
+         */
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var view = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
-
+        var mainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
+        val navigationView: NavigationView
+        navigationView = findViewById(R.id.nav_view)
         when (item.itemId) {
-            R.id.home -> {
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.homeFragment).commit()
-            }
-            R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.loginFragment).commit()
-            R.id.register -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.registerFragment).commit()
-            R.id.address -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.addressFragment).commit()
+            R.id.home -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.homeFragment).commit()
+            R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.loginFragment).commit()
+            R.id.register -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.registerFragment).commit()
+            R.id.address -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.addressFragment).commit()
             R.id.logout->{
                 if(mAuth.currentUser!=null){
-                    mAuth.signOut()
+                       mAuth.signOut()
                 }
-            }
+                    supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mainActivityViewModel.loginFragment)?.commit()
+              }
 
-            R.id.email -> view.sendMail(this)
+            R.id.email -> mainActivityViewModel.sendMail(this)
             R.id.rate -> {
-                val navigationView: NavigationView
-                navigationView = findViewById(R.id.nav_view)
                 navigationView.setCheckedItem(R.id.rate)
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, view.detailsFragment).commit()
-
-
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.detailsFragment).commit()
             }
-            R.id.share -> view.shareApp(this)
+            R.id.share -> mainActivityViewModel.shareApp(this)
         }
 
 
@@ -92,6 +121,24 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         } else {
             super.onBackPressed()
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        //Poprawic to jutro.
+        //Tak myslalem by poprawiac to czy uzytkownik jest zalogowany
+
+        var viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
+        viewModel.name.observe(this,
+                Observer {
+                    user_name.text = it
+                })
+
+        viewModel.surname.observe(this, Observer {
+            user_surname.text = it
+        })
     }
 
 

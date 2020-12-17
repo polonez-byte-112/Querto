@@ -44,7 +44,6 @@ class LoginFragment : Fragment() {
         view.login_btn.setOnClickListener {
           var  takenUsername = username.text.toString()
           var  takenPassword = password.text.toString()
-
             if (takenUsername.isEmpty() || takenPassword.isEmpty()) {
                 Toast.makeText(context, "Fill all columns", Toast.LENGTH_SHORT).show()
             } else {
@@ -60,6 +59,7 @@ class LoginFragment : Fragment() {
 
         if(mAuth.currentUser!=null){
             activity?.nav_view?.setCheckedItem(R.id.home)
+            Toast.makeText(requireContext(),"You are already logged ", Toast.LENGTH_SHORT).show()
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
         }
         return view
@@ -76,6 +76,7 @@ class LoginFragment : Fragment() {
     private fun setupLoginObserver() {
         mMainActivityViewModel.loginStatus.observe(this, Observer { isValidUser ->
             if (isValidUser) {
+                mMainActivityViewModel.updateUI()
                 activity?.nav_view?.setCheckedItem(R.id.home)
                 activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()

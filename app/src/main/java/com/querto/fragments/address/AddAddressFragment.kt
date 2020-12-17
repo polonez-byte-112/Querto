@@ -11,7 +11,6 @@
         import com.google.firebase.database.DatabaseReference
         import com.google.firebase.database.FirebaseDatabase
         import com.querto.R
-        import com.querto.adapters.AddressAdapter
         import com.querto.model.Address
         import com.querto.viewmodel.MainActivityViewModel
         import kotlinx.android.synthetic.main.fragment_add_address.view.*
@@ -24,7 +23,6 @@
                 inflater: LayoutInflater, container: ViewGroup?,
                 savedInstanceState: Bundle?
             ): View? {
-                // Inflate the layout for this fragment
                var view = inflater.inflate(R.layout.fragment_add_address, container, false)
 
 
@@ -56,7 +54,7 @@
             private fun addAddress(addressName: String, addressStreet: String, addressNumber: String,addressZipCode: String, addressCityName: String) {
 
                 val address = Address(mAuth.currentUser?.uid, addressName, addressStreet,addressZipCode, addressNumber, addressCityName)
-                database.child("addresses").child(database.push().key.toString()).setValue(address).addOnCompleteListener {
+                database.child("addresses").child(mAuth.currentUser?.uid.toString()).setValue(address).addOnCompleteListener {
                     if(it.isSuccessful){
                         activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.addressFragment)?.commit()
                         Toast.makeText(requireContext(), "Added address", Toast.LENGTH_SHORT).show()
