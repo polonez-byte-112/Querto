@@ -98,9 +98,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val loginStatus: LiveData<Boolean>
         get() = mutableLoginStatus
 
-    init {
 
-    }
 
 
     fun checkLogin(username: String, password: String) {
@@ -163,6 +161,10 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                     println(error.message)
                 }
             })
+        }else{
+            println("Nie jest zalogowany ")
+            mutable_name.postValue("Test")
+            mutable_surname.postValue("Test")
         }
 
        println("Koniec aktualizacji danych")

@@ -66,9 +66,6 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         val toogle: ActionBarDrawerToggle
         toogle = ActionBarDrawerToggle(this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toogle)
-        drawer.setOnClickListener {
-            println("\n\n\n\nDziala")
-        }
 
         toogle.syncState()
 
@@ -126,18 +123,17 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
 
     override fun onResume() {
         super.onResume()
-
+        println("On resume tutaj")
         //Poprawic to jutro.
         //Tak myslalem by poprawiac to czy uzytkownik jest zalogowany
-
         var viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
         viewModel.name.observe(this,
-                Observer {
-                    user_name.text = it
+                {
+                    user_name.text = it.toString()
                 })
 
-        viewModel.surname.observe(this, Observer {
-            user_surname.text = it
+        viewModel.surname.observe(this, {
+            user_surname.text = it.toString()
         })
     }
 
