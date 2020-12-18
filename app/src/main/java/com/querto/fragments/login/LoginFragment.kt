@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,8 +31,6 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         database = FirebaseDatabase.getInstance().reference
         mAuth = FirebaseAuth.getInstance()
-
-
 
         mMainActivityViewModel =
                 ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
@@ -74,9 +73,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupLoginObserver() {
+
+
+
         mMainActivityViewModel.loginStatus.observe(this, Observer { isValidUser ->
             if (isValidUser) {
-                mMainActivityViewModel.updateUI()
+                val mainActivity = MainActivity()
+                mainActivity.updateUI()
+                //Dziala wyswietlanie logowania w main i logout.Jeszcze loginFragment i  Register
+
                 activity?.nav_view?.setCheckedItem(R.id.home)
                 activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()

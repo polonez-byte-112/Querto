@@ -84,13 +84,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val dodatki_small_price: IntArray = application.resources.getIntArray(R.array.dodatki_small_price)
     val dodatki_medium_price: IntArray = application.resources.getIntArray(R.array.dodatki_medium_price)
     val dodatki_big_price: IntArray = application.resources.getIntArray(R.array.dodatki_big_price)
-    private val mutable_name = MutableLiveData<String>()
-    val name : LiveData<String>
-        get()= mutable_name
 
-    private val mutable_surname = MutableLiveData<String>()
-    val surname: LiveData<String>
-     get()=mutable_surname
 
 
 
@@ -137,37 +131,5 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         context.startActivity(chooser)
     }
 
-   fun updateUI(){
-        database = FirebaseDatabase.getInstance().reference
-        mAuth = FirebaseAuth.getInstance()
-       println("Aktualizowanie UI")
-
-        if(mAuth.currentUser!=null){
-
-            database.child("users").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        mutable_name.postValue(snapshot.child("name").value.toString())
-                       mutable_surname.postValue(snapshot.child("surname").value.toString())
-                    } else {
-                        println("\nUser doesnt exist")
-                        mutable_name.postValue("Test")
-                        mutable_surname.postValue("Test")
-                    }
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    println(error.message)
-                }
-            })
-        }else{
-            println("Nie jest zalogowany ")
-            mutable_name.postValue("Test")
-            mutable_surname.postValue("Test")
-        }
-
-       println("Koniec aktualizacji danych")
-    }
 
 }
