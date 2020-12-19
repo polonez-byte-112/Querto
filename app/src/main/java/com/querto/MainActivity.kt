@@ -14,6 +14,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.querto.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     val mutable_surname = MutableLiveData<String>()
     val surname: LiveData<String>
         get()=mutable_surname
-
+    var loginOpen : Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
 
 
 
+
         updateUI()
 
     }
@@ -91,13 +93,11 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         when (item.itemId) {
             R.id.home -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.homeFragment).commit()
             R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.loginFragment).commit()
-            R.id.register -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.registerFragment).commit()
             R.id.address -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.addressFragment).commit()
             R.id.logout->{
                 if(mAuth.currentUser!=null){
-                    mutable_name.postValue("Guest")
-                    mutable_surname.postValue("")
                        mAuth.signOut()
+                        updateUI()
                 }
                     supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mainActivityViewModel.loginFragment)?.commit()
               }
@@ -169,7 +169,13 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     }
 
 
+    override fun onResume() {
+        super.onResume()
 
+        if(savedStateRegistry !=null){
+            loginOpen=1
+        }
+    }
 
 
 

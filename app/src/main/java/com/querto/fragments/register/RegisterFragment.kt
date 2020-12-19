@@ -12,9 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.model.User
 import com.querto.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
 
@@ -40,7 +42,12 @@ class RegisterFragment : Fragment() {
         database = FirebaseDatabase.getInstance().reference
 
         if(mAuth.currentUser!=null){
-            mAuth.signOut()
+
+            (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
+            (activity as MainActivity).supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
+            Toast.makeText(requireContext(), "You already have account.\nLog out to make another one.",Toast.LENGTH_SHORT).show()
+         //   mAuth.signOut()
+        //    (activity as MainActivity).updateUI()
         }
 
         return view
@@ -68,7 +75,7 @@ class RegisterFragment : Fragment() {
             mAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener {
                 if (it.isSuccessful){
                     Toast.makeText(requireContext(), "Created a user", Toast.LENGTH_SHORT).show()
-                   writeNewUser(database.push().key.toString(), name, surname, username, password, age)
+                   writeNewUser(mAuth.currentUser?.uid.toString(), name, surname, username, password, age)
                 }else{
                     Toast.makeText(requireContext(), "Fail at creating a user", Toast.LENGTH_SHORT).show()
                     it.exception?.printStackTrace()
@@ -86,9 +93,13 @@ class RegisterFragment : Fragment() {
         firstName.isNotEmpty() && secondName.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() && age.isNotEmpty()
 
     private fun writeNewUser(userId: String, name: String, surname: String, username: String, password: String, age: String) {
-        val user = User(mAuth.currentUser?.uid.toString(), name, surname,username, password,age)
-        database.child("users").child(mAuth.currentUser?.uid.toString()).setValue(user)
+        val user = User(userId, name, surname,username, password,age)
+        database.child("users").child(mAuth.currentUser?.uid.toString()).setValue(user).addOnCompleteListener {
+            (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
+            (activity as MainActivity).supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
 
+        }
+        (activity as MainActivity).updateUI()
 
     }
 

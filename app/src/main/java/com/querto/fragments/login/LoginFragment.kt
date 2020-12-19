@@ -53,13 +53,15 @@ class LoginFragment : Fragment() {
         view.redirectLoginBtn.setOnClickListener {
 
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.registerFragment)?.commit()
-            activity?.nav_view?.setCheckedItem(R.id.register)
+
         }
 
         if(mAuth.currentUser!=null){
-            activity?.nav_view?.setCheckedItem(R.id.home)
-            Toast.makeText(requireContext(),"You are already logged ", Toast.LENGTH_SHORT).show()
-            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
+            (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
+            (activity as MainActivity).supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
+           if((activity as MainActivity).loginOpen == 1){
+               Toast.makeText(requireContext(), "You already have account.",Toast.LENGTH_SHORT).show()
+           }
         }
         return view
     }
@@ -78,12 +80,11 @@ class LoginFragment : Fragment() {
 
         mMainActivityViewModel.loginStatus.observe(this, Observer { isValidUser ->
             if (isValidUser) {
-                val mainActivity = MainActivity()
-                mainActivity.updateUI()
-                //Dziala wyswietlanie logowania w main i logout.Jeszcze loginFragment i  Register
 
-                activity?.nav_view?.setCheckedItem(R.id.home)
-                activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
+                (activity as MainActivity).updateUI()
+                //Dziala wyswietlanie logowania w main i logout.Jeszcze loginFragment i  Register
+                (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
+                (activity as MainActivity).supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "Bad email or password", Toast.LENGTH_SHORT).show()
