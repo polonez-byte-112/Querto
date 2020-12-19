@@ -44,7 +44,7 @@ class RegisterFragment : Fragment() {
         if(mAuth.currentUser!=null){
 
             (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
-            (activity as MainActivity).supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
+            (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
             Toast.makeText(requireContext(), "You already have account.\nLog out to make another one.",Toast.LENGTH_SHORT).show()
          //   mAuth.signOut()
         //    (activity as MainActivity).updateUI()
@@ -96,7 +96,7 @@ class RegisterFragment : Fragment() {
         val user = User(userId, name, surname,username, password,age)
         database.child("users").child(mAuth.currentUser?.uid.toString()).setValue(user).addOnCompleteListener {
             (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
-            (activity as MainActivity).supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.homeFragment)?.commit()
+            (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
 
         }
         (activity as MainActivity).updateUI()

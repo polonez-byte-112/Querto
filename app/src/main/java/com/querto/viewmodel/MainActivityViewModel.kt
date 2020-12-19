@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.querto.R
+import com.querto.fragments.account_data.AccountFragment
 import com.querto.fragments.address.AddAddressFragment
 import com.querto.fragments.address.AddressFragment
 import com.querto.fragments.details.DetailsFragment
@@ -43,6 +44,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val detailsFragment = DetailsFragment()
     val addressFragment = AddressFragment()
     val addAddressFragment = AddAddressFragment()
+    val accountFragment = AccountFragment()
 
 
     var pizza_names: Array<String> = application.resources.getStringArray(R.array.pizza_titles)
@@ -125,10 +127,10 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     fun sendMail(context: Context) {
         val sendEmail = Intent(Intent.ACTION_SEND)
         val email: Array<String> = arrayOf("kontakt@cilento.pl")
-        sendEmail.setData(Uri.parse("mailto: kontakt@cilento.pl "))
+        sendEmail.data = Uri.parse("mailto: kontakt@cilento.pl ")
         sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Problem z Usługą")
         sendEmail.putExtra(Intent.EXTRA_TEXT, "Pizza którą zamówiłem nie przyszła na czas.\n\n\nMoje Dane Kontaktowe: \n\nImie: \nNazwisko: \nAdres: ")
-        sendEmail.setType("message/rfc822")
+        sendEmail.type = "message/rfc822"
         sendEmail.putExtra(Intent.EXTRA_EMAIL, email)
         val chooser = Intent.createChooser(sendEmail, "Send mail using")
         context.startActivity(chooser)

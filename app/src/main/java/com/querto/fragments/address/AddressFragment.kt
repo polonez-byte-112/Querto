@@ -80,7 +80,7 @@ class AddressFragment : Fragment() {
                     }
 
                 } else {
-                    System.out.println("Database doesnt exist");
+                    System.out.println("Database doesnt exist")
                     view.address_biger_box.visibility= View.INVISIBLE
                     view.address_title.text = ""
                     view.address_street.text = ""
@@ -91,7 +91,7 @@ class AddressFragment : Fragment() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
+                System.out.println("The read failed: " + databaseError.code)
             }
         })
 

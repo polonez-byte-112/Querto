@@ -20,6 +20,11 @@
                       android:icon="@drawable/ic_login"
                       android:title="Login / Register" />
 
+
+                  <item
+                      android:id="@+id/account"
+                      android:icon="@drawable/ic_account"
+                      android:title="Account Info" />
                   <item
                       android:id="@+id/address"
                       android:icon="@drawable/ic_location"
