@@ -24,7 +24,7 @@
                   <item
                       android:id="@+id/account"
                       android:icon="@drawable/ic_account"
-                      android:title="Account Info" />
+                      android:title="Profile" />
                   <item
                       android:id="@+id/address"
                       android:icon="@drawable/ic_location"
