@@ -1,36 +1,24 @@
 package com.querto.viewmodel
 
 
-import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.material.navigation.NavigationView
-import com.google.firebase.FirebaseError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
 import com.querto.R
-import com.querto.fragments.account_data.AccountFragment
+import com.querto.fragments.account.AccountFragment
 import com.querto.fragments.address.AddAddressFragment
 import com.querto.fragments.address.AddressFragment
 import com.querto.fragments.details.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
-import com.querto.model.Address
-import com.querto.model.User
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.nav_header.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -87,17 +75,15 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val dodatki_medium_price: IntArray = application.resources.getIntArray(R.array.dodatki_medium_price)
     val dodatki_big_price: IntArray = application.resources.getIntArray(R.array.dodatki_big_price)
 
+    var contactName: String? = ""
+    var contactSurname : String?=""
+    var contactFullAddress: String? =""
 
 
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean>
         get() = mutableLoginStatus
-
-
-
-
-
 
 
     fun checkLogin(username: String, password: String) {
@@ -115,7 +101,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 }
         }
     }
-    fun shareApp(context: Context) {
+    fun openFacebook(context: Context) {
 
         val openURL = Intent(Intent.ACTION_VIEW)
 
@@ -129,11 +115,64 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         val email: Array<String> = arrayOf("kontakt@cilento.pl")
         sendEmail.data = Uri.parse("mailto: kontakt@cilento.pl ")
         sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Problem z Usługą")
-        sendEmail.putExtra(Intent.EXTRA_TEXT, "Pizza którą zamówiłem nie przyszła na czas.\n\n\nMoje Dane Kontaktowe: \n\nImie: \nNazwisko: \nAdres: ")
-        sendEmail.type = "message/rfc822"
-        sendEmail.putExtra(Intent.EXTRA_EMAIL, email)
-        val chooser = Intent.createChooser(sendEmail, "Send mail using")
-        context.startActivity(chooser)
+
+
+
+        database = FirebaseDatabase.getInstance().reference
+        mAuth = FirebaseAuth.getInstance()
+
+        if (mAuth.currentUser != null) {
+
+
+            database.child("users").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+
+                    if (snapshot.exists()) {
+                        println("User found")
+                       contactName = snapshot.child("name").value.toString()
+                       contactSurname = snapshot.child("surname").value.toString()
+
+                        database.child("addresses").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (snapshot.exists()) {
+                                    println("Address found")
+                                    contactFullAddress=snapshot.child("street").value.toString() +"  "+snapshot.child("house_number").value.toString()+",  "+ snapshot.child("postcode").value.toString()+",  "+ snapshot.child("city_name").value.toString()
+                                } else {
+                                    println("Address not found ")
+                                    contactFullAddress = "Not found"
+                                }
+
+                                sendEmail.putExtra(Intent.EXTRA_TEXT, "Pizza którą zamówiłem nie przyszła na czas.\n\n\nMoje Dane Kontaktowe: \nImię: $contactName \nNazwisko: $contactSurname \nAdress:\n$contactFullAddress  ")
+                                sendEmail.type = "message/rfc822"
+                                sendEmail.putExtra(Intent.EXTRA_EMAIL, email)
+                                val chooser = Intent.createChooser(sendEmail, "Send mail using")
+                                context.startActivity(chooser)
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                println(error.message)
+                            }
+                        })
+                    } else {
+                        println("User not found in")
+                        contactName = "Guest"
+                        contactSurname = " "
+                        contactFullAddress = "Not found"
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
+        } else {
+            println("User not signed in")
+            contactName = "Guest"
+            contactSurname = " "
+            contactFullAddress = "Not found"
+        }
     }
 
 

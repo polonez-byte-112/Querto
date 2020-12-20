@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/white_wall"
     android:gravity="center"
-    tools:context=".fragments.account_data.AccountFragment">
+    tools:context=".fragments.account.AccountFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/account_main_floating_btn"
@@ -32,6 +32,7 @@
         android:clickable="true"
         android:focusable="true"
         app:borderWidth="0dp"
+        android:visibility="invisible"
         android:backgroundTint="@color/brighterYellow"
         android:src="@drawable/ic_edit_account"
         app:layout_constraintBottom_toTopOf="@+id/account_main_floating_btn"
@@ -45,6 +46,7 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/brighterYellow"
         android:clickable="true"
+        android:visibility="invisible"
         android:focusable="true"
         android:src="@drawable/ic_delete"
         app:borderWidth="0dp"
@@ -151,12 +153,12 @@
             android:text="SampleSurname"
             android:elevation="8dp"
             android:textColor="#000"
-            app:layout_constraintBottom_toTopOf="@+id/account_email"
+            app:layout_constraintBottom_toTopOf="@+id/account_age"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/account_name" />
 
         <TextView
-            android:id="@+id/account_email"
+            android:id="@+id/account_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"

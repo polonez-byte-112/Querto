@@ -56,13 +56,6 @@ class LoginFragment : Fragment() {
 
         }
 
-        if(mAuth.currentUser!=null){
-            (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
-            (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
-           if((activity as MainActivity).loginOpen == 1){
-               Toast.makeText(requireContext(), "You already have account.",Toast.LENGTH_SHORT).show()
-           }
-        }
         return view
     }
 
@@ -82,7 +75,6 @@ class LoginFragment : Fragment() {
             if (isValidUser) {
 
                 (activity as MainActivity).updateUI()
-                //Dziala wyswietlanie logowania w main i logout.Jeszcze loginFragment i  Register
                 (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
                 (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()

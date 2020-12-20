@@ -34,6 +34,9 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     val surname: LiveData<String>
         get() = mutable_surname
     var loginOpen: Int? = null
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -74,8 +77,14 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         toogle.syncState()
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
-            navigationView.setCheckedItem(R.id.login)
+
+            if(mAuth.currentUser!=null){
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
+                navigationView.setCheckedItem(R.id.home)
+            }else{
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
+                navigationView.setCheckedItem(R.id.login)
+            }
 
 
         }
@@ -94,31 +103,21 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         when (item.itemId) {
             R.id.home -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.homeFragment).commit()
             R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.loginFragment).commit()
-            R.id.account-> {
-                if(mAuth.currentUser!=null){
-                    supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.accountFragment).commit()
-                }else{
-                    Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show()
-                 //   navigationView.setCheckedItem(R.id.login)
-                    supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.loginFragment).commit()
-                }
-            }
+            R.id.account-> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.accountFragment).commit()
             R.id.address -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.addressFragment).commit()
             R.id.logout -> {
                 if (mAuth.currentUser != null) {
                     mAuth.signOut()
                     updateUI()
                 }
-                //   navigationView.setCheckedItem(R.id.login)
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.loginFragment).commit()
             }
-
             R.id.email -> mainActivityViewModel.sendMail(this)
-            R.id.rate -> {
-                navigationView.setCheckedItem(R.id.rate)
+            R.id.detail -> {
+                navigationView.setCheckedItem(R.id.detail)
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.detailsFragment).commit()
             }
-            R.id.share -> mainActivityViewModel.shareApp(this)
+            R.id.facebook -> mainActivityViewModel.openFacebook(this)
         }
 
 
@@ -133,7 +132,6 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
             super.onBackPressed()
         }
     }
-
     fun updateUI() {
 
         println("Updating UI")
@@ -162,10 +160,27 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
                     println(error.message)
                 }
             })
+
+            val navigationView: NavigationView
+            navigationView = findViewById(R.id.nav_view)
+            val nav_menu  = navigationView.menu
+            nav_menu.findItem(R.id.account).setVisible(true)
+            nav_menu.findItem(R.id.address).setVisible(true)
+            nav_menu.findItem(R.id.logout).setVisible(true)
+            nav_menu.findItem(R.id.login).setVisible(false)
         } else {
             println("User not signed in")
             mutable_name.postValue("Guest")
             mutable_surname.postValue("")
+
+
+            val navigationView: NavigationView
+            navigationView = findViewById(R.id.nav_view)
+            val nav_menu  = navigationView.menu
+            nav_menu.findItem(R.id.account).setVisible(false)
+            nav_menu.findItem(R.id.address).setVisible(false)
+            nav_menu.findItem(R.id.logout).setVisible(false)
+            nav_menu.findItem(R.id.login).setVisible(true)
         }
 
         name.observe(this, {
@@ -177,15 +192,9 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         })
 
 
-    }
 
 
-    override fun onResume() {
-        super.onResume()
 
-        if (savedStateRegistry != null) {
-            loginOpen = 1
-        }
     }
 
 
