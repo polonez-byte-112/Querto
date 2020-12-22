@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
+import com.querto.items.*
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_napoje_row.view.*
 
@@ -47,7 +48,10 @@ class NapojeAdapter(activityMain: Activity, val napoje_names: Array<String>, val
         holder.currentSecondKind.text = napoje_kind_two.get(position)
         holder.box.setOnClickListener {
             Toast.makeText(context, "Wcisnieto  Napoje ${(position + 1)} ", Toast.LENGTH_SHORT).show()
-            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.napojeItem)?.commit()
+
+            val napojeItem = NapojeItemFragment(napoje_price.get(position))
+
+            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, napojeItem)?.commit()
 
         }
     }

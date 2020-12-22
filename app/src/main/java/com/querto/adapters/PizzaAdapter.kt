@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.querto.MainActivity
 import com.querto.R
+import com.querto.items.*
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_pizza_row.view.*
 
@@ -38,10 +38,11 @@ class PizzaAdapter(activityMain: Activity, val pizza_images: Array<Int>, val piz
         holder.currentPriceMedium.text = pizza_medium_price.get(position).toString()
         holder.currentPriceBig.text = pizza_big_price.get(position).toString()
         holder.box.setOnClickListener {
-            Toast.makeText(context, "Wcisnieto  Pizza ${(position + 1)} ",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Wcisnieto  ${pizza_names.get(position)} ${(position + 1)} ",Toast.LENGTH_SHORT).show()
+            val pizzaItem = PizzaItemFragment(pizza_images[position], pizza_small_price.get(position), pizza_medium_price.get(position), pizza_big_price.get(position))
 
 
-          activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.pizzaItem)?.commit()
+          activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,pizzaItem)?.commit()
         }
 
 

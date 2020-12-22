@@ -8,14 +8,20 @@ import android.view.ViewGroup
 import com.querto.R
 
 
-class SosyItemFragment : Fragment() {
+class SosyItemFragment(title: String, price : Int) : Fragment() {
+
+    val currentTitle = title
+    val currentPrice = price
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sosy_item, container, false)
+      var view =  inflater.inflate(R.layout.fragment_sosy_item, container, false)
+
+
+        return view
     }
 
 

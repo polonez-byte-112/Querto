@@ -55,8 +55,8 @@ class SosyAdapter(activityMain: Activity, val sosy_names: Array<String>, val sos
         holder.currentPrice.text = sosy_price.get(position).toString()
         holder.box.setOnClickListener {
             Toast.makeText(context, "Wcisnieto  Sosy ${(position + 1)} ", Toast.LENGTH_SHORT).show()
-
-            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.sosyItem)?.commit()
+            val sosyItem = SosyItemFragment(sosy_names.get(position), sosy_price.get(position))
+            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,sosyItem)?.commit()
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
+import com.querto.items.*
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_calzone_row.view.*
 
@@ -49,7 +50,10 @@ class CalzoneAdapter(activityMain : Activity, val calzone_images: Array<Int>, va
         holder.box.setOnClickListener {
             Toast.makeText(context, "Wcisnieto  Calzone ${(position + 1)} ", Toast.LENGTH_SHORT).show()
 
-            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.calzoneItem)?.commit()
+
+            val calzoneItem = CalzoneItemFragment(calzone_images[position],calzone_normal_price.get(position),calzone_big_price.get(position) )
+
+            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,calzoneItem)?.commit()
         }
     }
 

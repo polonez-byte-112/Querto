@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
+import com.querto.items.PanuozzoItemFragment
+import com.querto.items.SosyItemFragment
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_panuozzo_row.view.*
 
@@ -40,7 +42,9 @@ class PanuozzoAdapter(activityMain : Activity, val panuozzo_images: Array<Int>, 
         holder.currentPriceBig.text = panuozzo_big_price.get(position).toString()
         holder.box.setOnClickListener {
             Toast.makeText(context, "Wcisnieto  Panuozzo ${(position + 1)} ", Toast.LENGTH_SHORT).show()
-            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.panuozzoItem)?.commit()
+            val panuozzoItem = PanuozzoItemFragment(panuozzo_images[position],panuozzo_normal_price.get(position),panuozzo_big_price.get(position) )
+
+            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,panuozzoItem)?.commit()
 
         }
     }

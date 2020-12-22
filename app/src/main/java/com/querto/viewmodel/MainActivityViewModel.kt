@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,7 +21,6 @@ import com.querto.fragments.details.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
-import com.querto.items.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -39,13 +39,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     //Items
 
-    val pizzaItem = PizzaItemFragment()
-    val calzoneItem = CalzoneItemFragment()
-    val dodatkiItem = DodatkiItemFragment()
-    val foacciaItem = FoacciaItemFragment()
-    val napojeItem = NapojeItemFragment()
-    val panuozzoItem = PanuozzoItemFragment()
-    val sosyItem = SosyItemFragment()
+
 
 
     var pizza_names: Array<String> = application.resources.getStringArray(R.array.pizza_titles)
@@ -94,9 +88,36 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
 
 
+    var pizza_small_item=0
+    var pizza_medium_item=0
+    var pizza_big_item=0
+
+    var foaccia_item=0
+
+    var calzone_medium_item=0
+    var calzone_big_item=0
+
+    var panuozzo_medium_item=0
+    var panuozzo_big_item=0
+
+    var sosy_item=0
+
+    var napoje_item=0
+
+
+    var dodatki_small_item=0
+    var dodatki_medium_item=0
+    var dodatki_big_item=0
+
+
+
+
     private val mutableLoginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean>
         get() = mutableLoginStatus
+
+
+
 
 
     fun checkLogin(username: String, password: String) {
@@ -194,5 +215,166 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
+    fun addItem(textView: TextView, kind: String, size: String) { when(kind){
 
+            "pizza"-> {
+                when(size){
+                    "small"->{
+                        pizza_small_item +=1
+                    textView.text = pizza_small_item.toString()
+                    }
+                    "medium"->{
+                        pizza_medium_item +=1
+                        textView.text= pizza_medium_item.toString()
+                    }
+                    "big"->{
+                        pizza_big_item +=1
+                        textView.text=pizza_big_item.toString()
+                    }
+                }
+            }
+            "foaccia"->{
+                  foaccia_item +=1
+                textView.text=foaccia_item.toString()
+            }
+            "calzone"-> {
+                when(size){
+                    "medium"->{
+                        calzone_medium_item +=1
+                        textView.text=calzone_medium_item.toString()
+                    }
+                    "big"->{
+                        calzone_big_item +=1
+                        textView.text=calzone_big_item.toString()
+                    }
+                }
+            }
+            "panuozzo"-> {
+                when(size){
+                    "medium"->{
+                        panuozzo_medium_item +=1
+                        textView.text=panuozzo_medium_item.toString()
+                    }
+                    "big"->{
+                        panuozzo_big_item +=1
+                        textView.text=panuozzo_big_item.toString()
+                    }
+                }
+            }
+            "sosy"-> {
+                sosy_item +=1
+                textView.text=sosy_item.toString()
+            }
+            "napoje"->  {
+                napoje_item +=1
+                textView.text=napoje_item.toString()
+            }
+            "dodatki"-> {
+                when(size){
+                    "small"->{
+                        dodatki_small_item +=1
+                        textView.text=dodatki_small_item.toString()
+                    }
+                    "medium"->{
+                        dodatki_medium_item +=1
+                        textView.text=dodatki_medium_item.toString()
+                    }
+                    "big"->{
+                        dodatki_big_item +=1
+                        textView.text=dodatki_big_item.toString()
+                    }
+                }
+            }
+        } }
+    fun removeItem(textView: TextView, kind: String, size: String) { when(kind){
+
+            "pizza"-> {
+                when(size){
+                    "small"->{
+                        if(pizza_small_item>0)
+                        pizza_small_item -=1
+                        textView.text = pizza_small_item.toString()
+                    }
+                    "medium"->{
+                        if(pizza_medium_item>0)
+                        pizza_medium_item -=1
+                        textView.text= pizza_medium_item.toString()
+                    }
+                    "big"->{
+                        if(pizza_big_item>0)
+                        pizza_big_item -=1
+                        textView.text=pizza_big_item.toString()
+                    }
+                }
+            }
+            "foaccia"->{
+                if(foaccia_item>0)
+                foaccia_item -=1
+                textView.text=foaccia_item.toString()
+            }
+            "calzone"-> {
+                when(size){
+                    "medium"->{
+                        if(calzone_medium_item>0)
+                        calzone_medium_item -=1
+                        textView.text=calzone_medium_item.toString()
+                    }
+                    "big"->{
+                        if(calzone_big_item>0)
+                        calzone_big_item -=1
+                        textView.text=calzone_big_item.toString()
+                    }
+                }
+            }
+            "panuozzo"-> {
+                when(size){
+                    "medium"->{
+                        if(panuozzo_medium_item>0)
+                        panuozzo_medium_item -=1
+                        textView.text=panuozzo_medium_item.toString()
+                    }
+                    "big"->{
+                        if(panuozzo_big_item>0)
+                        panuozzo_big_item -=1
+                        textView.text=panuozzo_big_item.toString()
+                    }
+                }
+            }
+            "sosy"-> {
+                if(sosy_item>0)
+                sosy_item -=1
+                textView.text=sosy_item.toString()
+            }
+            "napoje"->  {
+                if(napoje_item>0)
+                napoje_item -=1
+                textView.text=napoje_item.toString()
+            }
+            "dodatki"-> {
+                when(size){
+                    "small"->{
+                        if(dodatki_small_item>0)
+                        dodatki_small_item -=1
+                        textView.text=dodatki_small_item.toString()
+                    }
+                    "medium"->{
+                        if(dodatki_medium_item>0)
+                        dodatki_medium_item -=1
+                        textView.text=dodatki_medium_item.toString()
+                    }
+                    "big"->{
+                        if(dodatki_big_item>0)
+                        dodatki_big_item -=1
+                        textView.text=dodatki_big_item.toString()
+                    }
+                }
+            }
+        } }
+
+    fun updateSummary(textView: TextView, itemOne: Int, itemTwo: Int, itemThree: Int, priceOne:Int, priceTwo: Int, priceThree: Int ) {
+
+        var summary =  (itemOne* priceOne)+ (itemTwo*priceTwo)+ (itemThree*priceThree)
+        textView.text= summary.toString()
+
+    }
 }

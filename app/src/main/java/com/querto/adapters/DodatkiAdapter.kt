@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
+import com.querto.items.*
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_dodatki_row.view.*
 
@@ -47,7 +48,9 @@ class DodatkiAdapter(activityMain : Activity, val dodatki_names: Array<String>, 
         holder.box.setOnClickListener {
             Toast.makeText(context, "Wcisnieto  Dodatki ${(position + 1)} ", Toast.LENGTH_SHORT).show()
 
-            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.dodatkiItem)?.commit()
+            val dodatkiItem = DodatkiItemFragment()
+
+            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, dodatkiItem)?.commit()
         }
 
     }
