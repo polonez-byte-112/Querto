@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     val mutable_surname = MutableLiveData<String>()
     val surname: LiveData<String>
         get() = mutable_surname
-    var loginOpen: Int? = null
 
 
 
@@ -56,18 +55,11 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         val headerView: View
         headerView = navigationView.getHeaderView(0)
 
-        val img = headerView.findViewById<ImageView>(R.id.header_img)
         user_name = headerView.findViewById(R.id.nav_name)
         user_surname = headerView.findViewById(R.id.nav_surname)
 
 
 
-
-
-
-        img.setOnClickListener {
-            supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.accountFragment).commit()
-        }
 
 
         val toogle: ActionBarDrawerToggle
@@ -164,11 +156,12 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
             val navigationView: NavigationView
             navigationView = findViewById(R.id.nav_view)
             val nav_menu  = navigationView.menu
-            nav_menu.findItem(R.id.account).setVisible(true)
-            nav_menu.findItem(R.id.address).setVisible(true)
-            nav_menu.findItem(R.id.logout).setVisible(true)
-            nav_menu.findItem(R.id.login).setVisible(false)
+            nav_menu.findItem(R.id.account).isVisible = true
+            nav_menu.findItem(R.id.address).isVisible = true
+            nav_menu.findItem(R.id.logout).isVisible = true
+            nav_menu.findItem(R.id.login).isVisible = false
         } else {
+
             println("User not signed in")
             mutable_name.postValue("Guest")
             mutable_surname.postValue("")
@@ -177,10 +170,10 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
             val navigationView: NavigationView
             navigationView = findViewById(R.id.nav_view)
             val nav_menu  = navigationView.menu
-            nav_menu.findItem(R.id.account).setVisible(false)
-            nav_menu.findItem(R.id.address).setVisible(false)
-            nav_menu.findItem(R.id.logout).setVisible(false)
-            nav_menu.findItem(R.id.login).setVisible(true)
+            nav_menu.findItem(R.id.account).isVisible = false
+            nav_menu.findItem(R.id.address).isVisible = false
+            nav_menu.findItem(R.id.logout).isVisible = false
+            nav_menu.findItem(R.id.login).isVisible = true
         }
 
         name.observe(this, {

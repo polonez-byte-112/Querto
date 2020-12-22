@@ -26,7 +26,7 @@ class CalzoneFragment : Fragment() {
         view.recyclerViewCalzone.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
-        view.recyclerViewCalzone.adapter = CalzoneAdapter(requireContext(), mMainActivityViewModel.calzone_img, mMainActivityViewModel.calzone_names, mMainActivityViewModel.calzone_desc, mMainActivityViewModel.calzone_price_normal, mMainActivityViewModel.calzone_price_big)
+        view.recyclerViewCalzone.adapter = CalzoneAdapter(activity!!, mMainActivityViewModel.calzone_img, mMainActivityViewModel.calzone_names, mMainActivityViewModel.calzone_desc, mMainActivityViewModel.calzone_price_normal, mMainActivityViewModel.calzone_price_big)
 
 
         return view

@@ -26,7 +26,7 @@ class FoacciaFragment : Fragment() {
         view.recyclerViewFoaccia.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
-        view.recyclerViewFoaccia.adapter = FoacciaAdapter(requireContext(), mMainActivityViewModel.focaccia_img, mMainActivityViewModel.focaccia_names, mMainActivityViewModel.focaccia_desc, mMainActivityViewModel.focaccia_price)
+        view.recyclerViewFoaccia.adapter = FoacciaAdapter(activity!!, mMainActivityViewModel.focaccia_img, mMainActivityViewModel.focaccia_names, mMainActivityViewModel.focaccia_desc, mMainActivityViewModel.focaccia_price)
 
 
         return view

@@ -1,23 +1,27 @@
 package com.querto.adapters
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_dodatki_row.view.*
 
-class DodatkiAdapter(contextAdapter: Context, val dodatki_names: Array<String>, val dodatki_small_price: IntArray, val dodatki_medium_price: IntArray, val dodatki_big_price: IntArray) : RecyclerView.Adapter<DodatkiAdapter.MyViewHolder>() {
+class DodatkiAdapter(activityMain : Activity, val dodatki_names: Array<String>, val dodatki_small_price: IntArray, val dodatki_medium_price: IntArray, val dodatki_big_price: IntArray) : RecyclerView.Adapter<DodatkiAdapter.MyViewHolder>() {
 
     private var mMainActivityViewModel: MainActivityViewModel
-    private val context: Context = contextAdapter
+    private val context: Context = activityMain.applicationContext
+    var activity = activityMain as AppCompatActivity
 
     init {
-        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(contextAdapter.applicationContext as Application).create(
+        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(context as Application).create(
                 MainActivityViewModel::class.java)
     }
 
@@ -27,10 +31,11 @@ class DodatkiAdapter(contextAdapter: Context, val dodatki_names: Array<String>, 
         var currentMediumPrice = itemView.dodatki_row_price_medium
         var currentBigPrice = itemView.dodatki_row_price_big
         val currentId = itemView.dodatki_row_id
+        val box = itemView.dodatki_box
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return DodatkiAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_dodatki_row, parent, false))
+        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_dodatki_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -39,6 +44,11 @@ class DodatkiAdapter(contextAdapter: Context, val dodatki_names: Array<String>, 
         holder.currentSmallPrice.text = dodatki_small_price.get(position).toString()
         holder.currentMediumPrice.text = dodatki_medium_price.get(position).toString()
         holder.currentBigPrice.text = dodatki_big_price.get(position).toString()
+        holder.box.setOnClickListener {
+            Toast.makeText(context, "Wcisnieto  Dodatki ${(position + 1)} ", Toast.LENGTH_SHORT).show()
+
+            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.dodatkiItem)?.commit()
+        }
 
     }
 

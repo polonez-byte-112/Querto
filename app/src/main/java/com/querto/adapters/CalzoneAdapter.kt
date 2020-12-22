@@ -1,23 +1,27 @@
 package com.querto.adapters
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_calzone_row.view.*
 
-class CalzoneAdapter(contextAdapter: Context, val calzone_images: Array<Int>, val calzone_names: Array<String>, val calzone_desc: Array<String>, val calzone_normal_price: IntArray, val calzone_big_price: IntArray) : RecyclerView.Adapter<CalzoneAdapter.MyViewHolder>() {
+class CalzoneAdapter(activityMain : Activity, val calzone_images: Array<Int>, val calzone_names: Array<String>, val calzone_desc: Array<String>, val calzone_normal_price: IntArray, val calzone_big_price: IntArray) : RecyclerView.Adapter<CalzoneAdapter.MyViewHolder>() {
 
     private var mMainActivityViewModel: MainActivityViewModel
-    private val context: Context = contextAdapter
+    private val context: Context = activityMain.applicationContext
+    var activity = activityMain as AppCompatActivity
 
     init {
-        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(contextAdapter.applicationContext as Application).create(
+        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(context as Application).create(
                 MainActivityViewModel::class.java)
     }
 
@@ -32,7 +36,7 @@ class CalzoneAdapter(contextAdapter: Context, val calzone_images: Array<Int>, va
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return CalzoneAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_calzone_row, parent, false))
+        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_calzone_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -42,6 +46,11 @@ class CalzoneAdapter(contextAdapter: Context, val calzone_images: Array<Int>, va
         holder.currentDesc.text = calzone_desc.get(position)
         holder.currentPriceNormal.text = calzone_normal_price.get(position).toString()
         holder.currentPriceBig.text = calzone_big_price.get(position).toString()
+        holder.box.setOnClickListener {
+            Toast.makeText(context, "Wcisnieto  Calzone ${(position + 1)} ", Toast.LENGTH_SHORT).show()
+
+            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.calzoneItem)?.commit()
+        }
     }
 
     override fun getItemCount(): Int {

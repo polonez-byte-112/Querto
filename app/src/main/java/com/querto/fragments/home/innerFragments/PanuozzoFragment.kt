@@ -25,7 +25,7 @@ class PanuozzoFragment : Fragment() {
         view.recyclerViewPanuozzo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
-        view.recyclerViewPanuozzo.adapter = PanuozzoAdapter(requireContext(), mMainActivityViewModel.panuozzo_img, mMainActivityViewModel.panuozzo_names, mMainActivityViewModel.panuozzo_desc, mMainActivityViewModel.panuozzo_price_normal, mMainActivityViewModel.panuozzo_price_big)
+        view.recyclerViewPanuozzo.adapter = PanuozzoAdapter(activity!!, mMainActivityViewModel.panuozzo_img, mMainActivityViewModel.panuozzo_names, mMainActivityViewModel.panuozzo_desc, mMainActivityViewModel.panuozzo_price_normal, mMainActivityViewModel.panuozzo_price_big)
 
 
         return view

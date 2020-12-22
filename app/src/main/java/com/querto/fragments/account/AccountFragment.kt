@@ -61,6 +61,16 @@ class AccountFragment : Fragment() {
             onMainClicked()
         }
 
+        view.account_edit_account_floating_btn.setOnClickListener {
+            mMainActivityViewModel =
+                ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
+                    .create(MainActivityViewModel::class.java)
+
+
+            (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.editAccountFragment).commit()
+
+        }
+
         view.account_delete_floating_btn.setOnClickListener {
             deleteAccount()
 
@@ -77,6 +87,7 @@ class AccountFragment : Fragment() {
             mAuth.currentUser!!.delete()
             database.child("users").child(mAuth.currentUser?.uid.toString()).removeValue()
             database.child("addresses").child(mAuth.currentUser?.uid.toString()).removeValue()
+            mAuth.signOut()
             (activity as MainActivity).updateUI()
 
 

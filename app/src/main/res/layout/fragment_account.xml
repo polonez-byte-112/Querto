@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/white_wall"
-    android:gravity="center"
     tools:context=".fragments.account.AccountFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

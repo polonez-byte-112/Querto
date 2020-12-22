@@ -41,14 +41,6 @@ class RegisterFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
 
-        if(mAuth.currentUser!=null){
-
-            (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
-            (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
-            Toast.makeText(requireContext(), "You already have account.\nLog out to make another one.",Toast.LENGTH_SHORT).show()
-         //   mAuth.signOut()
-        //    (activity as MainActivity).updateUI()
-        }
 
         return view
 

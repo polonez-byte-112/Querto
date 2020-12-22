@@ -26,7 +26,7 @@ class SosyFragment : Fragment() {
         view.recyclerViewSosy.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
-        view.recyclerViewSosy.adapter = SosyAdapter(requireContext(), mMainActivityViewModel.sosy_names, mMainActivityViewModel.sosy_price)
+        view.recyclerViewSosy.adapter = SosyAdapter(activity!!, mMainActivityViewModel.sosy_names, mMainActivityViewModel.sosy_price)
 
         return view
     }

@@ -1,30 +1,34 @@
 package com.querto.adapters
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_panuozzo_row.view.*
 
-class PanuozzoAdapter(contextAdapter: Context, val panuozzo_images: Array<Int>, val panuozzo_names: Array<String>, val panuozzo_desc: Array<String>, val panuozzo_normal_price: IntArray, val panuozzo_big_price: IntArray) : RecyclerView.Adapter<PanuozzoAdapter.MyViewHolder>() {
+class PanuozzoAdapter(activityMain : Activity, val panuozzo_images: Array<Int>, val panuozzo_names: Array<String>, val panuozzo_desc: Array<String>, val panuozzo_normal_price: IntArray, val panuozzo_big_price: IntArray) : RecyclerView.Adapter<PanuozzoAdapter.MyViewHolder>() {
 
 
     private var mMainActivityViewModel: MainActivityViewModel
-    private val context: Context = contextAdapter
+    private val context: Context = activityMain.applicationContext
+    var activity = activityMain as AppCompatActivity
 
     init {
-        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(contextAdapter.applicationContext as Application).create(
+        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(context as Application).create(
                 MainActivityViewModel::class.java)
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return PanuozzoAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_panuozzo_row, parent, false))
+        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.my_panuozzo_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -34,6 +38,11 @@ class PanuozzoAdapter(contextAdapter: Context, val panuozzo_images: Array<Int>, 
         holder.currentDesc.text = panuozzo_desc.get(position)
         holder.currentPriceNormal.text = panuozzo_normal_price.get(position).toString()
         holder.currentPriceBig.text = panuozzo_big_price.get(position).toString()
+        holder.box.setOnClickListener {
+            Toast.makeText(context, "Wcisnieto  Panuozzo ${(position + 1)} ", Toast.LENGTH_SHORT).show()
+            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.panuozzoItem)?.commit()
+
+        }
     }
 
     override fun getItemCount(): Int {

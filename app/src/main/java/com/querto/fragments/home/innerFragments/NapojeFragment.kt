@@ -25,7 +25,7 @@ class NapojeFragment : Fragment() {
         view.recyclerViewNapoje.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
-        view.recyclerViewNapoje.adapter = NapojeAdapter(requireContext(), mMainActivityViewModel.napoje_names, mMainActivityViewModel.napoje_first_kind, mMainActivityViewModel.napoje_second_kind, mMainActivityViewModel.napoje_price)
+        view.recyclerViewNapoje.adapter = NapojeAdapter(activity!!, mMainActivityViewModel.napoje_names, mMainActivityViewModel.napoje_first_kind, mMainActivityViewModel.napoje_second_kind, mMainActivityViewModel.napoje_price)
 
         return view
     }

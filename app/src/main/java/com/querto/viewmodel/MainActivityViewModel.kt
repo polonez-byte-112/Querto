@@ -13,12 +13,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.querto.R
 import com.querto.fragments.account.AccountFragment
+import com.querto.fragments.account.EditAccountFragment
 import com.querto.fragments.address.AddAddressFragment
 import com.querto.fragments.address.AddressFragment
 import com.querto.fragments.details.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
+import com.querto.items.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -33,6 +35,17 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val addressFragment = AddressFragment()
     val addAddressFragment = AddAddressFragment()
     val accountFragment = AccountFragment()
+    val editAccountFragment = EditAccountFragment()
+
+    //Items
+
+    val pizzaItem = PizzaItemFragment()
+    val calzoneItem = CalzoneItemFragment()
+    val dodatkiItem = DodatkiItemFragment()
+    val foacciaItem = FoacciaItemFragment()
+    val napojeItem = NapojeItemFragment()
+    val panuozzoItem = PanuozzoItemFragment()
+    val sosyItem = SosyItemFragment()
 
 
     var pizza_names: Array<String> = application.resources.getStringArray(R.array.pizza_titles)
@@ -170,8 +183,14 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         } else {
             println("User not signed in")
             contactName = "Guest"
-            contactSurname = " "
+            contactSurname = ""
             contactFullAddress = "Not found"
+
+            sendEmail.putExtra(Intent.EXTRA_TEXT, "Pizza którą zamówiłem nie przyszła na czas.\n\n\nMoje Dane Kontaktowe: \nImię: $contactName \nNazwisko: $contactSurname \nAdress: $contactFullAddress  ")
+            sendEmail.type = "message/rfc822"
+            sendEmail.putExtra(Intent.EXTRA_EMAIL, email)
+            val chooser = Intent.createChooser(sendEmail, "Send mail using")
+            context.startActivity(chooser)
         }
     }
 

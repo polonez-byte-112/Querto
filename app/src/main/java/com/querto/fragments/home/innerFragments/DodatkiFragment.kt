@@ -24,7 +24,7 @@ class DodatkiFragment : Fragment() {
         view.recyclerViewDodatki.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
 
-        view.recyclerViewDodatki.adapter = DodatkiAdapter(requireContext(), mMainActivityViewModel.dodatki_names, mMainActivityViewModel.dodatki_small_price, mMainActivityViewModel.dodatki_medium_price, mMainActivityViewModel.dodatki_big_price)
+        view.recyclerViewDodatki.adapter = DodatkiAdapter(activity!!, mMainActivityViewModel.dodatki_names, mMainActivityViewModel.dodatki_small_price, mMainActivityViewModel.dodatki_medium_price, mMainActivityViewModel.dodatki_big_price)
 
 
         return view
