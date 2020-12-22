@@ -47,10 +47,7 @@ class NapojeAdapter(activityMain: Activity, val napoje_names: Array<String>, val
         holder.currentFirstKind.text = napoje_kind_one.get(position)
         holder.currentSecondKind.text = napoje_kind_two.get(position)
         holder.box.setOnClickListener {
-            Toast.makeText(context, "Wcisnieto  Napoje ${(position + 1)} ", Toast.LENGTH_SHORT).show()
-
-            val napojeItem = NapojeItemFragment(napoje_price.get(position))
-
+            val napojeItem = NapojeItemFragment(napoje_price.get(position), napoje_kind_one.get(position), napoje_kind_two.get(position))
             activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, napojeItem)?.commit()
 
         }

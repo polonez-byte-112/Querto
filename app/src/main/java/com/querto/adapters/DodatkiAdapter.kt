@@ -46,9 +46,17 @@ class DodatkiAdapter(activityMain : Activity, val dodatki_names: Array<String>, 
         holder.currentMediumPrice.text = dodatki_medium_price.get(position).toString()
         holder.currentBigPrice.text = dodatki_big_price.get(position).toString()
         holder.box.setOnClickListener {
-            Toast.makeText(context, "Wcisnieto  Dodatki ${(position + 1)} ", Toast.LENGTH_SHORT).show()
+            var dodatkiItem  = DodatkiItemFragment(mMainActivityViewModel.dodatki_one_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
 
-            val dodatkiItem = DodatkiItemFragment()
+            when(position){
+                0->  dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_one_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                1-> dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_two_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                2->  dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_three_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                3-> dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_four_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                4-> dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_five_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+
+            }
+
 
             activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, dodatkiItem)?.commit()
         }

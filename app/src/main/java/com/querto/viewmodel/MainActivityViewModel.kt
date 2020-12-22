@@ -102,15 +102,19 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     var sosy_item=0
 
-    var napoje_item=0
-
+    var napoje_one_item=0
+    var napoje_two_item=0
 
     var dodatki_small_item=0
     var dodatki_medium_item=0
     var dodatki_big_item=0
 
 
-
+    var dodatki_one_array : Array<String> = application.resources.getStringArray(R.array.dodatki_one_titles)
+    var dodatki_two_array : Array<String> = application.resources.getStringArray(R.array.dodatki_two_titles)
+    var dodatki_three_array : Array<String> = application.resources.getStringArray(R.array.dodatki_three_titles)
+    var dodatki_four_array  : Array<String> = application.resources.getStringArray(R.array.dodatki_four_titles)
+    var dodatki_five_array  : Array<String> = application.resources.getStringArray(R.array.dodatki_five_titles)
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean>
@@ -266,8 +270,17 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 textView.text=sosy_item.toString()
             }
             "napoje"->  {
-                napoje_item +=1
-                textView.text=napoje_item.toString()
+                when(size){
+                    "one"->{
+                        napoje_one_item +=1
+                        textView.text=napoje_one_item.toString()
+                    }
+
+                    "two"->{
+                        napoje_two_item +=1
+                        textView.text=napoje_two_item.toString()
+                    }
+                }
             }
             "dodatki"-> {
                 when(size){
@@ -346,9 +359,19 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 textView.text=sosy_item.toString()
             }
             "napoje"->  {
-                if(napoje_item>0)
-                napoje_item -=1
-                textView.text=napoje_item.toString()
+                when(size){
+                    "one"->{
+                        if(napoje_one_item>0)
+                        napoje_one_item -=1
+                        textView.text=napoje_one_item.toString()
+                    }
+
+                    "two"->{
+                        if(napoje_two_item>0)
+                        napoje_two_item -=1
+                        textView.text=napoje_two_item.toString()
+                    }
+                }
             }
             "dodatki"-> {
                 when(size){

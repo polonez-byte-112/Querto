@@ -273,4 +273,52 @@
     </integer-array>
 
 
+    <string-array name="dodatki_one_titles">
+        <item>ser gorgonzola</item>
+        <item>ser mozzarella</item>
+        <item>pomidorki koktajlowe</item>
+        <item>szynka parmeńska</item>
+        <item>ser grana padano</item>
+        <item>tuńczyk</item>
+    </string-array>
+    <string-array name="dodatki_two_titles">
+        <item>anchois</item>
+        <item>bakłażan</item>
+        <item>boczek</item>
+        <item>cukinia</item>
+        <item>ricotta</item>
+        <item>kurczak w marynacie gyros</item>
+        <item>nutella</item>
+        <item>orzechy laskowe</item>
+        <item>pancetta</item>
+        <item>papryka</item>
+        <item>pieczarki</item>
+        <item>salami łagodne</item>
+        <item>salami pikantne</item>
+        <item>szynka</item>
+        <item>ser wędzony</item>
+        <item>pomidory suszone</item>
+        <item>szpinak</item>
+    </string-array>
+    <string-array name="dodatki_three_titles">
+        <item>berlinki</item>
+        <item>kapary</item>
+        <item>kukurydza</item>
+        <item>majonez</item>
+        <item>oliwki</item>
+        <item>papryka jalapeno</item>
+    </string-array>
+    <string-array name="dodatki_four_titles">
+        <item>cebula</item>
+        <item>czosnek</item>
+        <item>sos pomidorowy</item>
+    </string-array>
+    <string-array name="dodatki_five_titles">
+        <item>bazylia</item>
+        <item>oregano</item>
+        <item>oliwa extra vergin</item>
+        <item>peperoncino</item>
+        <item>sól morska</item>
+    </string-array>
+
 </resources>
