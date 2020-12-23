@@ -21,6 +21,7 @@ import com.querto.fragments.details.DetailsFragment
 import com.querto.fragments.home.HomeFragment
 import com.querto.fragments.login.LoginFragment
 import com.querto.fragments.register.RegisterFragment
+import com.querto.models.Cart.CartItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -115,6 +116,10 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     var dodatki_three_array : Array<String> = application.resources.getStringArray(R.array.dodatki_three_titles)
     var dodatki_four_array  : Array<String> = application.resources.getStringArray(R.array.dodatki_four_titles)
     var dodatki_five_array  : Array<String> = application.resources.getStringArray(R.array.dodatki_five_titles)
+
+
+   val items: ArrayList<CartItem> = arrayListOf()
+
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean>

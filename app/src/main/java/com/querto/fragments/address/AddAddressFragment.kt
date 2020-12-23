@@ -11,7 +11,7 @@
         import com.google.firebase.database.DatabaseReference
         import com.google.firebase.database.FirebaseDatabase
         import com.querto.R
-        import com.querto.model.Address
+        import com.querto.models.Address.Address
         import com.querto.viewmodel.MainActivityViewModel
         import kotlinx.android.synthetic.main.fragment_add_address.view.*
 

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.querto.R
 import com.querto.adapters.home.ViewPagerAdapter
+import com.querto.fragments.cart.CartMainFragment
 import com.querto.fragments.home.innerFragments.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -41,7 +42,8 @@ class HomeFragment : Fragment() {
         }
 
         floatingContinueBtn.setOnClickListener {
-            Toast.makeText(context, "Continue order", Toast.LENGTH_SHORT).show()
+            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartMainFragment())?.commit()
+
         }
         super.onViewCreated(view, savedInstanceState)
 

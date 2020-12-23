@@ -10,10 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.querto.R
-import com.querto.model.Address
-import com.querto.model.User
+import com.querto.models.User.User
 import com.querto.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_account.view.*
 import kotlinx.android.synthetic.main.fragment_edit_account.view.*
 
 
@@ -56,7 +54,7 @@ class EditAccountFragment : Fragment() {
                         var input_age = view.account_edit_age.text.toString()
 
         if(inputCheck(input_name, input_surname, input_age)){
-            val user = User(mAuth.currentUser?.uid, input_name,input_surname,snapshot.child("username").value.toString() ,snapshot.child("password").value.toString(),  input_age)
+            val user = User(mAuth.currentUser?.uid, input_name,input_surname,snapshot.child("username").value.toString() ,  input_age)
             database.child("users").child(mAuth.currentUser?.uid.toString()).setValue(user).addOnCompleteListener {
                 if(it.isSuccessful){
                     activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.accountFragment)?.commit()

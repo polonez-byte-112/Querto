@@ -1,8 +1,6 @@
 package com.querto.fragments.register
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.querto.MainActivity
 import com.querto.R
-import com.querto.model.User
+import com.querto.models.User.User
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -85,7 +83,7 @@ class RegisterFragment : Fragment() {
         firstName.isNotEmpty() && secondName.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() && age.isNotEmpty()
 
     private fun writeNewUser(userId: String, name: String, surname: String, username: String, password: String, age: String) {
-        val user = User(userId, name, surname,username, password,age)
+        val user = User(userId, name, surname,username,age)
         database.child("users").child(mAuth.currentUser?.uid.toString()).setValue(user).addOnCompleteListener {
             (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
             (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
