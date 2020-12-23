@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
@@ -73,6 +74,15 @@ class PizzaItemFragment(pizza_images: Int, pizza_small_price: Int,  pizza_medium
         view.pizza_big_item_remove_btn.setOnClickListener {
             mMainActivityViewModel.removeItem(pizza_big_item_counter, "pizza", "big")
             mMainActivityViewModel.updateSummary(pizza_item_summary, mMainActivityViewModel.pizza_small_item, mMainActivityViewModel.pizza_medium_item, mMainActivityViewModel.pizza_big_item, currentSmallPrice, currentMediumPrice, currentBigPrice)
+        }
+
+
+        view.addPizza_Cart_btn.setOnClickListener {
+            val addedMoney = pizza_item_summary.text.toString()
+            val smallPizzas  = mMainActivityViewModel.pizza_small_item
+            val mediumPizzas  = mMainActivityViewModel.pizza_medium_item
+            val bigPizzas  = mMainActivityViewModel.pizza_big_item
+            Toast.makeText(requireContext(), "Money : $addedMoney \nSmall Pizzas: $smallPizzas\nMedium Pizzas: $mediumPizzas\nBig Pizzas: $bigPizzas", Toast.LENGTH_SHORT).show()
         }
 
         return view

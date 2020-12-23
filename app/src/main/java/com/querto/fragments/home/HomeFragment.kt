@@ -8,9 +8,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.querto.MainActivity
 import com.querto.R
-import com.querto.adapters.ViewPagerAdapter
+import com.querto.adapters.home.ViewPagerAdapter
 import com.querto.fragments.home.innerFragments.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
