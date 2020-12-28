@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.adapters.cart.CartMainAdapter
 import com.querto.fragments.cart.CartMainFragment
@@ -33,7 +34,7 @@ class PizzaItemFragment( pizza_name: String, pizza_images: Int, pizza_small_pric
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
      var view = inflater.inflate(R.layout.fragment_pizza_item, container, false)
-
+        (activity as MainActivity).CURRENT_ITEM_STATUS=1
 
         view.pizza_small_img.setImageResource(currentImg)
         view.pizza_medium_img.setImageResource(currentImg)
@@ -80,25 +81,17 @@ class PizzaItemFragment( pizza_name: String, pizza_images: Int, pizza_small_pric
             mMainActivityViewModel.updateSummary(pizza_item_summary, mMainActivityViewModel.pizza_small_item, mMainActivityViewModel.pizza_medium_item, mMainActivityViewModel.pizza_big_item, currentSmallPrice, currentMediumPrice, currentBigPrice)
         }
 
+        val cartMainAdapter = CartMainAdapter((activity as MainActivity), (activity as MainActivity).items)
 
         view.addPizza_Cart_btn.setOnClickListener {
-            val addedMoney = pizza_item_summary.text.toString()
             val smallPizzas  = mMainActivityViewModel.pizza_small_item
             val mediumPizzas  = mMainActivityViewModel.pizza_medium_item
             val bigPizzas  = mMainActivityViewModel.pizza_big_item
-            Toast.makeText(requireContext(), "Money : $addedMoney \nSmall Pizzas: $smallPizzas\nMedium Pizzas: $mediumPizzas\nBig Pizzas: $bigPizzas", Toast.LENGTH_SHORT).show()
 
+            cartMainAdapter.addItem(currentPizzaName, "26cm", smallPizzas.toString(), currentSmallPrice.toString())
+            cartMainAdapter.addItem(currentPizzaName, "33cm", mediumPizzas.toString(), currentMediumPrice.toString())
+            cartMainAdapter.addItem(currentPizzaName, "41cm", bigPizzas.toString(), currentBigPrice.toString())
 
-
-            val cartMainAdapter = CartMainAdapter(requireContext(), mMainActivityViewModel.items)
-
-            cartMainAdapter.addItem(currentPizzaName, "Small", smallPizzas.toString(), currentSmallPrice.toString())
-            cartMainAdapter.addItem(currentPizzaName, "Medium", mediumPizzas.toString(), currentMediumPrice.toString())
-            cartMainAdapter.addItem(currentPizzaName, "Big", bigPizzas.toString(), currentBigPrice.toString())
-
-            /**
-             * Problem jest taki ze recyclerView tam sie nie aktualizuje niestety
-             */
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartMainFragment())?.commit()
 
         }
@@ -106,5 +99,9 @@ class PizzaItemFragment( pizza_name: String, pizza_images: Int, pizza_small_pric
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).CURRENT_ITEM_STATUS=0
+    }
 
 }

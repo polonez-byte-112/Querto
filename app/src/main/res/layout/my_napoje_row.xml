@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff">
@@ -59,24 +60,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/napoje_txtMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="170dp"
-                android:fontFamily="@font/poppins"
-                android:text="Cena"
-                android:textColor="#000"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/napoje_row_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_bold"
                 android:paddingLeft="5dp"
                 android:paddingTop="3dp"
                 android:paddingRight="3dp"
@@ -84,21 +72,10 @@
                 android:text="25"
                 android:textColor="#000"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/napoje_txtMedium"
-                app:layout_constraintTop_toBottomOf="@+id/napoje_txtMedium" />
-
-            <TextView
-                android:id="@+id/napoje_textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:paddingTop="3dp"
-                android:text="zł"
-                android:textColor="#000"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/napoje_row_price"
-                app:layout_constraintTop_toBottomOf="@+id/napoje_txtMedium" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/napoje_row_rodzaj_one" />
 
             <TextView
                 android:id="@+id/napoje_row_rodzaj_one"

@@ -1,5 +1,6 @@
 package com.querto.fragments.home
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +9,17 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.adapters.home.ViewPagerAdapter
 import com.querto.fragments.cart.CartMainFragment
 import com.querto.fragments.home.innerFragments.*
+import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
-
     private val openFloatingMenu: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.from_bottom_anim) }
     private val closeFloatingMenu: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.to_bottom_anim) }
     //By lazy pomaga zaoszczedzic pamiec a wszystko w nawiasie jest równe temu po lewej np openMenu : Animation = AnimationUtils etc
@@ -26,7 +29,12 @@ class HomeFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+       var view = inflater.inflate(R.layout.fragment_home, container, false)
+
+
+        (activity as MainActivity).HOME_STATUS=1
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,5 +101,11 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        (activity as MainActivity).HOME_STATUS=0
+    }
 
 }

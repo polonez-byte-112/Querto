@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.models.User.User
 import com.querto.viewmodel.MainActivityViewModel
@@ -32,6 +33,8 @@ class EditAccountFragment : Fragment() {
         mMainActivityViewModel =
             ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
                 .create(MainActivityViewModel::class.java)
+
+        (activity as MainActivity).EDIT_PROFIL_STATUS=1
 
         database.child("users").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object :
             ValueEventListener {
@@ -84,6 +87,11 @@ class EditAccountFragment : Fragment() {
         return view
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).EDIT_PROFIL_STATUS=0
+    }
 
 
     private fun inputCheck(firstName: String, secondName: String, age: String)=

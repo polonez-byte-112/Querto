@@ -33,9 +33,9 @@ class PizzaAdapter(activityMain: Activity, val pizza_images: Array<Int>, val piz
         holder.currentId.text = (position + 1).toString()
         holder.currentName.text = pizza_names.get(position)
         holder.currentDesc.text = pizza_desc.get(position)
-        holder.currentPriceSmall.text = pizza_small_price.get(position).toString()
-        holder.currentPriceMedium.text = pizza_medium_price.get(position).toString()
-        holder.currentPriceBig.text = pizza_big_price.get(position).toString()
+        holder.currentPriceSmall.text = pizza_small_price.get(position).toString()+" zł"
+        holder.currentPriceMedium.text = pizza_medium_price.get(position).toString()+" zł"
+        holder.currentPriceBig.text = pizza_big_price.get(position).toString()+" zł"
         holder.box.setOnClickListener {
               val pizzaItem = PizzaItemFragment(pizza_names.get(position), pizza_images[position], pizza_small_price.get(position), pizza_medium_price.get(position), pizza_big_price.get(position))
           activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,pizzaItem)?.commit()

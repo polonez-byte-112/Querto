@@ -42,11 +42,11 @@ class NapojeAdapter(activityMain: Activity, val napoje_names: Array<String>, val
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.currentId.text = (position + 1).toString()
         holder.currentName.text = napoje_names.get(position)
-        holder.currentPrice.text = napoje_price.get(position).toString()
+        holder.currentPrice.text = napoje_price.get(position).toString()+" zł"
         holder.currentFirstKind.text = napoje_kind_one.get(position)
         holder.currentSecondKind.text = napoje_kind_two.get(position)
         holder.box.setOnClickListener {
-            val napojeItem = NapojeItemFragment(napoje_price.get(position), napoje_kind_one.get(position), napoje_kind_two.get(position))
+            val napojeItem = NapojeItemFragment(napoje_names.get(position),napoje_price.get(position), napoje_kind_one.get(position), napoje_kind_two.get(position))
             activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, napojeItem)?.commit()
 
         }

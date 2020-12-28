@@ -36,10 +36,10 @@ class PanuozzoAdapter(activityMain : Activity, val panuozzo_images: Array<Int>, 
         holder.currentId.text = (position + 1).toString()
         holder.currentName.text = panuozzo_names.get(position)
         holder.currentDesc.text = panuozzo_desc.get(position)
-        holder.currentPriceNormal.text = panuozzo_normal_price.get(position).toString()
-        holder.currentPriceBig.text = panuozzo_big_price.get(position).toString()
+        holder.currentPriceNormal.text = panuozzo_normal_price.get(position).toString()+" zł"
+        holder.currentPriceBig.text = panuozzo_big_price.get(position).toString()+" zł"
         holder.box.setOnClickListener {
-            val panuozzoItem = PanuozzoItemFragment(panuozzo_images[position],panuozzo_normal_price.get(position),panuozzo_big_price.get(position) )
+            val panuozzoItem = PanuozzoItemFragment(panuozzo_names.get(position),panuozzo_images[position],panuozzo_normal_price.get(position),panuozzo_big_price.get(position) )
             activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,panuozzoItem)?.commit()
 
         }

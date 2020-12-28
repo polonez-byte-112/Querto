@@ -3,20 +3,16 @@ package com.querto
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.querto.models.Cart.CartItem
 import com.querto.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavigationItemSelectedListener {
@@ -24,24 +20,32 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     private lateinit var drawer: DrawerLayout
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
+    lateinit var viewModel: MainActivityViewModel
     lateinit var user_name: TextView
     lateinit var user_surname: TextView
-    val mutable_name = MutableLiveData<String>()
-    val name: LiveData<String>
-        get() = mutable_name
 
     val mutable_surname = MutableLiveData<String>()
     val surname: LiveData<String>
         get() = mutable_surname
 
 
+    var DETALE_STATUS=0
+    var HOME_STATUS=0
+    var PROFIL_STATUS=0
+    var EDIT_PROFIL_STATUS=0
+    var ADDRESS_STATUS=0
+    var EDIT_ADDRESS_STATUS=0
+    var CURRENT_ITEM_STATUS=0
+    var LOGIN_STATUS=0
+    var REGISTER_STATUS=0
+    var items: ArrayList<CartItem> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-        var viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
         database = FirebaseDatabase.getInstance().reference
         mAuth = FirebaseAuth.getInstance()
 
@@ -50,6 +54,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
 
         val navigationView: NavigationView
         navigationView = findViewById(R.id.nav_view)
+        navigationView.itemIconTintList=null
         navigationView.setNavigationItemSelectedListener(this)
 
         val headerView: View
@@ -89,27 +94,26 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var mainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
-        val navigationView: NavigationView
+       val navigationView: NavigationView
         navigationView = findViewById(R.id.nav_view)
         when (item.itemId) {
-            R.id.home -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.homeFragment).commit()
-            R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.loginFragment).commit()
-            R.id.account-> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.accountFragment).commit()
-            R.id.address -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.addressFragment).commit()
+            R.id.home -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
+            R.id.login -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
+            R.id.account-> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.accountFragment).commit()
+            R.id.address -> supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.addressFragment).commit()
             R.id.logout -> {
                 if (mAuth.currentUser != null) {
                     mAuth.signOut()
                     updateUI()
                 }
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.loginFragment).commit()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
             }
-            R.id.email -> mainActivityViewModel.sendMail(this)
+            R.id.email -> viewModel.sendMail(this)
             R.id.detail -> {
                 navigationView.setCheckedItem(R.id.detail)
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mainActivityViewModel.detailsFragment).commit()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.detailsFragment).commit()
             }
-            R.id.facebook -> mainActivityViewModel.openFacebook(this)
+            R.id.facebook -> viewModel.openFacebook(this)
         }
 
 
@@ -121,7 +125,60 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
+
+            if(HOME_STATUS==1 || LOGIN_STATUS==1){
+            HOME_STATUS=0
+            LOGIN_STATUS=0
             super.onBackPressed()
+        }
+                if(DETALE_STATUS==1){
+                    DETALE_STATUS=0
+                    supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
+                    HOME_STATUS=1
+                }
+
+
+            if(PROFIL_STATUS==1){
+                PROFIL_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
+                HOME_STATUS=1
+            }
+
+            if(ADDRESS_STATUS==1){
+                ADDRESS_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
+                HOME_STATUS=1
+            }
+
+
+            if(CURRENT_ITEM_STATUS==1){
+                CURRENT_ITEM_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
+                HOME_STATUS=1
+            }
+
+            if(REGISTER_STATUS==1){
+                REGISTER_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
+                LOGIN_STATUS=1
+            }
+
+
+            if(EDIT_PROFIL_STATUS==1){
+                EDIT_PROFIL_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.accountFragment).commit()
+                PROFIL_STATUS=1
+            }
+
+
+            if(EDIT_ADDRESS_STATUS==1){
+                EDIT_ADDRESS_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.addressFragment).commit()
+                ADDRESS_STATUS=1
+            }
+
+
+
         }
     }
     fun updateUI() {
@@ -138,12 +195,10 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         println("User found")
-                        mutable_name.postValue(snapshot.child("name").value.toString())
-                        mutable_surname.postValue(snapshot.child("surname").value.toString())
+                        mutable_surname.postValue(snapshot.child("name").value.toString()+" "+snapshot.child("surname").value.toString())
                     } else {
                         println("User not found")
-                        mutable_name.postValue("Guest")
-                        mutable_surname.postValue("")
+                        mutable_surname.postValue("Gość")
                     }
 
                 }
@@ -163,8 +218,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
         } else {
 
             println("User not signed in")
-            mutable_name.postValue("Guest")
-            mutable_surname.postValue("")
+            mutable_surname.postValue("Gość")
 
 
             val navigationView: NavigationView
@@ -176,9 +230,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
             nav_menu.findItem(R.id.login).isVisible = true
         }
 
-        name.observe(this, {
-            user_name.text = it.toString()
-        })
+
 
         surname.observe(this, {
             user_surname.text = it.toString()

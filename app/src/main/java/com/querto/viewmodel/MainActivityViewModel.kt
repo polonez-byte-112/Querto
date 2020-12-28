@@ -95,8 +95,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     var foaccia_item=0
 
+    var calzone_small_item=0
     var calzone_medium_item=0
-    var calzone_big_item=0
 
     var panuozzo_medium_item=0
     var panuozzo_big_item=0
@@ -118,7 +118,12 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     var dodatki_five_array  : Array<String> = application.resources.getStringArray(R.array.dodatki_five_titles)
 
 
-   val items: ArrayList<CartItem> = arrayListOf()
+
+
+
+
+
+
 
 
     private val mutableLoginStatus = MutableLiveData<Boolean>()
@@ -249,12 +254,12 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             "calzone"-> {
                 when(size){
                     "medium"->{
-                        calzone_medium_item +=1
-                        textView.text=calzone_medium_item.toString()
+                        calzone_small_item +=1
+                        textView.text=calzone_small_item.toString()
                     }
                     "big"->{
-                        calzone_big_item +=1
-                        textView.text=calzone_big_item.toString()
+                        calzone_medium_item +=1
+                        textView.text=calzone_medium_item.toString()
                     }
                 }
             }
@@ -333,14 +338,14 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             "calzone"-> {
                 when(size){
                     "medium"->{
+                        if(calzone_small_item>0)
+                        calzone_small_item -=1
+                        textView.text=calzone_small_item.toString()
+                    }
+                    "big"->{
                         if(calzone_medium_item>0)
                         calzone_medium_item -=1
                         textView.text=calzone_medium_item.toString()
-                    }
-                    "big"->{
-                        if(calzone_big_item>0)
-                        calzone_big_item -=1
-                        textView.text=calzone_big_item.toString()
                     }
                 }
             }

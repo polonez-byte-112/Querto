@@ -14,7 +14,7 @@ import com.querto.items.*
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_calzone_row.view.*
 
-class CalzoneAdapter(activityMain : Activity, val calzone_images: Array<Int>, val calzone_names: Array<String>, val calzone_desc: Array<String>, val calzone_normal_price: IntArray, val calzone_big_price: IntArray) : RecyclerView.Adapter<CalzoneAdapter.MyViewHolder>() {
+class CalzoneAdapter(activityMain : Activity, val calzone_images: Array<Int>, val calzone_names: Array<String>, val calzone_desc: Array<String>, val calzone_small_price: IntArray, val calzone_normal_price: IntArray) : RecyclerView.Adapter<CalzoneAdapter.MyViewHolder>() {
 
     private var mMainActivityViewModel: MainActivityViewModel
     private val context: Context = activityMain.applicationContext
@@ -30,8 +30,8 @@ class CalzoneAdapter(activityMain : Activity, val calzone_images: Array<Int>, va
         val currentId = itemView.calzone_row_id
         val currentName = itemView.calzone_row_title
         val currentDesc = itemView.calzone_row_description
-        val currentPriceNormal = itemView.calzone_row_price_normal
-        val currentPriceBig = itemView.calzone_row_price_big
+        val currentPriceSmall = itemView.calzone_row_price_small
+        val currentPriceNormal = itemView.calzone_row_price_medium
         val box = itemView.calzone_box
     }
 
@@ -44,10 +44,10 @@ class CalzoneAdapter(activityMain : Activity, val calzone_images: Array<Int>, va
         holder.currentId.text = (position + 1).toString()
         holder.currentName.text = calzone_names.get(position)
         holder.currentDesc.text = calzone_desc.get(position)
-        holder.currentPriceNormal.text = calzone_normal_price.get(position).toString()
-        holder.currentPriceBig.text = calzone_big_price.get(position).toString()
+        holder.currentPriceSmall.text = calzone_small_price.get(position).toString()+" zł"
+        holder.currentPriceNormal.text = calzone_normal_price.get(position).toString()+" zł"
         holder.box.setOnClickListener {
-            val calzoneItem = CalzoneItemFragment(calzone_images[position],calzone_normal_price.get(position),calzone_big_price.get(position) )
+            val calzoneItem = CalzoneItemFragment(calzone_names.get(position),calzone_images[position],calzone_small_price.get(position),calzone_normal_price.get(position) )
             activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,calzoneItem)?.commit()
         }
     }

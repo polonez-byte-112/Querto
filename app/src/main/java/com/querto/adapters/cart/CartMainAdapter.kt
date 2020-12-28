@@ -1,5 +1,6 @@
 package com.querto.adapters.cart
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,19 +11,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.adapters.innerFragments.CalzoneAdapter
 import com.querto.models.Cart.CartItem
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.my_cart_main_row.view.*
 
-class CartMainAdapter(val context: Context, val items: ArrayList<CartItem>): RecyclerView.Adapter<CartMainAdapter.MyViewHolder>() {
+class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): RecyclerView.Adapter<CartMainAdapter.MyViewHolder>() {
     private var mMainActivityViewModel: MainActivityViewModel
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
+    private val context = activity.applicationContext
 
     init {
-        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(context.applicationContext as Application).create(
+        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(context as Application).create(
                 MainActivityViewModel::class.java)
 
     }
@@ -87,8 +90,8 @@ class CartMainAdapter(val context: Context, val items: ArrayList<CartItem>): Rec
 
         if(Integer.parseInt(amount)>0){
             val item = CartItem(database.push().key.toString(),name, size, amount, (Integer.parseInt(amount)* Integer.parseInt(price)).toString())
-            mMainActivityViewModel.items.add(item)
-            println("\nId: ${item.i_id}\nName: ${item.i_name}\nSize: ${item.i_size}\nAmount: ${item.i_amount}")
+           (activity as MainActivity).items.add(item)
+            println("\n\n\nId: ${item.i_id}\nName: ${item.i_name}\nSize: ${item.i_size}\nAmount: ${item.i_amount}\n\n\n")
             notifyDataSetChanged()
 
         }

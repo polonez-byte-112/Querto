@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="196dp"
     android:background="#FFC300"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -20,9 +20,11 @@
         android:id="@+id/nav_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
         android:paddingTop="8dp"
-        android:text="Querto"
+        android:text="Witaj"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
 
@@ -30,7 +32,10 @@
         android:id="@+id/nav_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:fontFamily="@font/poppins_bold"
         android:paddingTop="8dp"
-        android:text="Fast Pizza delivery"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:text="Gość"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
 </LinearLayout>

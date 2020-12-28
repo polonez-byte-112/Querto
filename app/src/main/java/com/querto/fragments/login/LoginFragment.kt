@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
         mMainActivityViewModel =
                 ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
                         .create(MainActivityViewModel::class.java)
-
+        (activity as MainActivity).LOGIN_STATUS=1
         username = view.loginUsername
         password = view.loginPassword
 
@@ -74,6 +74,7 @@ class LoginFragment : Fragment() {
         mMainActivityViewModel.loginStatus.observe(this, Observer { isValidUser ->
             if (isValidUser) {
 
+                (activity as MainActivity).LOGIN_STATUS=0
                 (activity as MainActivity).updateUI()
                 (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
                 (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
@@ -85,6 +86,10 @@ class LoginFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).LOGIN_STATUS=0
+    }
 
 
 

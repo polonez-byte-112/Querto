@@ -51,7 +51,7 @@ class SosyAdapter(activityMain: Activity, val sosy_names: Array<String>, val sos
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.currentId.text = (position + 1).toString()
         holder.currentName.text = sosy_names.get(position)
-        holder.currentPrice.text = sosy_price.get(position).toString()
+        holder.currentPrice.text = sosy_price.get(position).toString()+" zł"
         holder.box.setOnClickListener {
             val sosyItem = SosyItemFragment(sosy_names.get(position), sosy_price.get(position))
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,sosyItem)?.commit()

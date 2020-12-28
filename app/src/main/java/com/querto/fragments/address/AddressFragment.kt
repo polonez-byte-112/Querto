@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,6 +42,7 @@ class AddressFragment : Fragment() {
                 MainActivityViewModel::class.java)
 
 
+        (activity as MainActivity).ADDRESS_STATUS=1
 
 
         if(mAuth.currentUser==null){
@@ -108,7 +110,11 @@ class AddressFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
 
+        (activity as MainActivity).ADDRESS_STATUS=0
+    }
 
 
 

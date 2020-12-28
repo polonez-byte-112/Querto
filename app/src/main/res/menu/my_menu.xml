@@ -7,7 +7,7 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="Strona Główna" />
     </group>
 
   <group android:checkableBehavior="single">
@@ -18,42 +18,42 @@
                   <item
                       android:id="@+id/login"
                       android:icon="@drawable/ic_login"
-                      android:title="Login / Register" />
+                      android:title="Zaloguj się" />
 
 
                   <item
                       android:id="@+id/account"
                       android:visible="false"
                       android:icon="@drawable/ic_account"
-                      android:title="Profile" />
+                      android:title="Profil" />
                   <item
                       android:id="@+id/address"
                       android:visible="false"
                       android:icon="@drawable/ic_location"
-                      android:title="Address" />
+                      android:title="Adress" />
 
                   <item
                       android:id="@+id/logout"
                       android:visible="false"
                       android:icon="@drawable/ic_logout"
-                      android:title="Log out" />
+                      android:title="Wyloguj" />
               </group>
           </menu>
       </item>
   </group>
 
-    <item android:title="Communication">
+    <item android:title="Komunikacja">
         <menu>
             <item
                 android:id="@+id/email"
                 android:icon="@drawable/ic_email"
                 android:tint="#6F001F"
-                android:title="Email \'Cliento\'" />
+                android:title="Napisz Maila do \'Cliento\'" />
             <item
                 android:id="@+id/facebook"
                 android:icon="@drawable/ic_share"
                 android:tint="#6F001F"
-                android:title="Like \'Cliento\' on Facebook" />
+                android:title="Polub \'Cliento\' na Facebook" />
         </menu>
     </item>
 
@@ -61,7 +61,7 @@
         <item
             android:id="@+id/detail"
             android:icon="@drawable/ic_store"
-            android:title="Contact \'Cliento\' Details" />
+            android:title="Detale Kontaktowe" />
     </group>
 
 

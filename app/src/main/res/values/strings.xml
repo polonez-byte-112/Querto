@@ -230,11 +230,11 @@
         <item>Woda\u0020</item>
     </string-array>
     <string-array name="napoje_kinds_one">
-        <item>pepsi zwykła</item>
+        <item>zwykła</item>
         <item>gazowana</item>
     </string-array>
     <string-array name="napoje_kinds_two">
-        <item>pepsi light</item>
+        <item>light</item>
         <item>niegazowana</item>
     </string-array>
     <integer-array name="napoje_price">

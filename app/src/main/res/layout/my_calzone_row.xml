@@ -87,80 +87,66 @@
 
             <TextView
                 android:id="@+id/calzone_txtNormal"
-                android:layout_width="54dp"
+                android:layout_width="wrap_content"
                 android:layout_height="23dp"
                 android:layout_marginStart="92dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="Normalna"
+                android:text="26cm"
+                android:textAlignment="center"
                 android:textColor="#000"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calzone_row_description" />
 
             <TextView
                 android:id="@+id/calzone_txtBig"
-                android:layout_width="44dp"
+                android:layout_width="wrap_content"
                 android:layout_height="23dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="Duża"
+                android:text="33cm"
                 android:textAlignment="center"
                 android:textColor="#000"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/calzone_txtNormal"
                 app:layout_constraintTop_toBottomOf="@+id/calzone_row_description" />
 
             <TextView
-                android:id="@+id/calzone_row_price_normal"
+                android:id="@+id/calzone_row_price_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_bold"
                 android:paddingLeft="5dp"
                 android:paddingTop="3dp"
                 android:paddingRight="3dp"
                 android:paddingBottom="3dp"
                 android:text="25"
+                android:textAlignment="center"
                 android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/calzone_txtNormal"
                 app:layout_constraintStart_toStartOf="@+id/calzone_txtNormal"
                 app:layout_constraintTop_toBottomOf="@+id/calzone_txtNormal" />
 
             <TextView
-                android:id="@+id/calzone_textView12"
+                android:id="@+id/calzone_row_price_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="4dp"
-                android:paddingTop="3dp"
-                android:text="zł"
-                android:textColor="#000"
-                app:layout_constraintStart_toEndOf="@+id/calzone_row_price_normal"
-                app:layout_constraintTop_toBottomOf="@+id/calzone_txtNormal" />
-
-            <TextView
-                android:id="@+id/calzone_row_price_big"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_bold"
                 android:paddingLeft="5dp"
                 android:paddingTop="3dp"
                 android:paddingRight="3dp"
                 android:paddingBottom="3dp"
                 android:text="25"
+                android:textAlignment="center"
                 android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/calzone_txtBig"
                 app:layout_constraintStart_toStartOf="@+id/calzone_txtBig"
-                app:layout_constraintTop_toBottomOf="@+id/calzone_txtBig" />
-
-            <TextView
-                android:id="@+id/calzone_textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="4dp"
-                android:paddingTop="3dp"
-                android:text="zł"
-                android:textColor="#000"
-                app:layout_constraintStart_toEndOf="@+id/calzone_row_price_big"
                 app:layout_constraintTop_toBottomOf="@+id/calzone_txtBig" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

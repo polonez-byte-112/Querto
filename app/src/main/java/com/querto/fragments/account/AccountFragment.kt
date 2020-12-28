@@ -32,7 +32,11 @@ class AccountFragment : Fragment() {
        var view = inflater.inflate(R.layout.fragment_account, container, false)
         database = FirebaseDatabase.getInstance().reference
         mAuth = FirebaseAuth.getInstance()
+        mMainActivityViewModel =
+                ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
+                        .create(MainActivityViewModel::class.java)
 
+        (activity as MainActivity).PROFIL_STATUS=1
         database.child("users").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -62,10 +66,6 @@ class AccountFragment : Fragment() {
         }
 
         view.account_edit_account_floating_btn.setOnClickListener {
-            mMainActivityViewModel =
-                ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
-                    .create(MainActivityViewModel::class.java)
-
 
             (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.editAccountFragment).commit()
 
@@ -126,6 +126,12 @@ class AccountFragment : Fragment() {
             account_edit_account_floating_btn.visibility= View.INVISIBLE
             account_delete_floating_btn.visibility = View.INVISIBLE
         }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).PROFIL_STATUS=0
     }
 
 

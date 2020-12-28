@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
+import com.querto.MainActivity
 import com.querto.R
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_dodatki_item.*
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_dodatki_item.view.*
 import kotlinx.android.synthetic.main.fragment_napoje_item.*
 
 
-class DodatkiItemFragment(items: Array<String>, smallPrice: Int, mediumPrice: Int, bigPrice: Int) : Fragment() {
+class DodatkiItemFragment(name: String, items: Array<String>, smallPrice: Int, mediumPrice: Int, bigPrice: Int) : Fragment() {
     private lateinit var mMainActivityViewModel: MainActivityViewModel
 
     var currentItems = items
@@ -29,7 +30,7 @@ class DodatkiItemFragment(items: Array<String>, smallPrice: Int, mediumPrice: In
     ): View? {
         // Inflate the layout for this fragment
        var view = inflater.inflate(R.layout.fragment_dodatki_item, container, false)
-
+        (activity as MainActivity).CURRENT_ITEM_STATUS=1
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
                 MainActivityViewModel::class.java)
 
@@ -89,6 +90,13 @@ class DodatkiItemFragment(items: Array<String>, smallPrice: Int, mediumPrice: In
 
         return view;
     }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).CURRENT_ITEM_STATUS=0
+    }
+
 
 
 }

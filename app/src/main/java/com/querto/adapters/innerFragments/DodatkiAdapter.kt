@@ -41,18 +41,18 @@ class DodatkiAdapter(activityMain : Activity, val dodatki_names: Array<String>, 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.currentId.text = (position + 1).toString()
         holder.currentName.text = dodatki_names.get(position)
-        holder.currentSmallPrice.text = dodatki_small_price.get(position).toString()
-        holder.currentMediumPrice.text = dodatki_medium_price.get(position).toString()
-        holder.currentBigPrice.text = dodatki_big_price.get(position).toString()
+        holder.currentSmallPrice.text = dodatki_small_price.get(position).toString()+" zł"
+        holder.currentMediumPrice.text = dodatki_medium_price.get(position).toString()+" zł"
+        holder.currentBigPrice.text = dodatki_big_price.get(position).toString()+" zł"
         holder.box.setOnClickListener {
-            var dodatkiItem  = DodatkiItemFragment(mMainActivityViewModel.dodatki_one_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+            var dodatkiItem  = DodatkiItemFragment(dodatki_names.get(position),mMainActivityViewModel.dodatki_one_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
 
             when(position){
-                0->  dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_one_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
-                1-> dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_two_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
-                2->  dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_three_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
-                3-> dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_four_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
-                4-> dodatkiItem = DodatkiItemFragment(mMainActivityViewModel.dodatki_five_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                0->  dodatkiItem = DodatkiItemFragment(dodatki_names.get(position),mMainActivityViewModel.dodatki_one_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                1-> dodatkiItem = DodatkiItemFragment(dodatki_names.get(position),mMainActivityViewModel.dodatki_two_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                2->  dodatkiItem = DodatkiItemFragment(dodatki_names.get(position),mMainActivityViewModel.dodatki_three_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                3-> dodatkiItem = DodatkiItemFragment(dodatki_names.get(position),mMainActivityViewModel.dodatki_four_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
+                4-> dodatkiItem = DodatkiItemFragment(dodatki_names.get(position),mMainActivityViewModel.dodatki_five_array,dodatki_small_price.get(position), dodatki_medium_price.get(position), dodatki_big_price.get(position) )
 
             }
 

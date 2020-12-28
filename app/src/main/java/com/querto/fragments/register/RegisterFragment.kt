@@ -33,6 +33,8 @@ class RegisterFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
 
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!).create(MainActivityViewModel::class.java)
+
+        (activity as MainActivity).REGISTER_STATUS=1
         view.register_btn.setOnClickListener {
             inputUser()
         }
@@ -86,11 +88,18 @@ class RegisterFragment : Fragment() {
         val user = User(userId, name, surname,username,age)
         database.child("users").child(mAuth.currentUser?.uid.toString()).setValue(user).addOnCompleteListener {
             (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
+            (activity as MainActivity).REGISTER_STATUS=0
             (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
 
         }
         (activity as MainActivity).updateUI()
 
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).REGISTER_STATUS=0
     }
 
 }

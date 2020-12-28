@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff">
@@ -8,7 +9,7 @@
     <TextView
         android:id="@+id/sosy_row_id"
         android:layout_width="70dp"
-        android:layout_height="350dp"
+        android:layout_height="200dp"
         android:background="@drawable/row_id_bg"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
@@ -26,7 +27,7 @@
 
     <RelativeLayout
         android:layout_width="340dp"
-        android:layout_height="350dp"
+        android:layout_height="200dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:gravity="center"
@@ -47,6 +48,7 @@
                 android:id="@+id/sosy_row_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/amatic_sc"
                 android:paddingBottom="20dp"
                 android:text="sos, ser, szynka, salami,peperoni, cebula"
@@ -54,19 +56,6 @@
                 android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/sosy_txtMedium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/sosy_txtMedium"
-                android:layout_width="54dp"
-                android:layout_height="23dp"
-                android:layout_marginTop="180dp"
-                android:fontFamily="@font/poppins"
-                android:text="  Cena"
-                android:textColor="#000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -75,28 +64,19 @@
                 android:id="@+id/sosy_row_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_bold"
                 android:paddingLeft="5dp"
                 android:paddingTop="3dp"
                 android:paddingRight="3dp"
                 android:paddingBottom="3dp"
                 android:text="25"
                 android:textColor="#000"
-                app:layout_constraintStart_toStartOf="@+id/sosy_txtMedium"
-                app:layout_constraintTop_toBottomOf="@+id/sosy_txtMedium" />
-
-            <TextView
-                android:id="@+id/sosy_textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:paddingTop="3dp"
-                android:text="zł"
-                android:textColor="#000"
-                app:layout_constraintStart_toEndOf="@+id/sosy_row_price"
-                app:layout_constraintTop_toBottomOf="@+id/sosy_txtMedium" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sosy_row_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
