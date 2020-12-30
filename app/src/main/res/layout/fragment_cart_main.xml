@@ -5,21 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".fragments.cart.CartMainFragment">
 
     <TextView
         android:id="@+id/cart_no_items_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_weight="5"
-        android:visibility="gone"
-        android:text="No items in cart"
-        android:textAlignment="center" />
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="Brak przedmiotów w koszyku"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_main_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/white"
         android:layout_weight="5">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -27,16 +34,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/summary_box"
         android:layout_width="match_parent"
-        android:background="#fff"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1.2"
+        android:background="@drawable/cart_main_summarry_box_bg">
 
         <TextView
             android:id="@+id/textView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="Podsumowanie"
             android:textColor="#000000"
             android:textSize="30sp"
@@ -44,7 +51,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/summared_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -64,7 +71,7 @@
             android:text=" zł"
             android:textColor="#000000"
             android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/textView32"
+            app:layout_constraintStart_toEndOf="@+id/summared_price"
             app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -72,12 +79,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:clickable="true"
-            android:src="@drawable/ic_continue"
             android:backgroundTint="#F5D1DB"
+            android:clickable="true"
             android:focusable="true"
-            app:borderWidth="0dp"
+            android:src="@drawable/ic_continue"
             android:tint="#C70039"
+            app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

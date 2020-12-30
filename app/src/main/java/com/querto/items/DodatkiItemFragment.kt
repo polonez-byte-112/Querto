@@ -88,7 +88,7 @@ class DodatkiItemFragment(name: String, items: Array<String>, smallPrice: Int, m
 
 
 
-        return view;
+        return view
     }
 
 

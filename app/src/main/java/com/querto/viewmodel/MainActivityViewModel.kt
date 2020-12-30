@@ -111,6 +111,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     var dodatki_big_item=0
 
 
+
+
     var dodatki_one_array : Array<String> = application.resources.getStringArray(R.array.dodatki_one_titles)
     var dodatki_two_array : Array<String> = application.resources.getStringArray(R.array.dodatki_two_titles)
     var dodatki_three_array : Array<String> = application.resources.getStringArray(R.array.dodatki_three_titles)

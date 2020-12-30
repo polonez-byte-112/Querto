@@ -48,7 +48,7 @@ class CalzoneAdapter(activityMain : Activity, val calzone_images: Array<Int>, va
         holder.currentPriceNormal.text = calzone_normal_price.get(position).toString()+" zł"
         holder.box.setOnClickListener {
             val calzoneItem = CalzoneItemFragment(calzone_names.get(position),calzone_images[position],calzone_small_price.get(position),calzone_normal_price.get(position) )
-            activity.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container,calzoneItem)?.commit()
+            activity.supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container,calzoneItem).commit()
         }
     }
 

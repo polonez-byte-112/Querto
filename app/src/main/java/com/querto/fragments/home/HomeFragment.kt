@@ -46,7 +46,8 @@ class HomeFragment : Fragment() {
         }
 
         floatingClearBtn.setOnClickListener {
-            Toast.makeText(context, "Delete order", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Oczyszczono listę zamówienia", Toast.LENGTH_SHORT).show()
+            (activity as MainActivity).items.clear()
         }
 
         floatingContinueBtn.setOnClickListener {

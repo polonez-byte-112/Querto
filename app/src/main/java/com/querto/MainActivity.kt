@@ -38,7 +38,15 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     var CURRENT_ITEM_STATUS=0
     var LOGIN_STATUS=0
     var REGISTER_STATUS=0
+    var CART_MAIN_STATUS=0
     var items: ArrayList<CartItem> = arrayListOf()
+    var summarry = MutableLiveData<Int>()
+
+    init {
+        summarry.postValue(0)
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -153,6 +161,12 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
 
             if(CURRENT_ITEM_STATUS==1){
                 CURRENT_ITEM_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
+                HOME_STATUS=1
+            }
+
+            if(CART_MAIN_STATUS==1){
+                CART_MAIN_STATUS=0
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
                 HOME_STATUS=1
             }

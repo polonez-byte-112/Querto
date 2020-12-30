@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     android:layout_height="match_parent"
-    android:background="@drawable/white_wall"
+    android:background="@drawable/pizza_wallpaper"
     android:gravity="center_horizontal"
     tools:context=".items.NapojeItemFragment">
 

@@ -59,7 +59,7 @@ class CalzoneItemFragment(calzoneName: String, image : Int, normal_price: Int, b
             mMainActivityViewModel.updateSummary(calzone_item_summary,0,mMainActivityViewModel.calzone_small_item, mMainActivityViewModel.calzone_medium_item,0, currentNormalPrice, currentBigPrice)
         }
 
-        val cartMainAdapter = CartMainAdapter((activity as MainActivity), (activity as MainActivity).items)
+        val cartMainAdapter = CartMainAdapter((activity as MainActivity), (activity as MainActivity).items, )
 
         view.addCalzone_Cart_btn.setOnClickListener {
             var smallAmount = mMainActivityViewModel.calzone_small_item

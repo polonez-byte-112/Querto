@@ -2,10 +2,10 @@ package com.querto.adapters.cart
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -13,9 +13,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.querto.MainActivity
 import com.querto.R
-import com.querto.adapters.innerFragments.CalzoneAdapter
+import com.querto.fragments.cart.CartMainFragment
 import com.querto.models.Cart.CartItem
 import com.querto.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.fragment_cart_main.*
 import kotlinx.android.synthetic.main.my_cart_main_row.view.*
 
 class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): RecyclerView.Adapter<CartMainAdapter.MyViewHolder>() {
@@ -52,26 +53,47 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
         holder.currentAmount.text= amount.toString()
 
         holder.addBtn.setOnClickListener {
+
+
             amount++
             items.get(position).i_amount = amount.toString()
+            changeItem((activity as MainActivity), Integer.parseInt(items[position].i_price),"plus")
+
+            //Naprawic tutaj problem z cena ( cena tez zwraca z iloscia  i zeby to bylo widac w summarry!)
             notifyDataSetChanged()
         }
+        val cartMainFragment = CartMainFragment()
 
         holder.removeBtn.setOnClickListener {
-            if(amount>0)
+            if(amount>0){
                 amount--
-            items.get(position).i_amount = amount.toString()
+                items.get(position).i_amount = amount.toString()
+                changeItem((activity as MainActivity), Integer.parseInt(items[position].i_price), "minus")
+             }
+
 
             if(items.get(position).i_amount.equals("0")){
                 items.removeAt(position)
+                if(items.size==0){
+                    activity.cart_no_items_text.visibility = View.VISIBLE
+                    activity.cart_main_recycler_view.visibility = View.GONE
+                    activity.summary_box.visibility=View.GONE
+                }
             }
 
             notifyDataSetChanged()
         }
 
         holder.removeItemBtn.setOnClickListener{
-            //usuwa obecny obiekt z listy
+
+
+            deleteItem((activity as MainActivity), Integer.parseInt(items[position].i_price), Integer.parseInt(items[position].i_amount))
             items.removeAt(position)
+            if(items.size==0){
+                activity.cart_no_items_text.visibility = View.VISIBLE
+                activity.cart_main_recycler_view.visibility = View.GONE
+                activity.summary_box.visibility=View.GONE
+            }
             notifyDataSetChanged()
         }
 
@@ -89,11 +111,33 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
         mAuth = FirebaseAuth.getInstance()
 
         if(Integer.parseInt(amount)>0){
-            val item = CartItem(database.push().key.toString(),name, size, amount, (Integer.parseInt(amount)* Integer.parseInt(price)).toString())
+            val item = CartItem(database.push().key.toString(),name, size, amount,price)
            (activity as MainActivity).items.add(item)
             println("\n\n\nId: ${item.i_id}\nName: ${item.i_name}\nSize: ${item.i_size}\nAmount: ${item.i_amount}\n\n\n")
             notifyDataSetChanged()
 
+        }
+    }
+
+    fun deleteItem(activity: MainActivity, price: Int, amount: Int) {
+
+        activity.summarry.value =  activity.summarry.value?.minus(price* amount)
+        println("Deleted Price:  $price\nSummary: ${activity.summarry.value}")
+    }
+
+
+
+    fun changeItem( activity: MainActivity,price: Int, state:String){
+
+        when(state){
+            "plus" -> {
+                println("Dodajemy!!!")
+                activity.summarry.value = activity.summarry.value?.plus(price)
+            }
+
+             "minus"->{
+                 activity.summarry.value =  activity.summarry.value?.minus(price)
+             }
         }
     }
 
