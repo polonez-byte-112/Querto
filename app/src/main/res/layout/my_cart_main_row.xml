@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/cart_main_row_id"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/row_id_bg"
             android:fontFamily="@font/poppins_bold"
@@ -75,11 +75,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="Small"
                     android:textAlignment="textStart"
                     android:textColor="#000"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cart_main_row_title" />
@@ -90,22 +91,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="12dp"
                     android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/cart_main_row_counter"
-                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_kind" />
+                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_item_summary" />
 
                 <TextView
                     android:id="@+id/cart_main_row_counter"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="0"
                     android:textColor="#000000"
                     android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/cart_main_row_remove_btn"
-                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_kind" />
+                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_item_summary" />
 
                 <TextView
                     android:id="@+id/cart_main_row_remove_btn"
@@ -113,8 +118,49 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="12dp"
                     android:drawableLeft="@drawable/ic_baseline_remove_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_item_summary" />
+
+                <TextView
+                    android:id="@+id/cart_main_row_dodatki"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="+Cebula, +Bakłażan, +Pomidor"
+                    android:textAlignment="textStart"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_sosy" />
+
+                <TextView
+                    android:id="@+id/cart_main_row_item_summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="250"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_dodatki" />
+
+                <TextView
+                    android:id="@+id/cart_main_row_sosy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="+Ketchup, +Słodko-Kwaśny"
+                    android:textAlignment="textStart"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cart_main_row_kind" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

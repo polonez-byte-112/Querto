@@ -212,12 +212,16 @@
 
     <!-- Sosy -->
     <string-array name="sosy_titles">
-        <item>Oliwa: czosnkowa, oregano, pepperoncino\u0020</item>
+        <item>Oliwa: czosnkowa\u0020</item>
+        <item>Oliwa: oregano\u0020</item>
+        <item>Oliwa: pepperoncino\u0020</item>
         <item>Ketchup\u0020</item>
         <item>Słodko-kwaśny\u0020</item>
         <item>Czosnkowo-koperkowy\u0020</item>
     </string-array>
     <integer-array name="sosy_price">
+        <item>3</item>
+        <item>3</item>
         <item>3</item>
         <item>3</item>
         <item>3</item>
@@ -244,31 +248,181 @@
 
     <!-- Dodatki -->
     <string-array name="dodatki_titles">
-        <item>ser gorgonzola, ser mozzarella, pomidorki koktajlowe, szynka parmeńska, ser grana padano, tuńczyk\u0020</item>
-        <item>anchois, bakłażan, boczek, cukinia, ricotta, kurczak w marynacie gyros, nutella, orzechy laskowe, pancetta, papryka, pieczarki, salami łagodne, salami pikantne, szynka, ser wędzony, pomidory suszone, szpinak\u0020</item>
-        <item>berlinki, kapary, kukurydza, majonez, oliwki, papryka jalapeno\u0020</item>
-        <item>cebula, czosnek, sos pomidorowy\u0020</item>
-        <item>bazylia, oregano, oliwa extra vergin, peperoncino, sól morska\u0020</item>
+
+        <item>ser gorgonzola\u0020</item>
+        <item>ser mozzarella\u0020</item>
+        <item>pomidorki koktajlowe\u0020</item>
+        <item>szynka parmeńska\u0020</item>
+        <item>ser grana padano\u0020</item>
+        <item>tuńczyk\u0020</item>
+
+        <item>anchois\u0020</item>
+        <item>bakłażan\u0020</item>
+        <item>boczek\u0020</item>
+        <item>cukinia</item>
+        <item>ricotta\u0020</item>
+        <item>kurczak w marynacie gyros\u0020</item>
+        <item>nutella\u0020</item>
+        <item>orzechy laskowe\u0020</item>
+        <item>pancetta\u0020</item>
+        <item>papryka\u0020</item>
+        <item>pieczarki\u0020</item>
+        <item>salami łagodne\u0020</item>
+        <item>salami pikantne\u0020</item>
+        <item>szynka\u0020</item>
+        <item>ser wędzony\u0020</item>
+        <item>pomidory suszone\u0020</item>
+        <item>szpinak\u0020</item>
+
+        <item>berlinki\u0020</item>
+        <item>kapary\u0020</item>
+        <item>kukurydza\u0020</item>
+        <item>majonez\u0020</item>
+        <item>oliwki\u0020</item>
+        <item>papryka jalapeno\u0020</item>
+
+        <item>cebula\u0020</item>
+        <item>czosnek\u0020</item>
+        <item>sos pomidorowy\u0020</item>
+
+        <item>bazylia\u0020</item>
+        <item>oregano\u0020</item>
+        <item>oliwa extra vergin\u0020</item>
+        <item>peperoncino\u0020</item>
+        <item>sól morska\u0020</item>
+
+
     </string-array>
     <integer-array name="dodatki_small_price">
         <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+
         <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+
         <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
         <item>1</item>
         <item>1</item>
     </integer-array>
     <integer-array name="dodatki_medium_price">
+
         <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+
         <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+
         <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+
         <item>2</item>
+        <item>2</item>
+        <item>2</item>
+
         <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+
+
     </integer-array>
     <integer-array name="dodatki_big_price">
         <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+
         <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+
         <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+
         <item>3</item>
+        <item>3</item>
+        <item>3</item>
+
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
         <item>1</item>
     </integer-array>
 

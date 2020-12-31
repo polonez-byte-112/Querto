@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.querto.R
-import com.querto.adapters.innerFragments.FoacciaAdapter
+import com.querto.adapters.home.innerFragments.FoacciaAdapter
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_foaccia.view.*
 

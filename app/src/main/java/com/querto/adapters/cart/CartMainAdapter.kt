@@ -39,6 +39,7 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
             val addBtn = itemView.cart_main_row_add_btn
             val removeBtn = itemView.cart_main_row_remove_btn
             val removeItemBtn = itemView.cart_main_row_remove_item_btn
+            val itemSummary = itemView.cart_main_row_item_summary
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -47,10 +48,12 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var amount =  Integer.parseInt(items.get(position).i_amount)
+        var price = Integer.parseInt(items.get(position).i_price)
        holder.currentName.text = items.get(position).i_name
         holder.currentKind.text=items.get(position).i_size
         holder.currentId.text  = (position + 1).toString()
         holder.currentAmount.text= amount.toString()
+        holder.itemSummary.text = (amount* price).toString()+" zł"
 
         holder.addBtn.setOnClickListener {
 
@@ -62,7 +65,7 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
             //Naprawic tutaj problem z cena ( cena tez zwraca z iloscia  i zeby to bylo widac w summarry!)
             notifyDataSetChanged()
         }
-        val cartMainFragment = CartMainFragment()
+
 
         holder.removeBtn.setOnClickListener {
             if(amount>0){

@@ -36,7 +36,7 @@
         <TextView
             android:id="@+id/detailsTextBox"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/details_box_bg"
@@ -104,7 +104,7 @@
             android:fontFamily="@font/amatic_sc"
             android:text="TEL. 720 844 990"
             android:textColor="#FFFFFF"
-            android:textSize="8sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/detailsTextBox"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -118,7 +118,7 @@
             android:fontFamily="@font/amatic_sc"
             android:text="TEL. 720 844 990"
             android:textColor="#FFFFFF"
-            android:textSize="8sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/detailsTextBox"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -132,7 +132,7 @@
             android:fontFamily="@font/amatic_sc"
             android:text="TEL. 720 844 990"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/detailsTextBox"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -146,14 +146,14 @@
             android:fontFamily="@font/amatic_sc"
             android:text="TEL. 720 844 990"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/detailsTextBox"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
             android:id="@+id/detailsHoursBox"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="150dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
@@ -194,7 +194,7 @@
             android:gravity="center_horizontal"
             android:text="Poniedziałek-Czwartek: 13:00 - 21:00\nPiątek-Sobota: 13:00 - 23:00\nNiedziela: 13:00 - 21:00"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/detailsHoursBox"
             app:layout_constraintEnd_toEndOf="@+id/detailsHoursBox"
             app:layout_constraintStart_toStartOf="@+id/detailsHoursBox"
