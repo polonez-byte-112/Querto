@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/pizza_wallpaper"
-    android:gravity="center_horizontal"
+    android:gravity="center"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".extra.ExtraFragment">
 
+
     <RelativeLayout
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/item_bg"
-        android:elevation="12dp"
-        android:gravity="center">
+        android:gravity="center_horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="700dp">
-
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/item_bg"
+            android:elevation="12dp">
 
             <TextView
                 android:id="@+id/extra_textView19"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/poppins"
                 android:text="Etap 1. (Opcjonalnie)"
                 android:textColor="#050404"
@@ -34,62 +36,109 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/extra_textView21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="318dp"
-                android:fontFamily="@font/poppins"
-                android:text="Etap 2. (Opcjonalnie)"
-                android:textColor="#050404"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/extra_textView20" />
-
-            <TextView
                 android:id="@+id/extra_textView20"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Wybierz dodatkowe sosy"
+                android:layout_weight="1"
+                android:text="Dodatkowe sosy"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extra_textView19" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/extra_sosy_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extra_textView20" />
+
+            <TextView
+                android:id="@+id/extra_textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:text="Etap 2. (Opcjonalnie)"
+                android:textColor="#050404"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extra_sosy_recycler_view" />
+
+
             <TextView
                 android:id="@+id/extra_textView22"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Wybierz dodatki "
+                android:layout_weight="1"
+                android:text="Dodatki "
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extra_textView21" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/extra_dodatki_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extra_textView22" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addExtra_Cart_btn"
+
+            <TextView
+                android:id="@+id/extra_textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:text="Podsumowanie"
+                android:textColor="#050404"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extra_dodatki_recycler_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/extra_summary_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:minHeight="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extra_textView3" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/extra_continue_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
                 android:layout_marginEnd="26dp"
-                android:layout_marginBottom="26dp"
                 android:backgroundTint="@color/brighterYellow"
                 android:clickable="true"
-                android:drawableTint="#C70039"
                 android:elevation="24dp"
                 android:src="@drawable/ic_continue"
-                android:tint="#E91E63"
+                android:tint="#C70039"
                 app:borderWidth="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extra_summary_recycler_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </RelativeLayout>
+</ScrollView>
 
 
-</RelativeLayout>
+
+
+

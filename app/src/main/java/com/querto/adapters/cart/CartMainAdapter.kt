@@ -13,13 +13,14 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.querto.MainActivity
 import com.querto.R
+import com.querto.extra.ExtraFragment
 import com.querto.fragments.cart.CartMainFragment
 import com.querto.models.Cart.CartItem
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_cart_main.*
 import kotlinx.android.synthetic.main.my_cart_main_row.view.*
 
-class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): RecyclerView.Adapter<CartMainAdapter.MyViewHolder>() {
+class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>): RecyclerView.Adapter<CartMainAdapter.MyViewHolder>() {
     private var mMainActivityViewModel: MainActivityViewModel
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
@@ -40,6 +41,9 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
             val removeBtn = itemView.cart_main_row_remove_btn
             val removeItemBtn = itemView.cart_main_row_remove_item_btn
             val itemSummary = itemView.cart_main_row_item_summary
+            val currentSosy = itemView.cart_main_row_sosy
+            val currentDodatki = itemView.cart_main_row_dodatki
+            val box = itemView.cart_main_box
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -54,6 +58,8 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
         holder.currentId.text  = (position + 1).toString()
         holder.currentAmount.text= amount.toString()
         holder.itemSummary.text = (amount* price).toString()+" zł"
+
+
 
         holder.addBtn.setOnClickListener {
 
@@ -100,6 +106,20 @@ class CartMainAdapter(val activity: Activity, val items: ArrayList<CartItem>): R
             notifyDataSetChanged()
         }
 
+        holder.box.setOnClickListener {
+
+            println(items.get(position).i_name)
+            if(!( items.get(position).i_name == "Pepsi  light" || items.get(position).i_name == "Pepsi  zwykła"|| items.get(position).i_name == "Woda  niegazowana" || items.get(position).i_name == "Woda  gazowana"))
+            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, ExtraFragment((activity as MainActivity),items.get(position) ))?.commit()
+        }
+
+        if( items.get(position).i_name == "Pepsi  light" || items.get(position).i_name == "Pepsi  zwykła"|| items.get(position).i_name == "Woda  niegazowana" || items.get(position).i_name == "Woda  gazowana"){
+            holder.currentSosy.visibility=View.GONE
+            holder.currentDodatki.visibility=View.GONE
+        }else{
+            holder.currentSosy.visibility=View.VISIBLE
+            holder.currentDodatki.visibility=View.VISIBLE
+        }
 
     }
 

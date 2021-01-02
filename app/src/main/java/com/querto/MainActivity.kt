@@ -12,6 +12,8 @@ import androidx.lifecycle.*
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.querto.extra.ExtraFragment
+import com.querto.fragments.cart.CartMainFragment
 import com.querto.models.Cart.CartItem
 import com.querto.viewmodel.MainActivityViewModel
 
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     var LOGIN_STATUS=0
     var REGISTER_STATUS=0
     var CART_MAIN_STATUS=0
+    var EXTRA_STATUS=0
     var items: ArrayList<CartItem> = arrayListOf()
     var summarry = MutableLiveData<Int>()
 
@@ -169,6 +172,12 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
                 CART_MAIN_STATUS=0
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.homeFragment).commit()
                 HOME_STATUS=1
+            }
+
+            if(EXTRA_STATUS==1){
+                EXTRA_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, CartMainFragment()).commit()
+                CART_MAIN_STATUS=1
             }
 
             if(REGISTER_STATUS==1){

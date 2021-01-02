@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
         viewPagerAdapter.addFragment(FoacciaFragment(), "Foaccia")
         viewPagerAdapter.addFragment(CalzoneFragment(), "Calzone")
         viewPagerAdapter.addFragment(PanuozzoFragment(), "Panuozzo")
-        viewPagerAdapter.addFragment(SosyFragment(), "Sosy")
         viewPagerAdapter.addFragment(NapojeFragment(), "Napoje")
         viewPager_home?.adapter = viewPagerAdapter
         tabLayout?.setupWithViewPager(viewPager_home)

@@ -7,6 +7,7 @@
     android:background="#fff">
 
     <LinearLayout
+        android:id="@+id/cart_main_bigger_box"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="20dp"
@@ -130,13 +131,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="+Cebula, +Bakłażan, +Pomidor"
+                    android:hint="Brak dodatków"
                     android:textAlignment="textStart"
                     android:textColor="#000000"
+                    android:textColorHint="#666666"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cart_main_row_sosy" />
+
+                <TextView
+                    android:id="@+id/cart_main_row_sosy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Brak extra sosów"
+                    android:textAlignment="textStart"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_kind" />
 
                 <TextView
                     android:id="@+id/cart_main_row_item_summary"
@@ -149,19 +165,6 @@
                     android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cart_main_row_dodatki" />
-
-                <TextView
-                    android:id="@+id/cart_main_row_sosy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="+Ketchup, +Słodko-Kwaśny"
-                    android:textAlignment="textStart"
-                    android:textColor="#000000"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cart_main_row_kind" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>

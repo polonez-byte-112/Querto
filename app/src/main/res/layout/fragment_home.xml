@@ -67,7 +67,7 @@
             app:tabBackground="@color/customYellow"
             app:tabGravity="fill"
             app:tabInlineLabel="true"
-            app:tabMode="scrollable"
+            app:tabMode="fixed"
             app:tabTextAppearance="@style/CustomTabStyle"
             app:tabTextColor="#C70039" />
 
