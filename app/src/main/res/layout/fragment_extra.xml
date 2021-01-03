@@ -51,8 +51,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/extra_sosy_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginTop="30dp"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extra_textView20" />
@@ -88,8 +89,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/extra_dodatki_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginTop="30dp"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extra_textView22" />
@@ -115,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:minHeight="100dp"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extra_textView3" />

@@ -66,8 +66,8 @@ class CalzoneItemFragment(calzoneName: String, image : Int, normal_price: Int, b
             var normalAmount =mMainActivityViewModel.calzone_medium_item
 
 
-            cartMainAdapter.addItem(currentName, "26cm", smallAmount.toString(), currentNormalPrice.toString())
-            cartMainAdapter.addItem(currentName, "33cm", normalAmount.toString(), currentBigPrice.toString())
+            cartMainAdapter.addItem(currentName, "26cm", smallAmount.toString(), currentNormalPrice.toString(), arrayListOf(), arrayListOf())
+            cartMainAdapter.addItem(currentName, "33cm", normalAmount.toString(), currentBigPrice.toString(), arrayListOf(), arrayListOf())
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartMainFragment())?.commit()
 
         }

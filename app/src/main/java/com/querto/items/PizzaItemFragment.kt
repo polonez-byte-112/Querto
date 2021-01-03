@@ -88,9 +88,9 @@ class PizzaItemFragment( pizza_name: String, pizza_images: Int, pizza_small_pric
             val mediumPizzas  = mMainActivityViewModel.pizza_medium_item
             val bigPizzas  = mMainActivityViewModel.pizza_big_item
 
-            cartMainAdapter.addItem(currentPizzaName, "26cm", smallPizzas.toString(), currentSmallPrice.toString())
-            cartMainAdapter.addItem(currentPizzaName, "33cm", mediumPizzas.toString(), currentMediumPrice.toString())
-            cartMainAdapter.addItem(currentPizzaName, "41cm", bigPizzas.toString(), currentBigPrice.toString())
+            cartMainAdapter.addItem(currentPizzaName, "26cm", smallPizzas.toString(), currentSmallPrice.toString(),arrayListOf(),arrayListOf())
+            cartMainAdapter.addItem(currentPizzaName, "33cm", mediumPizzas.toString(), currentMediumPrice.toString(), arrayListOf(),arrayListOf())
+            cartMainAdapter.addItem(currentPizzaName, "41cm", bigPizzas.toString(), currentBigPrice.toString(), arrayListOf(),arrayListOf())
 
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartMainFragment())?.commit()
 

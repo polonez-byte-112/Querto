@@ -12,6 +12,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_medium"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

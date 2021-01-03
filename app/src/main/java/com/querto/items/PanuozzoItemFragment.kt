@@ -68,8 +68,8 @@ class PanuozzoItemFragment(name : String,image : Int, normal_price: Int, big_pri
             var bigAmount =mMainActivityViewModel.panuozzo_big_item
 
 
-            cartMainAdapter.addItem(currentName, "26cm", normalAmount.toString(), currentNormalPrice.toString())
-            cartMainAdapter.addItem(currentName, "33cm", bigAmount.toString(), currentBigPrice.toString())
+            cartMainAdapter.addItem(currentName, "26cm", normalAmount.toString(), currentNormalPrice.toString(),arrayListOf(),arrayListOf())
+            cartMainAdapter.addItem(currentName, "33cm", bigAmount.toString(), currentBigPrice.toString(),arrayListOf(),arrayListOf())
 
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartMainFragment())?.commit()
 

@@ -1,11 +1,9 @@
 package com.querto.adapters.cart
 
-import android.app.Activity
 import android.app.Application
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -14,8 +12,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.querto.MainActivity
 import com.querto.R
 import com.querto.extra.ExtraFragment
-import com.querto.fragments.cart.CartMainFragment
 import com.querto.models.Cart.CartItem
+import com.querto.models.Dodatek.Dodatek
+import com.querto.models.Sos.Sos
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_cart_main.*
 import kotlinx.android.synthetic.main.my_cart_main_row.view.*
@@ -59,6 +58,20 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
         holder.currentAmount.text= amount.toString()
         holder.itemSummary.text = (amount* price).toString()+" zł"
 
+        var wszystkieDodatki = ""
+        var wszystkieSosy =""
+
+
+        items[position].i_dodatki.forEach {
+           wszystkieDodatki +=it.d_name
+        }
+
+        items[position].i_sosy.forEach {
+            wszystkieSosy += it.s_name
+        }
+
+
+        holder.currentDodatki.text = wszystkieDodatki
 
 
         holder.addBtn.setOnClickListener {
@@ -66,7 +79,7 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
 
             amount++
             items.get(position).i_amount = amount.toString()
-            changeItem((activity as MainActivity), Integer.parseInt(items[position].i_price),"plus")
+            changeItem(activity, Integer.parseInt(items[position].i_price),"plus")
 
             //Naprawic tutaj problem z cena ( cena tez zwraca z iloscia  i zeby to bylo widac w summarry!)
             notifyDataSetChanged()
@@ -77,7 +90,7 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
             if(amount>0){
                 amount--
                 items.get(position).i_amount = amount.toString()
-                changeItem((activity as MainActivity), Integer.parseInt(items[position].i_price), "minus")
+                changeItem(activity, Integer.parseInt(items[position].i_price), "minus")
              }
 
 
@@ -96,7 +109,7 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
         holder.removeItemBtn.setOnClickListener{
 
 
-            deleteItem((activity as MainActivity), Integer.parseInt(items[position].i_price), Integer.parseInt(items[position].i_amount))
+            deleteItem(activity, Integer.parseInt(items[position].i_price), Integer.parseInt(items[position].i_amount))
             items.removeAt(position)
             if(items.size==0){
                 activity.cart_no_items_text.visibility = View.VISIBLE
@@ -110,7 +123,7 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
 
             println(items.get(position).i_name)
             if(!( items.get(position).i_name == "Pepsi  light" || items.get(position).i_name == "Pepsi  zwykła"|| items.get(position).i_name == "Woda  niegazowana" || items.get(position).i_name == "Woda  gazowana"))
-            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, ExtraFragment((activity as MainActivity),items.get(position) ))?.commit()
+                activity.supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, ExtraFragment(activity,items.get(position) )).commit()
         }
 
         if( items.get(position).i_name == "Pepsi  light" || items.get(position).i_name == "Pepsi  zwykła"|| items.get(position).i_name == "Woda  niegazowana" || items.get(position).i_name == "Woda  gazowana"){
@@ -129,13 +142,13 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
 
 
 
-    fun addItem(name: String, size: String, amount: String, price: String){
+    fun addItem(name: String, size: String, amount: String, price: String, sosy:ArrayList<Sos> ,dodatki: ArrayList<Dodatek>){
         database = FirebaseDatabase.getInstance().reference
         mAuth = FirebaseAuth.getInstance()
 
         if(Integer.parseInt(amount)>0){
-            val item = CartItem(database.push().key.toString(),name, size, amount,price)
-           (activity as MainActivity).items.add(item)
+            val item = CartItem(database.push().key.toString(),name, size, amount,price, sosy, dodatki)
+           activity.items.add(item)
             println("\n\n\nId: ${item.i_id}\nName: ${item.i_name}\nSize: ${item.i_size}\nAmount: ${item.i_amount}\n\n\n")
             notifyDataSetChanged()
 

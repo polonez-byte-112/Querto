@@ -16,7 +16,7 @@ import com.querto.models.Cart.CartItem
 import com.querto.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_extra.view.*
 
-class ExtraFragment(activity: MainActivity, item: CartItem) : Fragment() {
+class ExtraFragment(val activity: MainActivity,val  item: CartItem) : Fragment() {
     lateinit var mMainActivityViewModel: MainActivityViewModel
 
 
@@ -25,12 +25,12 @@ class ExtraFragment(activity: MainActivity, item: CartItem) : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
       var view =  inflater.inflate(R.layout.fragment_extra, container, false)
-      (activity as MainActivity).EXTRA_STATUS=1
+      activity.EXTRA_STATUS=1
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
                 MainActivityViewModel::class.java)
 
-        var extraSosyAdapter=  ExtraSosyAdapter((activity as MainActivity),mMainActivityViewModel.sosy_names, mMainActivityViewModel.sosy_price)
-        var extraDodatkiAdapter = ExtraDodatkiAdapter((activity as MainActivity), mMainActivityViewModel.dodatki_names, mMainActivityViewModel.dodatki_small_price, mMainActivityViewModel.dodatki_medium_price, mMainActivityViewModel.dodatki_big_price)
+        var extraSosyAdapter=  ExtraSosyAdapter(activity,mMainActivityViewModel.sosy_names, mMainActivityViewModel.sosy_price,item )
+        var extraDodatkiAdapter = ExtraDodatkiAdapter(activity, mMainActivityViewModel.dodatki_names, mMainActivityViewModel.dodatki_small_price, mMainActivityViewModel.dodatki_medium_price, mMainActivityViewModel.dodatki_big_price , item)
 
         view.extra_sosy_recycler_view.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         view.extra_sosy_recycler_view.adapter = extraSosyAdapter
@@ -46,7 +46,7 @@ class ExtraFragment(activity: MainActivity, item: CartItem) : Fragment() {
 
         view.extra_continue_btn.setOnClickListener {
 
-          activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartMainFragment())?.commit()
+          activity.supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, CartMainFragment()).commit()
         }
         return view
     }
@@ -54,6 +54,6 @@ class ExtraFragment(activity: MainActivity, item: CartItem) : Fragment() {
 
   override fun onDestroyView() {
     super.onDestroyView()
-    (activity as MainActivity).EXTRA_STATUS=0
+    activity.EXTRA_STATUS=0
   }
 }

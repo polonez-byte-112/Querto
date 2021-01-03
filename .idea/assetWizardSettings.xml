@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/exit_to_app/baseline_exit_to_app_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/keyboard_backspace/baseline_keyboard_backspace_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,7 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="c70039" />
-                            <entry key="outputName" value="ic_logout" />
+                            <entry key="outputName" value="ic_go_back" />
                             <entry key="sourceFile" value="C:\Users\pawel\AndroidStudioProjects\Querto" />
                           </map>
                         </option>

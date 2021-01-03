@@ -12,9 +12,10 @@ import androidx.lifecycle.*
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.querto.extra.ExtraFragment
 import com.querto.fragments.cart.CartMainFragment
 import com.querto.models.Cart.CartItem
+import com.querto.models.Dodatek.Dodatek
+import com.querto.models.Sos.Sos
 import com.querto.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +44,9 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     var CART_MAIN_STATUS=0
     var EXTRA_STATUS=0
     var items: ArrayList<CartItem> = arrayListOf()
+
+    var dodatki : ArrayList<Dodatek> = arrayListOf()
+    var sosy : ArrayList<Sos>  = arrayListOf()
     var summarry = MutableLiveData<Int>()
 
     init {

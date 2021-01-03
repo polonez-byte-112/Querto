@@ -70,8 +70,8 @@ class NapojeItemFragment(name: String, price: Int, kindOne : String, kindTwo: St
             var twoAmount =mMainActivityViewModel.napoje_two_item
 
 
-            cartMainAdapter.addItem(currentName+" "+currentFirstKind, "", oneAmount.toString(), currentPrice.toString())
-            cartMainAdapter.addItem(currentName+" "+currentSecondKind, "", twoAmount.toString(), currentPrice.toString())
+            cartMainAdapter.addItem(currentName+" "+currentFirstKind, "", oneAmount.toString(), currentPrice.toString(),arrayListOf(),arrayListOf())
+            cartMainAdapter.addItem(currentName+" "+currentSecondKind, "", twoAmount.toString(), currentPrice.toString(), arrayListOf(),arrayListOf())
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartMainFragment())?.commit()
 
         }
