@@ -39,18 +39,47 @@ class ExtraSosyAdapter(activityMain: MainActivity, val sosy_names: Array<String>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.currentName.text= sosy_names.get(position)
-        var amount = Integer.parseInt(holder.currentCounter.text.toString())
 
 
+        holder.currentCounter.text = item.i_sosy[position].s_amount
+        var  amount = Integer.parseInt(item.i_sosy[position].s_amount)
         holder.addItemToCounter.setOnClickListener {
-            holder.currentCounter.text  = (amount+1).toString()
+            amount +=1
+            if(amount==1){
+                item.i_sosy[position].s_name = "+ "+sosy_names[position]+", "
+                item.i_sosy[position].s_price = sosy_price[position].toString()
+                item.i_sosy[position].s_amount=amount.toString()
+
+            }else{
+                item.i_sosy[position].s_amount=amount.toString()
+            }
+
+            var itemPrice =  Integer.parseInt(item.i_price)
+            item.i_price = (itemPrice+sosy_price[position]).toString()
+
+            holder.currentCounter.text  = amount.toString()
+
+
         }
 
         holder.removeItemFromCounter.setOnClickListener {
+
             if(amount >0){
-                holder.currentCounter.text = (amount-1).toString()
-                // Jeszcze po tym trzeba aktualizowac podsumowanie
+                amount -=1
+
+                var itemPrice =  Integer.parseInt(item.i_price)
+                item.i_price = (itemPrice-sosy_price[position]).toString()
+
+                holder.currentCounter.text = amount.toString()
+                item.i_sosy[position].s_amount=amount.toString()
                 }
+
+
+            if(amount==0){
+                item.i_sosy[position].s_name = ""
+                item.i_sosy[position].s_price = ""
+                item.i_sosy[position].s_amount= "0"
+            }
 
         }
     }

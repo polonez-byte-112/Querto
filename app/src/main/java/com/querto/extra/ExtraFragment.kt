@@ -11,6 +11,7 @@ import com.querto.MainActivity
 import com.querto.R
 import com.querto.adapters.extra.extra_dodatki.ExtraDodatkiAdapter
 import com.querto.adapters.extra.extra_sosy.ExtraSosyAdapter
+import com.querto.adapters.extra.extra_summary.ExtraSummaryAdapter
 import com.querto.fragments.cart.CartMainFragment
 import com.querto.models.Cart.CartItem
 import com.querto.viewmodel.MainActivityViewModel
@@ -29,9 +30,9 @@ class ExtraFragment(val activity: MainActivity,val  item: CartItem) : Fragment()
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
                 MainActivityViewModel::class.java)
 
-        var extraSosyAdapter=  ExtraSosyAdapter(activity,mMainActivityViewModel.sosy_names, mMainActivityViewModel.sosy_price,item )
+        var extraSosyAdapter=  ExtraSosyAdapter(activity,mMainActivityViewModel.sosy_names, mMainActivityViewModel.sosy_price,item)
         var extraDodatkiAdapter = ExtraDodatkiAdapter(activity, mMainActivityViewModel.dodatki_names, mMainActivityViewModel.dodatki_small_price, mMainActivityViewModel.dodatki_medium_price, mMainActivityViewModel.dodatki_big_price , item)
-
+        var extraSummaryAdapter = ExtraSummaryAdapter(activity, item)
         view.extra_sosy_recycler_view.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         view.extra_sosy_recycler_view.adapter = extraSosyAdapter
 
@@ -42,7 +43,7 @@ class ExtraFragment(val activity: MainActivity,val  item: CartItem) : Fragment()
 
 
         view.extra_summary_recycler_view.layoutManager= LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
+        view.extra_summary_recycler_view.adapter =extraSummaryAdapter
 
         view.extra_continue_btn.setOnClickListener {
 

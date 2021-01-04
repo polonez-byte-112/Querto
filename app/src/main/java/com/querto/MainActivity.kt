@@ -44,20 +44,22 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     var CART_MAIN_STATUS=0
     var EXTRA_STATUS=0
     var items: ArrayList<CartItem> = arrayListOf()
-
-    var dodatki : ArrayList<Dodatek> = arrayListOf()
-    var sosy : ArrayList<Sos>  = arrayListOf()
     var summarry = MutableLiveData<Int>()
-
+    //List of addings for each pizza
+   var mySummaryItemListName: ArrayList<String> = arrayListOf()
+    var mySummaryItemListAmountAndPrice: ArrayList<String> = arrayListOf()
     init {
         summarry.postValue(0)
     }
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
 
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)

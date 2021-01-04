@@ -72,6 +72,7 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
 
 
         holder.currentDodatki.text = wszystkieDodatki
+        holder.currentSosy.text = wszystkieSosy
 
 
         holder.addBtn.setOnClickListener {
