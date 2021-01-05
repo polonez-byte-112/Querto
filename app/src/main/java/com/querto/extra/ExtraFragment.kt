@@ -41,7 +41,6 @@ class ExtraFragment(val activity: MainActivity,val  item: CartItem) : Fragment()
         view.extra_dodatki_recycler_view.adapter = extraDodatkiAdapter
 
 
-
         view.extra_summary_recycler_view.layoutManager= LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         view.extra_summary_recycler_view.adapter =extraSummaryAdapter
 
