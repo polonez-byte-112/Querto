@@ -7,7 +7,7 @@
     android:background="@drawable/pizza_wallpaper"
     android:gravity="center"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-    tools:context=".extra.ExtraFragment">
+    tools:context=".fragments.extra.ExtraFragment">
 
 
     <RelativeLayout
@@ -111,14 +111,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extra_dodatki_recycler_view" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/extra_summary_recycler_view"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/podsumowanie_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:minHeight="100dp"
-                android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:hint="Brak dodatków"
+                android:textColor="#040404"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extra_textView3" />
 
@@ -137,7 +138,7 @@
                 app:borderWidth="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/extra_summary_recycler_view" />
+                app:layout_constraintTop_toBottomOf="@+id/podsumowanie_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>

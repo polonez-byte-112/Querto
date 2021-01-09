@@ -19,11 +19,7 @@ class DetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_details, container, false)
-
-
-
         (activity as MainActivity).DETALE_STATUS=1
-        println("STATUS: ${(activity as MainActivity).DETALE_STATUS}")
         return view
     }
 
@@ -31,7 +27,6 @@ class DetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         (activity as MainActivity).DETALE_STATUS=0
-        println("STATUS: ${(activity as MainActivity).DETALE_STATUS}")
     }
 
 

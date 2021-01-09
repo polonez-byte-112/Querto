@@ -37,19 +37,11 @@ class AddressFragment : Fragment() {
         database = FirebaseDatabase.getInstance().reference
         mAuth = FirebaseAuth.getInstance()
 
-
         mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
                 MainActivityViewModel::class.java)
 
 
         (activity as MainActivity).ADDRESS_STATUS=1
-
-
-        if(mAuth.currentUser==null){
-            Toast.makeText(requireContext(), "To add address please login",Toast.LENGTH_SHORT).show()
-            activity?.nav_view?.setCheckedItem(R.id.login)
-            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.loginFragment)?.commit()
-        }
 
         database.child("addresses").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -82,7 +74,7 @@ class AddressFragment : Fragment() {
                     }
 
                 } else {
-                    System.out.println("Database doesnt exist")
+                    System.out.println("Konto / Baza nie istnieje")
                     view.address_biger_box.visibility= View.INVISIBLE
                     view.address_title.text = ""
                     view.address_street.text = ""
@@ -93,7 +85,7 @@ class AddressFragment : Fragment() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                System.out.println("The read failed: " + databaseError.code)
+                System.out.println("Bład odczytu: " + databaseError.code)
             }
         })
 
@@ -102,6 +94,7 @@ class AddressFragment : Fragment() {
 
 
         view.add_address_btn.setOnClickListener {
+            (activity as MainActivity).isCart_Address=false
             activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.addAddressFragment)?.commit()
         }
 

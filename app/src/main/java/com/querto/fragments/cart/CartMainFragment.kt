@@ -6,18 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.querto.MainActivity
 import com.querto.R
 import com.querto.adapters.cart.CartMainAdapter
+import com.querto.fragments.address.AddAddressFragment
 import com.querto.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_calzone.view.*
 import kotlinx.android.synthetic.main.fragment_cart_main.*
 import kotlinx.android.synthetic.main.fragment_cart_main.view.*
-import kotlin.properties.Delegates
 
 class CartMainFragment : Fragment() {
             private lateinit var mMainActivityViewModel: MainActivityViewModel
@@ -29,25 +27,31 @@ class CartMainFragment : Fragment() {
                                       savedInstanceState: Bundle?): View? {
                 // Inflate the layout for this fragment
                var  view = inflater.inflate(R.layout.fragment_cart_main, container, false)
-                mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
-                        MainActivityViewModel::class.java)
+        mMainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(
+                MainActivityViewModel::class.java)
+
                 view.cart_main_recycler_view.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 cartMainAdapter= CartMainAdapter((activity as MainActivity), (activity as MainActivity).items)
                 view.cart_main_recycler_view.adapter = cartMainAdapter
                 (activity as MainActivity).CART_MAIN_STATUS=1
 
-        (activity as MainActivity).summarry.value=0
-                (activity as MainActivity).items.forEach {
-                    (activity as MainActivity).summarry.value = (activity as MainActivity).summarry.value?.plus(Integer.parseInt(it.i_amount) * Integer.parseInt(it.i_price))
-                }
+                (activity as MainActivity).summarry.value=0
+
+                 (activity as MainActivity).items.forEach {
+                     (activity as MainActivity).summarry.value = (activity as MainActivity).summarry.value?.plus(Integer.parseInt(it.i_amount) * Integer.parseInt(it.i_price))
+                 }
 
 
-        (activity as MainActivity).summarry.observe(viewLifecycleOwner, Observer {
-            view.summared_price.text=it.toString()
-        })
+                (activity as MainActivity).summarry.observe(viewLifecycleOwner, Observer {
+                    view.summared_price.text=it.toString()
+                })
 
 
 
+        view.cart_main_continue_floating_btn.setOnClickListener {
+          (activity as MainActivity).isCart_Address=true
+            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, AddAddressFragment())?.commit()
+        }
                 return view
             }
 

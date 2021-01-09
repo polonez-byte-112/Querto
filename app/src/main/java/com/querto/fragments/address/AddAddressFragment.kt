@@ -12,6 +12,7 @@
         import com.google.firebase.database.*
         import com.querto.MainActivity
         import com.querto.R
+        import com.querto.fragments.cart.CartSummaryFragment
         import com.querto.models.Address.Address
         import com.querto.viewmodel.MainActivityViewModel
         import kotlinx.android.synthetic.main.fragment_add_address.view.*
@@ -21,6 +22,7 @@
             private lateinit var mAuth: FirebaseAuth
             private lateinit var mMainActivityViewModel: MainActivityViewModel
             private  var local_name: String?=""
+            var is_local_cart_address: Boolean? = null
             private var local_street:String?=""
             private var local_postcode:String?=""
             private var local_house_nr:String?=""
@@ -38,8 +40,14 @@
                     ViewModelProvider.AndroidViewModelFactory.getInstance(activity?.application!!)
                         .create(MainActivityViewModel::class.java)
 
-                (activity as MainActivity).EDIT_ADDRESS_STATUS=1
 
+                if(  (activity as MainActivity).isCart_Address){
+                    (activity as MainActivity).CART_ADDRESS_STATUS=1
+                }else{
+                    (activity as MainActivity).EDIT_ADDRESS_STATUS=1
+                }
+
+                 is_local_cart_address = (activity as MainActivity).isCart_Address
                 if(mAuth.currentUser!=null){
                     database.child("addresses").child(mAuth.currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
@@ -57,6 +65,10 @@
                                 view.addAddressCityZipCode.setText(local_postcode)
                                 view.addAddressCityName.setText(local_city_name)
 
+
+                                if(is_local_cart_address as Boolean && local_name!!.isNotEmpty()){
+                                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, CartSummaryFragment())?.commit()
+                                }
                             }
 
                         }
@@ -65,26 +77,32 @@
                             println(error.message)
                         }
                     })
-
                 }
+
+
+
 
                 view.addAddressButton.setOnClickListener {
 
-                    val addressName = view.addAddressName.text.toString()
-                    val addressStreet = view.addAddressStreet.text.toString()
-                    val addressNumber = view.addAddressHouseNumber.text.toString()
-                    val addressZipCode = view.addAddressCityZipCode.text.toString()
-                    val addressCityName = view.addAddressCityName.text.toString()
+                        val addressName = view.addAddressName.text.toString()
+                        val addressStreet = view.addAddressStreet.text.toString()
+                        val addressNumber = view.addAddressHouseNumber.text.toString()
+                        val addressZipCode = view.addAddressCityZipCode.text.toString()
+                        val addressCityName = view.addAddressCityName.text.toString()
 
-                    if(inputCheck(addressName,addressStreet,addressNumber,addressZipCode, addressCityName)){
-                        mAuth = FirebaseAuth.getInstance()
-                        database = FirebaseDatabase.getInstance().reference
+                        if(inputCheck(addressName,addressStreet,addressNumber,addressZipCode, addressCityName)){
 
-                        addAddress(addressName, addressStreet, addressNumber, addressZipCode, addressCityName)
-                    }else{
-                        Toast.makeText(requireContext(), "Please enter all fields", Toast.LENGTH_SHORT).show()
+                            mAuth = FirebaseAuth.getInstance()
+                            database = FirebaseDatabase.getInstance().reference
+
+                            addAddress(addressName, addressStreet, addressNumber, addressZipCode, addressCityName)
+
+                        }else{
+                            Toast.makeText(requireContext(), "Prosze wypelnij wszystkie dane", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+
+
                 return view
             }
 
@@ -97,11 +115,14 @@
                 val address = Address(mAuth.currentUser?.uid, addressName, addressStreet,addressZipCode, addressNumber, addressCityName)
                 database.child("addresses").child(mAuth.currentUser?.uid.toString()).setValue(address).addOnCompleteListener {
                     if(it.isSuccessful){
-                        activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.addressFragment)?.commit()
-                        Toast.makeText(requireContext(), "Added address", Toast.LENGTH_SHORT).show()
 
+                        if(is_local_cart_address!!){
+                            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, CartSummaryFragment())?.commit()
+                       }else {
+                            activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.addressFragment)?.commit()
+                        }
                     }else{
-                        Toast.makeText(requireContext(), "Fail at creating address", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Błąd przy tworzeniu konta", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -115,7 +136,13 @@
 
             override fun onDestroyView() {
                 super.onDestroyView()
-                (activity as MainActivity).EDIT_ADDRESS_STATUS=0
+
+                if(is_local_cart_address!!){
+                    (activity as MainActivity).CART_ADDRESS_STATUS=0
+                }else{
+                    (activity as MainActivity).EDIT_ADDRESS_STATUS=0
+                }
+
             }
 
         }

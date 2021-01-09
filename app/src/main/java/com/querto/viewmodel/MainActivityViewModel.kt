@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
 
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
+    var isCart_Address: Boolean = false
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
     val homeFragment = HomeFragment()

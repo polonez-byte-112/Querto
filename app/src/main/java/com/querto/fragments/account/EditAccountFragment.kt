@@ -61,15 +61,15 @@ class EditAccountFragment : Fragment() {
             database.child("users").child(mAuth.currentUser?.uid.toString()).setValue(user).addOnCompleteListener {
                 if(it.isSuccessful){
                     activity?.supportFragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim)?.replace(R.id.fragment_container, mMainActivityViewModel.accountFragment)?.commit()
-                    Toast.makeText(requireContext(), "Edited data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Edytowano konto", Toast.LENGTH_SHORT).show()
 
                 }else{
-                    Toast.makeText(requireContext(), "Problem with edit Profile.\nCheck Your connection", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Problem z edytowaniem Profilu.\nSprawdź połączenie internetowe", Toast.LENGTH_SHORT).show()
                 }
             }
 
         }else{
-            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Proszę wypełnij wszystkie dane", Toast.LENGTH_SHORT).show()
         }
                     }
                 }

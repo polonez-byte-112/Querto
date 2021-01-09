@@ -1,22 +1,19 @@
 package com.querto.adapters.extra.extra_sosy
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.MainActivity
 import com.querto.R
-import com.querto.adapters.extra.extra_dodatki.ExtraDodatkiAdapter
-import com.querto.adapters.home.innerFragments.CalzoneAdapter
 import com.querto.models.Cart.CartItem
-import com.querto.models.Dodatek.Dodatek
 import com.querto.models.Sos.Sos
 import kotlinx.android.synthetic.main.my_extra_sosy_row.view.*
 
-class ExtraSosyAdapter(activityMain: MainActivity, val sosy_names: Array<String>, val sosy_price: IntArray ,val item: CartItem): RecyclerView.Adapter<ExtraSosyAdapter.MyViewHolder>() {
+class ExtraSosyAdapter(activityMain: MainActivity, val sosy_names: Array<String>, val sosy_price: IntArray ,val item: CartItem, var textView: TextView): RecyclerView.Adapter<ExtraSosyAdapter.MyViewHolder>() {
     var activity = activityMain as AppCompatActivity
     private val context: Context = activityMain.applicationContext
 
@@ -43,12 +40,16 @@ class ExtraSosyAdapter(activityMain: MainActivity, val sosy_names: Array<String>
 
         holder.currentCounter.text = item.i_sosy[position].s_amount
         var  amount = Integer.parseInt(item.i_sosy[position].s_amount)
+
+
+
         holder.addItemToCounter.setOnClickListener {
             amount +=1
             if(amount==1){
                 item.i_sosy[position].s_name = "+ "+sosy_names[position]+", "
                 item.i_sosy[position].s_price = sosy_price[position].toString()
                 item.i_sosy[position].s_amount=amount.toString()
+
 
             }else{
                 item.i_sosy[position].s_amount=amount.toString()
@@ -59,7 +60,7 @@ class ExtraSosyAdapter(activityMain: MainActivity, val sosy_names: Array<String>
 
             holder.currentCounter.text  = amount.toString()
 
-
+            (activity as MainActivity).updateSummary(textView, item)
         }
 
         holder.removeItemFromCounter.setOnClickListener {
@@ -69,9 +70,10 @@ class ExtraSosyAdapter(activityMain: MainActivity, val sosy_names: Array<String>
 
                 var itemPrice =  Integer.parseInt(item.i_price)
                 item.i_price = (itemPrice-sosy_price[position]).toString()
-
                 holder.currentCounter.text = amount.toString()
                 item.i_sosy[position].s_amount=amount.toString()
+
+
                 }
 
 
@@ -79,8 +81,11 @@ class ExtraSosyAdapter(activityMain: MainActivity, val sosy_names: Array<String>
                 item.i_sosy[position].s_name = ""
                 item.i_sosy[position].s_price = ""
                 item.i_sosy[position].s_amount= "0"
+
             }
 
+
+            (activity as MainActivity).updateSummary(textView, item)
         }
     }
 

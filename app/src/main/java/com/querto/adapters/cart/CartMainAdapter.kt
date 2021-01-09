@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.querto.MainActivity
 import com.querto.R
-import com.querto.extra.ExtraFragment
+import com.querto.fragments.extra.ExtraFragment
 import com.querto.models.Cart.CartItem
 import com.querto.models.Dodatek.Dodatek
 import com.querto.models.Sos.Sos
@@ -122,7 +122,6 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
 
         holder.box.setOnClickListener {
 
-            println(items.get(position).i_name)
             if(!( items.get(position).i_name == "Pepsi  light" || items.get(position).i_name == "Pepsi  zwykła"|| items.get(position).i_name == "Woda  niegazowana" || items.get(position).i_name == "Woda  gazowana"))
                 activity.supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, ExtraFragment(activity,items.get(position) )).commit()
         }
@@ -150,7 +149,7 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
         if(Integer.parseInt(amount)>0){
             val item = CartItem(database.push().key.toString(),name, size, amount,price, sosy, dodatki)
            activity.items.add(item)
-            println("\n\n\nId: ${item.i_id}\nName: ${item.i_name}\nSize: ${item.i_size}\nAmount: ${item.i_amount}\n\n\n")
+
             notifyDataSetChanged()
 
         }
@@ -159,7 +158,7 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
     fun deleteItem(activity: MainActivity, price: Int, amount: Int) {
 
         activity.summarry.value =  activity.summarry.value?.minus(price* amount)
-        println("Deleted Price:  $price\nSummary: ${activity.summarry.value}")
+
     }
 
 
@@ -168,7 +167,6 @@ class CartMainAdapter(val activity: MainActivity, val items: ArrayList<CartItem>
 
         when(state){
             "plus" -> {
-                println("Dodajemy!!!")
                 activity.summarry.value = activity.summarry.value?.plus(price)
             }
 

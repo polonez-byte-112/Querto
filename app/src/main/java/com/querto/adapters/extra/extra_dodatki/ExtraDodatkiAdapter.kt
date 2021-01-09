@@ -4,17 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.querto.MainActivity
 import com.querto.R
-import com.querto.adapters.extra.extra_sosy.ExtraSosyAdapter
-import com.querto.adapters.extra.extra_summary.ExtraSummaryAdapter
 import com.querto.models.Cart.CartItem
 import com.querto.models.Dodatek.Dodatek
 import kotlinx.android.synthetic.main.my_extra_dodatki_row.view.*
 
-class ExtraDodatkiAdapter(activityMain : MainActivity, val dodatki_names: Array<String>, val dodatki_small_price: IntArray, val dodatki_medium_price: IntArray,val dodatki_big_price: IntArray,val item: CartItem) : RecyclerView.Adapter<ExtraDodatkiAdapter.MyViewHolder>() {
+class ExtraDodatkiAdapter(activityMain : MainActivity, val dodatki_names: Array<String>, val dodatki_small_price: IntArray, val dodatki_medium_price: IntArray,val dodatki_big_price: IntArray,val item: CartItem,var textView: TextView) : RecyclerView.Adapter<ExtraDodatkiAdapter.MyViewHolder>() {
     var activity = activityMain as AppCompatActivity
     private val context: Context = activityMain.applicationContext
 
@@ -59,6 +58,9 @@ class ExtraDodatkiAdapter(activityMain : MainActivity, val dodatki_names: Array<
                 item.i_dodatki[position].d_name ="+ "+dodatki_names[position]+", "
                 item.i_dodatki[position].d_price= currentPrice.toString()
                 item.i_dodatki[position].d_amount =amount.toString()
+
+
+
             }else{
                 item.i_dodatki[position].d_amount = amount.toString()
             }
@@ -70,7 +72,7 @@ class ExtraDodatkiAdapter(activityMain : MainActivity, val dodatki_names: Array<
 
 
             holder.currentCounter.text  = amount.toString()
-
+            (activity as MainActivity).updateSummary(textView, item)
         }
 
         holder.removeItemFromCounter.setOnClickListener {
@@ -89,14 +91,17 @@ class ExtraDodatkiAdapter(activityMain : MainActivity, val dodatki_names: Array<
                 holder.currentCounter.text = amount.toString()
                 if(item.i_dodatki.size>0){
                     currentPrice=0
-                    item.i_dodatki.get(position).d_name=""
-                    item.i_dodatki.get(position).d_price=""
-                    item.i_dodatki.get(position).d_amount="0"
+                    item.i_dodatki[position].d_name=""
+                    item.i_dodatki[position].d_price=""
+                    item.i_dodatki[position].d_amount="0"
+
+
+
                 }
 
             }
 
-
+            (activity as MainActivity).updateSummary(textView, item)
         }
 
     }

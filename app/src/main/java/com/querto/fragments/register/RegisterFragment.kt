@@ -66,16 +66,16 @@ class RegisterFragment : Fragment() {
 
             mAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener {
                 if (it.isSuccessful){
-                    Toast.makeText(requireContext(), "Created a user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Utworzono uzytkownika", Toast.LENGTH_SHORT).show()
                    writeNewUser(mAuth.currentUser?.uid.toString(), name, surname, username, password, age)
                 }else{
-                    Toast.makeText(requireContext(), "Fail at creating a user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Blad przy tworzeniu uzytkownika", Toast.LENGTH_SHORT).show()
                     it.exception?.printStackTrace()
                 }
             }
 
         } else {
-            Toast.makeText(requireContext(), "Fill all columns", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Wypelnij wszystkie kolumny", Toast.LENGTH_SHORT).show()
         }
 
     }

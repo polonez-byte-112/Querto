@@ -14,12 +14,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.querto.fragments.cart.CartMainFragment
 import com.querto.models.Cart.CartItem
-import com.querto.models.Dodatek.Dodatek
-import com.querto.models.Sos.Sos
 import com.querto.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavigationItemSelectedListener {
 
+    var isCart_Address : Boolean = false as Boolean
     private lateinit var drawer: DrawerLayout
     private lateinit var database: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
@@ -42,12 +41,14 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
     var LOGIN_STATUS=0
     var REGISTER_STATUS=0
     var CART_MAIN_STATUS=0
+    var CART_ADDRESS_STATUS=0
+    var CART_SUMMARY_STATUS=0
     var EXTRA_STATUS=0
     var items: ArrayList<CartItem> = arrayListOf()
     var summarry = MutableLiveData<Int>()
     //List of addings for each pizza
-   var mySummaryItemListName: ArrayList<String> = arrayListOf()
-    var mySummaryItemListAmountAndPrice: ArrayList<String> = arrayListOf()
+   var mySummaryItemListName: MutableList<String> = mutableListOf()
+    var mySummaryItemListAmountAndPrice: MutableList<String> = mutableListOf()
     init {
         summarry.postValue(0)
     }
@@ -186,6 +187,19 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
                 CART_MAIN_STATUS=1
             }
 
+            if(CART_ADDRESS_STATUS==1){
+                CART_ADDRESS_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, CartMainFragment()).commit()
+                CART_MAIN_STATUS=1
+            }
+
+
+            if(CART_SUMMARY_STATUS==1){
+                CART_SUMMARY_STATUS=0
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, CartMainFragment()).commit()
+                CART_MAIN_STATUS=1
+            }
+
             if(REGISTER_STATUS==1){
                 REGISTER_STATUS=0
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, viewModel.loginFragment).commit()
@@ -271,5 +285,43 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, NavigationView.OnNavig
 
     }
 
+    fun updateSummary(summaryText: TextView, item: CartItem){
+        println("We are updating summary!")
+        mySummaryItemListName.clear()
+        mySummaryItemListAmountAndPrice.clear()
 
+        item.i_sosy.forEach {
+
+            if(!(it.s_name=="" && it.s_price=="" && it.s_amount=="0")){
+                println("\n---------------------------------------\nName: ${it.s_name}\nPrice: ${it.s_price}\nAmount: ${it.s_amount}\n---------------------------------------\n")
+               mySummaryItemListName.add(it.s_name)
+               mySummaryItemListAmountAndPrice.add(it.s_amount+" x "+it.s_price+" zł")
+
+            }else{
+               mySummaryItemListName.remove(it.s_name)
+               mySummaryItemListAmountAndPrice.remove(it.s_amount+" x "+it.s_price+" zł")
+            }
+        }
+
+        item.i_dodatki.forEach {
+
+            if(!(it.d_name=="" && it.d_price=="" && it.d_amount=="0")){
+                println("\n---------------------------------------\nName: ${it.d_name}\nPrice: ${it.d_price}\nAmount: ${it.d_amount}\n---------------------------------------\n")
+                mySummaryItemListName.add(it.d_name)
+                mySummaryItemListAmountAndPrice.add(it.d_amount+" x "+it.d_price+" zł")
+
+
+            }else{
+                mySummaryItemListName.remove(it.d_name)
+                mySummaryItemListAmountAndPrice.remove(it.d_amount+" x "+it.d_price+" zł")
+            }
+        }
+        var local_text=""
+       mySummaryItemListName.forEachIndexed { index, s ->
+            local_text =local_text +"\n"+ mySummaryItemListName[index]+" "+mySummaryItemListAmountAndPrice[index]+"\n"
+        }
+
+        summaryText.text = local_text
+
+    }
 }

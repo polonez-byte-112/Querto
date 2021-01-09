@@ -78,9 +78,9 @@ class LoginFragment : Fragment() {
                 (activity as MainActivity).updateUI()
                 (activity as MainActivity).nav_view?.setCheckedItem(R.id.home)
                 (activity as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.fragment_slide_in_anim, R.anim.fragment_fade_out_anim, R.anim.fragment_slide_out_anim, R.anim.fragment_fade_in_anim).replace(R.id.fragment_container, mMainActivityViewModel.homeFragment).commit()
-                Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Udane zalogowanie", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Bad email or password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Zły email lub hasło", Toast.LENGTH_SHORT).show()
             }
         })
     }
