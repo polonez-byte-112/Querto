@@ -17,7 +17,7 @@ App have slide menu on the left side  and will have menu in HomeFragment which a
 
 ## 💻 Progress
 
-▰▰▰▰▰▰▰▰▰▱ 90%
+▰▰▰▰▰▰▰▰▰▰  100%
 
 
 **Frozzen for a moment**
